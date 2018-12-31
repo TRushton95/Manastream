@@ -41,7 +41,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
+    <Compile Include="Src\EventSystem\Events\Event.cs" />
+    <Compile Include="Src\EventSystem\EventManager.cs" />
+    <Compile Include="Src\EventSystem\EventTypes.cs" />
+    <Compile Include="Src\EventSystem\Listener.cs" />
+    <Compile Include="Src\Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
