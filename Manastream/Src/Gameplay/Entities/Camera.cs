@@ -66,19 +66,19 @@
 
             if (keyboard.IsKeyDown(Keys.W))
             {
-                canvasX -= Speed;
+                canvasY -= Speed;
             }
             if (keyboard.IsKeyDown(Keys.A))
             {
-                canvasY -= Speed;
+                canvasX -= Speed;
             }
             if (keyboard.IsKeyDown(Keys.S))
             {
-                canvasX += Speed;
+                canvasY += Speed;
             }
             if (keyboard.IsKeyDown(Keys.D))
             {
-                canvasY += Speed;
+                canvasX += Speed;
             }
         }
 
@@ -105,7 +105,7 @@
         /// </summary>
         public Matrix GetTranslationMatrix()
         {
-            return Matrix.CreateTranslation(canvasX, canvasY, 0);
+            return Matrix.CreateTranslation(-canvasX, -canvasY, 0);
         }
 
         #endregion
