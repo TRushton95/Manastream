@@ -19,17 +19,16 @@
         #endregion
 
         #region Constructors
-
         /// <summary>
         /// Initialises a new instance of the <see cref="GameActor"/> class.
         /// </summary>
-        public GameActor()
+        public GameActor(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
         {
-            this.BoardX = 0;
-            this.BoardY = 0;
-            this.CanvasX = 0;
-            this.CanvasY = 0;
-            this.Sprite = null;
+            this.BoardX = boardX;
+            this.BoardY = boardY;
+            this.CanvasX = canvasX;
+            this.CanvasY = canvasY;
+            this.Texture = texture;
         }
 
         #endregion
@@ -72,7 +71,7 @@
             set;
         }
 
-        public Texture2D Sprite
+        public Texture2D Texture
         {
             get;
             set;

@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Enums;
+    using Microsoft.Xna.Framework.Graphics;
 
     #endregion
 
@@ -17,7 +18,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Tile"/> class.
         /// </summary>
-        public Tile()
+        public Tile(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
+            : base(boardX, boardY, canvasX, canvasY, texture)
         {
             TileType = TileType.Empty;
         }
