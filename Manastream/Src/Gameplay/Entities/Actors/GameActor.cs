@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// The x coordinate of the sprite.
+        /// The x coordinate of the texture.
         /// </summary>
         public int CanvasX
         {
@@ -58,7 +58,7 @@
         }
 
         /// <summary>
-        /// The y coordinate of the sprite.
+        /// The y coordinate of the texture.
         /// </summary>
         public int CanvasY
         {
@@ -72,6 +72,9 @@
             set;
         }
 
+        /// <summary>
+        /// Gets the global instance of the <see cref="Textures"/> class.
+        /// </summary>
         protected static Textures Textures => Resources.GetInstance().Textures;
 
         #endregion

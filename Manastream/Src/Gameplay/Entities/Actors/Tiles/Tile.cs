@@ -13,6 +13,12 @@
     /// </summary>
     public abstract class Tile : GameActor
     {
+        #region Constants
+
+        public static readonly int Diameter = 100;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
