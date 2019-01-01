@@ -15,7 +15,7 @@
         /// Initialises an instance of the <see cref="EmptyTile"/> class.
         /// </summary>
         public EmptyTile(int boardX, int boardY, int canvasX, int canvasY)
-            : base(boardX, boardY, canvasX, canvasY, TileType.Empty, textures.EmptyTile)
+            : base(boardX, boardY, canvasX, canvasY, TileType.Empty, Textures.EmptyTile)
         {
         }
     }

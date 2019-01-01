@@ -15,7 +15,7 @@
         /// Initialises an instancec of the <see cref="GroundTile"/> class.
         /// </summary>
         public GroundTile(int boardX, int boardY, int canvasX, int canvasY)
-            : base(boardX, boardY, canvasX, canvasY, TileType.Ground, textures.GroundTile)
+            : base(boardX, boardY, canvasX, canvasY, TileType.Ground, Textures.GroundTile)
         {
         }
     }

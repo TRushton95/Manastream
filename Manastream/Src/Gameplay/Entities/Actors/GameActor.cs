@@ -12,13 +12,8 @@
     /// </summary>
     public abstract class GameActor
     {
-        #region Fields
-
-        protected static readonly Textures textures = Resources.GetInstance().Textures;
-
-        #endregion
-
         #region Constructors
+
         /// <summary>
         /// Initialises a new instance of the <see cref="GameActor"/> class.
         /// </summary>
@@ -76,6 +71,8 @@
             get;
             set;
         }
+
+        protected static Textures Textures => Resources.GetInstance().Textures;
 
         #endregion
     }
