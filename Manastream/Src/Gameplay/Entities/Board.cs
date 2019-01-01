@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Microsoft.Xna.Framework.Graphics;
     using System.Collections.Generic;
 
     #endregion
@@ -39,6 +40,17 @@
         }
 
         #endregion
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (List<Tile> row in tiles)
+            {
+                foreach (Tile tile in row)
+                {
+                    tile.Draw(spriteBatch);
+                }
+            }
+        }
 
         #region Generation
 

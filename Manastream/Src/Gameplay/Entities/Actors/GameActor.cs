@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.GameResources;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -76,6 +77,18 @@
         /// Gets the global instance of the <see cref="Textures"/> class.
         /// </summary>
         protected static Textures Textures => Resources.GetInstance().Textures;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Renders the game actor.
+        /// </summary>
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, new Vector2(CanvasX, CanvasY), Color.White);
+        }
 
         #endregion
     }
