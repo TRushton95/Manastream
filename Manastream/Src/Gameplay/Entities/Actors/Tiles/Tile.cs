@@ -18,10 +18,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Tile"/> class.
         /// </summary>
-        public Tile(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
+        public Tile(int boardX, int boardY, int canvasX, int canvasY, TileType tileType, Texture2D texture)
             : base(boardX, boardY, canvasX, canvasY, texture)
         {
-            TileType = TileType.Empty;
+            this.TileType = tileType;
         }
 
         #endregion
