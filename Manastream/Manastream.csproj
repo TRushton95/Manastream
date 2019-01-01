@@ -52,6 +52,7 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\EmptyTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\GroundTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
+    <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
     <Compile Include="Src\Resources\Resources.cs" />
     <Compile Include="Src\Resources\Textures.cs" />
@@ -64,6 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Tiles\EmptyTile.png" />
+    <Content Include="Content\Tiles\GroundTile.png" />
+    <Content Include="Content\Units\BlueUnit.png" />
+    <Content Include="Content\Units\RedUnit.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -28,7 +28,7 @@
         private static Texture2D emptyTile, groundTile;
 
         //Units
-        private static Texture2D allyUnit, enemyUnit;
+        private static Texture2D blueUnit, redUnit;
 
         #endregion
 
@@ -39,8 +39,8 @@
         public Texture2D GroundTile => groundTile;
 
         //Units
-        public Texture2D AllyUnit => allyUnit;
-        public Texture2D EnemyUnit => enemyUnit;
+        public Texture2D BlueUnit => blueUnit;
+        public Texture2D RedUnit => redUnit;
 
         #endregion
 
@@ -86,8 +86,8 @@
         /// </summary>
         private void InitialiseUnits(ContentManager content)
         {
-            allyUnit = LoadUnitTexture(content, "AllyUnit");
-            enemyUnit = LoadUnitTexture(content, "EnemyUnit");
+            blueUnit = LoadUnitTexture(content, "BlueUnit");
+            redUnit = LoadUnitTexture(content, "RedUnit");
         }
 
         #endregion
