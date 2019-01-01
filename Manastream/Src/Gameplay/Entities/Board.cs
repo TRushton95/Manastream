@@ -41,6 +41,11 @@
 
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Renders the board.
+        /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (List<Tile> row in tiles)
@@ -52,10 +57,12 @@
             }
         }
 
+        #endregion
+
         #region Generation
 
         /// <summary>
-        /// Generates a default board.
+        /// Generates the default board.
         /// </summary>
         public void Generate()
         {

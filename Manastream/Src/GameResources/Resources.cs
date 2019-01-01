@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework.Content;
-
-namespace Manastream.Src.GameResources
+﻿namespace Manastream.Src.GameResources
 {
+    #region Usings
+
+    using Microsoft.Xna.Framework.Content;
+
+    #endregion
+
     /// <summary>
     /// The resources class that contains the game resources.
     /// </summary>
