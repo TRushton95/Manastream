@@ -1,7 +1,7 @@
 ﻿namespace Manastream.Src.Resources
 {
     /// <summary>
-    /// The resources class that contains the game resources
+    /// The resources class that contains the game resources.
     /// </summary>
     public class Resources
     {

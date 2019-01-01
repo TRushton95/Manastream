@@ -15,7 +15,8 @@
     {
         #region Constants
 
-        private string TilesPathName = "Tiles";
+        private string TilePathName = "Tiles";
+        private string UnitPathName = "Units";
 
         #endregion
 
@@ -26,6 +27,9 @@
         //Tiles
         private static Texture2D emptyTile, groundTile;
 
+        //Units
+        private static Texture2D allyUnit, enemyUnit;
+
         #endregion
 
         #region Getters
@@ -33,6 +37,10 @@
         //Tiles
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
+
+        //Units
+        public Texture2D AllyUnit => allyUnit;
+        public Texture2D EnemyUnit => enemyUnit;
 
         #endregion
 
@@ -57,6 +65,7 @@
         public void Initialise(ContentManager content)
         {
             InitialiseTiles(content);
+            InitialiseUnits(content);
         }
 
         #endregion
@@ -72,6 +81,15 @@
             groundTile = LoadTileTexture(content, "GroundTile");
         }
 
+        /// <summary>
+        /// Initialises the unit textures.
+        /// </summary>
+        private void InitialiseUnits(ContentManager content)
+        {
+            allyUnit = LoadUnitTexture(content, "AllyUnit");
+            enemyUnit = LoadUnitTexture(content, "EnemyUnit");
+        }
+
         #endregion
 
         #region Section Loading
@@ -81,7 +99,15 @@
         /// </summary>
         private Texture2D LoadTileTexture(ContentManager content, string tileTextureName)
         {
-            return content.Load<Texture2D>(Path.Combine(TilesPathName, tileTextureName));
+            return content.Load<Texture2D>(Path.Combine(TilePathName, tileTextureName));
+        }
+
+        /// <summary>
+        /// Loads a unit texture.
+        /// </summary>
+        private Texture2D LoadUnitTexture(ContentManager content, string unitTextureName)
+        {
+            return content.Load<Texture2D>(Path.Combine(UnitPathName, unitTextureName));
         }
 
         #endregion
