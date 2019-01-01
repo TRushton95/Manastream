@@ -14,7 +14,7 @@
     {
         #region Fields
 
-        protected readonly Textures textures = Resources.GetInstance().Textures;
+        protected static readonly Textures textures = Resources.GetInstance().Textures;
 
         #endregion
 
