@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -15,11 +16,13 @@
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+        private Resources resources;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            resources = Resources.GetInstance();
         }
 
         /// <summary>
@@ -43,6 +46,7 @@
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            resources.InitialiseTextures(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -63,7 +67,7 @@
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here

@@ -1,4 +1,6 @@
-﻿namespace Manastream.Src.GameResources
+﻿using Microsoft.Xna.Framework.Content;
+
+namespace Manastream.Src.GameResources
 {
     /// <summary>
     /// The resources class that contains the game resources.
@@ -30,6 +32,11 @@
             }
 
             return resources;
+        }
+
+        public void InitialiseTextures(ContentManager content)
+        {
+            Textures.Initialise(content);
         }
 
         #endregion

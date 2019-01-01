@@ -23,6 +23,7 @@
         #region Fields
 
         private static Textures textures;
+        private bool initialised = false;
 
         //Tiles
         private static Texture2D emptyTile, groundTile;
@@ -32,7 +33,7 @@
 
         #endregion
 
-        #region Getters
+        #region Properties
 
         //Tiles
         public Texture2D EmptyTile => emptyTile;
@@ -64,8 +65,15 @@
         /// </summary>
         public void Initialise(ContentManager content)
         {
+            if (initialised)
+            {
+                return;
+            }
+
             InitialiseTiles(content);
             InitialiseUnits(content);
+
+            initialised = true;
         }
 
         #endregion
