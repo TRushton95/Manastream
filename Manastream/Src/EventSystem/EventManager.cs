@@ -32,7 +32,7 @@ namespace Manastream.Src.EventSystem
         #region Methods
 
         /// <summary>
-        /// Get the instance of the event manager
+        /// Get the instance of the <see cref="EventManager"/> class.
         /// </summary>
         public static EventManager GetInstance()
         {

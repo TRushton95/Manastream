@@ -48,9 +48,11 @@
     <Compile Include="Src\Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Src\Gameplay\Entities\GameEntity.cs" />
+    <Compile Include="Src\Gameplay\Entities\Actors\GameActor.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
+    <Compile Include="Src\Resources\Resources.cs" />
+    <Compile Include="Src\Resources\Textures.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
