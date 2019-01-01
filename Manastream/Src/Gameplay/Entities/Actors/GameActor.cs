@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.Resources;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -11,6 +12,12 @@
     /// </summary>
     public abstract class GameActor
     {
+        #region Fields
+
+        protected readonly Textures textures = Resources.GetInstance().Textures;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
