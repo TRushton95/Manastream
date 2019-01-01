@@ -1,8 +1,12 @@
-﻿using Manastream.Src.EventSystem.Events;
-using System.Collections.Generic;
-
-namespace Manastream.Src.EventSystem
+﻿namespace Manastream.Src.EventSystem
 {
+    #region Usings
+
+    using Manastream.Src.EventSystem.Events;
+    using System.Collections.Generic;
+
+    #endregion
+
     /// <summary>
     /// The listener base class to notify and receive messages from the <see cref="EventManager"/>.
     /// </summary>

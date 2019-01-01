@@ -1,9 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
-namespace Manastream.Src
+﻿namespace Manastream.Src
 {
+    #region Usings
+
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+
+    #endregion
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
