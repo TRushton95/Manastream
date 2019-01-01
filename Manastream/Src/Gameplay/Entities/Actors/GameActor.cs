@@ -2,7 +2,7 @@
 {
     #region Usings
 
-    using Manastream.Src.Resources;
+    using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion

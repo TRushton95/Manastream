@@ -54,8 +54,8 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
-    <Compile Include="Src\Resources\Resources.cs" />
-    <Compile Include="Src\Resources\Textures.cs" />
+    <Compile Include="Src\GameResources\Resources.cs" />
+    <Compile Include="Src\GameResources\Textures.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

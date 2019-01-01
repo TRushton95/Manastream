@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.Resources
+﻿namespace Manastream.Src.GameResources
 {
     #region Usings
 
