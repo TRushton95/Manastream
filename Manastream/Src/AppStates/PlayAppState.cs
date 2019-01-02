@@ -18,7 +18,6 @@
 
         private SpriteBatch gameSpriteBatch;
         private Board board;
-        private Camera camera;
 
         #endregion
 
@@ -30,8 +29,7 @@
         public PlayAppState()
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
-
-            camera = new Camera(0, 0);
+            
             board = new Board();
             board.Generate();
         }
@@ -40,13 +38,7 @@
 
         public override void Update()
         {
-            camera.Update();
-
-            Point transformedMouse = Vector2.Transform(
-                MouseInfo.Position.ToVector2(),
-                Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
-
-            board.Update(transformedMouse);
+            board.Update();
         }
 
         /// <summary>
@@ -56,11 +48,7 @@
         /// </summary>
         public override void DrawState(SpriteBatch uiSpriteBatch)
         {
-            gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
-
             board.Draw(gameSpriteBatch);
-
-            gameSpriteBatch.End();
 
             base.DrawState(uiSpriteBatch);
         }

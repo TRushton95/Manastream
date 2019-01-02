@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
+    using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -29,6 +30,7 @@
         private int width, height;
         private List<List<Tile>> tiles;
         private Tile highlightedTile;
+        private Camera camera;
 
         #endregion
 
@@ -42,6 +44,7 @@
             this.width = DefaultWidth;
             this.height = DefaultHeight;
             this.tiles = new List<List<Tile>>();
+            this.camera = new Camera(0, 0);
         }
 
         #endregion
@@ -52,30 +55,36 @@
         /// Updates the board state.
         /// Accepts mouse point as input so mouse may have camera transformation applied first.
         /// </summary>
-        public void Update(Point mouse)
+        public void Update()
         {
             //DEBUG
-            highlightedTile = GetTileAtCanvasPosition(mouse.X, mouse.Y);
+            camera.Update();
+            Point adjustedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
+            highlightedTile = GetTileAtCanvasPosition(adjustedMouse.X, adjustedMouse.Y);
         }
 
         /// <summary>
         /// Renders the board.
         /// </summary>
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch gameSpriteBatch)
         {
+            gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
+
             foreach (List<Tile> row in tiles)
             {
                 foreach (Tile tile in row)
                 {
-                    tile.Draw(spriteBatch);
+                    tile.Draw(gameSpriteBatch);
                 }
             }
 
             //DEBUG
             if (highlightedTile != null)
             {
-                spriteBatch.Draw(Resources.GetInstance().Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
+                gameSpriteBatch.Draw(Resources.GetInstance().Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
             }
+
+            gameSpriteBatch.End();
         }
 
         #endregion
