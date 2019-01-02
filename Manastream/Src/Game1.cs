@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.GameResources;
+    using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -86,6 +87,7 @@
                 Exit();
 
             // TODO: Add your update logic here
+            MouseInfo.Update();
 
             //DEBUG
             camera.Update();
