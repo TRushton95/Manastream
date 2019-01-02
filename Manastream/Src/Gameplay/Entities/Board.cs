@@ -3,8 +3,11 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using System;
     using System.Collections.Generic;
 
     #endregion
@@ -25,6 +28,7 @@
 
         private int width, height;
         private List<List<Tile>> tiles;
+        private Tile highlightedTile;
 
         #endregion
 
@@ -44,6 +48,13 @@
 
         #region Methods
 
+        public void Update()
+        {
+            //DEBUG
+            Point mouse = Mouse.GetState().Position;
+            highlightedTile = GetTileAtCanvasPosition(mouse.X, mouse.Y);
+        }
+
         /// <summary>
         /// Renders the board.
         /// </summary>
@@ -55,6 +66,12 @@
                 {
                     tile.Draw(spriteBatch);
                 }
+            }
+
+            //DEBUG
+            if (highlightedTile != null)
+            {
+                spriteBatch.Draw(Resources.GetInstance().Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
             }
         }
 
@@ -72,9 +89,10 @@
             //Get row and column canvas position is in
             int rowHeight = (Tile.Diameter / 4) * 3;
 
-            int row = canvasX / rowHeight;
+            int row = canvasY / rowHeight;
+            bool rowIsOdd = IsOdd(row); //row is mutable during these calculations
             
-            int adjustedCanvasX = IsOdd(row) ? canvasX - (Tile.Diameter / 2) : canvasX;
+            int adjustedCanvasX = rowIsOdd ? canvasX - (Tile.Diameter / 2) : canvasX;
             int column = adjustedCanvasX / Tile.Diameter;
             
             if (adjustedCanvasX < 0 || canvasY < 0) //Hack to avoid error as a result of diving a negative still resulting in column 0
@@ -83,10 +101,10 @@
             }
 
             //Calculate relative canvas position within the hex
-            double relX;
             double relY = canvasY - (row * rowHeight);
+            double relX;
 
-            if (IsOdd(row))
+            if (rowIsOdd)
             {
                 relX = (canvasX - (column * Tile.Diameter)) - (Tile.Diameter / 2);
             }
@@ -99,22 +117,26 @@
             double c = Tile.Diameter / 4;
             double m = c / (Tile.Diameter / 2);
 
-            if (relY < (-m * relX) + c)
+            if (relY < (-m * relX) + c) //left edge
             {
                 row--;
+                Console.WriteLine("Left edge: Row--");
 
-                if (!IsOdd(row))
+                if (!rowIsOdd)
                 {
                     column--;
+                    Console.WriteLine("Left edge: Column--");
                 }
             }
-            else if (relY < (m * relX) - c)
+            else if (relY < (m * relX) - c) //right edge
             {
                 row--;
+                Console.WriteLine("Right edge: Row--");
 
-                if (IsOdd(row))
+                if (rowIsOdd)
                 {
                     column++;
+                    Console.WriteLine("Right edge: Column++");
                 }
             }
 
@@ -133,7 +155,7 @@
             if (x >= 0 && x < width &&
                 y >= 0 && y < height)
             {
-                result = tiles[y][x];
+                result = tiles[x][y];
             }
 
             return result;
@@ -150,21 +172,21 @@
         {
             List<List<Tile>> result = new List<List<Tile>>();
 
-            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
             {
-                List<Tile> row = new List<Tile>();
-                
-                int canvasXOffset = IsOdd(y) ? Tile.Diameter / 2 : 0;
+                List<Tile> column = new List<Tile>();
 
-                for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
                 {
+                    int canvasXOffset = IsOdd(y) ? Tile.Diameter / 2 : 0;
+
                     int canvasX = x * Tile.Diameter + canvasXOffset;
                     int canvasY = (int)(y * (Tile.Diameter * 0.75));
 
-                    row.Add(new EmptyTile(x, y, canvasX, canvasY));
+                    column.Add(new EmptyTile(x, y, canvasX, canvasY));
                 }
 
-                result.Add(row);
+                result.Add(column);
             }
 
             tiles = result;
@@ -179,7 +201,7 @@
         /// </summary>
         private bool IsOdd(int i)
         {
-            return i % 2 == 0;
+            return i % 2 == 1;
         }
 
         #endregion
