@@ -2,7 +2,7 @@
 {
     #region Usings
 
-    using Microsoft.Xna.Framework.Content;
+    using Microsoft.Xna.Framework;
 
     #endregion
 
@@ -14,6 +14,7 @@
         #region Fields
 
         private static Resources resources;
+        private Textures textures;
 
         #endregion
 
@@ -26,14 +27,17 @@
         /// </summary>
         public Resources()
         {
-            this.Textures = new Textures();
+            this.textures = new Textures();
         }
 
         #endregion
 
-        public Textures Textures
+        public Textures Textures => textures;
+
+        public GraphicsDeviceManager GraphicsDeviceManager
         {
             get;
+            set;
         }
 
         #endregion
