@@ -20,6 +20,8 @@
 
         #region Methods
 
+        public abstract void Update();
+
         /// <summary>
         /// Draws the appstate.
         /// </summary>

@@ -2,7 +2,7 @@
 {
     #region Usings
 
-    using Manastream.Src.Gameplay.Entities;
+    using Manastream.Src.AppStates;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -19,16 +19,12 @@
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Resources resources;
-        private Camera camera;
-        private Board board;
+        private AppState appState;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
-            resources = Resources.GetInstance();
-            resources.GraphicsDevice = GraphicsDevice;
             
             //DEBUG
             graphics.PreferredBackBufferWidth = 1200;
@@ -45,10 +41,8 @@
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            //DEBUG
-            camera = new Camera(0, 0);
-            board = new Board();
+            resources = Resources.GetInstance();
+            resources.GraphicsDevice = GraphicsDevice;
 
             base.Initialize();
         }
@@ -64,7 +58,7 @@
 
             //DEBUG
             resources.Textures.Initialise(Content);
-            board.Generate();
+            appState = new PlayAppState();
 
             // TODO: use this.Content to load your game content here
         }
@@ -90,10 +84,7 @@
 
             // TODO: Add your update logic here
             MouseInfo.Update();
-
-            //DEBUG
-            camera.Update();
-            board.Update();
+            appState.Update();
 
             base.Update(gameTime);
         }
@@ -106,13 +97,7 @@
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //DEBUG
-            spriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
-            
-            // TODO: Add your drawing code here
-            board.Draw(spriteBatch);
-
-            spriteBatch.End();
+            appState.DrawState(spriteBatch);
         }
     }
 }

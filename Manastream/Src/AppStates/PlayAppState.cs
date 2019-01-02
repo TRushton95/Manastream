@@ -28,11 +28,19 @@
         public PlayAppState()
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
-            board = new Board();
+
             camera = new Camera(0, 0);
+            board = new Board();
+            board.Generate();
         }
 
         #endregion
+
+        public override void Update()
+        {
+            camera.Update();
+            board.Update();
+        }
 
         /// <summary>
         /// Draws the appstate.
