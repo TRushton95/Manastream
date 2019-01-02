@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -17,12 +18,19 @@
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private Resources resources;
+        private Camera camera;
+        private Board board;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             resources = Resources.GetInstance();
+            
+            //DEBUG
+            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 680;
+            this.IsMouseVisible = true;
         }
 
         /// <summary>
@@ -35,6 +43,10 @@
         {
             // TODO: Add your initialization logic here
 
+            //DEBUG
+            camera = new Camera(0, 0);
+            board = new Board();
+
             base.Initialize();
         }
 
@@ -46,7 +58,10 @@
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            //DEBUG
             resources.InitialiseTextures(Content);
+            board.Generate();
 
             // TODO: use this.Content to load your game content here
         }
@@ -72,6 +87,10 @@
 
             // TODO: Add your update logic here
 
+            //DEBUG
+            camera.Update();
+            board.Update();
+
             base.Update(gameTime);
         }
 
@@ -81,11 +100,13 @@
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
+            //DEBUG
+            spriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
 
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            board.Draw(spriteBatch);
 
             base.Draw(gameTime);
 
