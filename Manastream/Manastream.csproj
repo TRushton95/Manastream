@@ -41,6 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Src\AppStates\AppState.cs" />
     <Compile Include="Src\EventSystem\Events\Event.cs" />
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\EventTypes.cs" />
