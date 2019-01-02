@@ -102,15 +102,13 @@
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //DEBUG
-            spriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //DEBUG
+            spriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
+            
             // TODO: Add your drawing code here
             board.Draw(spriteBatch);
-
-            base.Draw(gameTime);
 
             spriteBatch.End();
         }
