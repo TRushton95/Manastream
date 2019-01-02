@@ -28,7 +28,7 @@
             Content.RootDirectory = "Content";
 
             resources = Resources.GetInstance();
-            resources.GraphicsDeviceManager = graphics;
+            resources.GraphicsDevice = GraphicsDevice;
             
             //DEBUG
             graphics.PreferredBackBufferWidth = 1200;

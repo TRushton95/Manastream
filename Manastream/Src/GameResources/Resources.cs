@@ -1,8 +1,8 @@
 ﻿namespace Manastream.Src.GameResources
 {
     #region Usings
-
-    using Microsoft.Xna.Framework;
+    
+    using Microsoft.Xna.Framework.Graphics;
 
     #endregion
 
@@ -34,7 +34,7 @@
 
         public Textures Textures => textures;
 
-        public GraphicsDeviceManager GraphicsDeviceManager
+        public GraphicsDevice GraphicsDevice
         {
             get;
             set;
