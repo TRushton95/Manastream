@@ -19,7 +19,22 @@
 
         #region Properties
 
-        public Textures Textures => Textures.GetInstance();
+        #region Constructors
+
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Resources"/> class.
+        /// </summary>
+        public Resources()
+        {
+            this.Textures = new Textures();
+        }
+
+        #endregion
+
+        public Textures Textures
+        {
+            get;
+        }
 
         #endregion
 
@@ -36,11 +51,6 @@
             }
 
             return resources;
-        }
-
-        public void InitialiseTextures(ContentManager content)
-        {
-            Textures.Initialise(content);
         }
 
         #endregion

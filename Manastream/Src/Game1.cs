@@ -60,7 +60,7 @@
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //DEBUG
-            resources.InitialiseTextures(Content);
+            resources.Textures.Initialise(Content);
             board.Generate();
 
             // TODO: use this.Content to load your game content here

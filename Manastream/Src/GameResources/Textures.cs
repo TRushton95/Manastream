@@ -21,8 +21,7 @@
         #endregion
 
         #region Fields
-
-        private static Textures textures;
+        
         private bool initialised = false;
 
         //Tiles
@@ -48,19 +47,6 @@
         #endregion
 
         #region Methods
-
-        /// <summary>
-        /// Gets the instance of the <see cref="Textures"/> class.
-        /// </summary>
-        public static Textures GetInstance()
-        {
-            if (textures == null)
-            {
-                textures = new Textures();
-            }
-
-            return textures;
-        }
         
         /// <summary>
         /// Initialise the textures.

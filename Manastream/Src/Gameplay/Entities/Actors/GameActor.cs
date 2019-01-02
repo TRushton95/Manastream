@@ -15,7 +15,7 @@
     {
         #region Constructors
 
-        /// <summary>
+        /// <summary>C:\Github\Manastream\Manastream\Src\Gameplay\Entities\Actors\GameActor.cs
         /// Initialises a new instance of the <see cref="GameActor"/> class.
         /// </summary>
         public GameActor(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
