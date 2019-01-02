@@ -3,6 +3,8 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities;
+    using Manastream.Src.Utility;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -39,7 +41,12 @@
         public override void Update()
         {
             camera.Update();
-            board.Update();
+
+            Point transformedMouse = Vector2.Transform(
+                MouseInfo.Position.ToVector2(),
+                Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
+
+            board.Update(transformedMouse);
         }
 
         /// <summary>

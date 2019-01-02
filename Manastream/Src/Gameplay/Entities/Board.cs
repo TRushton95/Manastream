@@ -48,10 +48,13 @@
 
         #region Methods
 
-        public void Update()
+        /// <summary>
+        /// Updates the board state.
+        /// Accepts mouse point as input so mouse may have camera transformation applied first.
+        /// </summary>
+        public void Update(Point mouse)
         {
             //DEBUG
-            Point mouse = Mouse.GetState().Position;
             highlightedTile = GetTileAtCanvasPosition(mouse.X, mouse.Y);
         }
 
