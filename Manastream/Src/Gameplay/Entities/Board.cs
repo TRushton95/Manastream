@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System.Collections.Generic;
 
@@ -59,6 +60,87 @@
 
         #endregion
 
+        #region Tile Utility
+
+        /// <summary>
+        /// Gets the tile at the given canvas position.
+        /// </summary>
+        public Tile GetTileAtCanvasPosition(int canvasX, int canvasY)
+        {
+            Tile result = null;
+
+            //Get row and column canvas position is in
+            int rowHeight = (Tile.Diameter / 4) * 3;
+
+            int row = canvasX / rowHeight;
+            
+            int adjustedCanvasX = IsOdd(row) ? canvasX - (Tile.Diameter / 2) : canvasX;
+            int column = adjustedCanvasX / Tile.Diameter;
+            
+            if (adjustedCanvasX < 0 || canvasY < 0) //Hack to avoid error as a result of diving a negative still resulting in column 0
+            {
+                return null;
+            }
+
+            //Calculate relative canvas position within the hex
+            double relX;
+            double relY = canvasY - (row * rowHeight);
+
+            if (IsOdd(row))
+            {
+                relX = (canvasX - (column * Tile.Diameter)) - (Tile.Diameter / 2);
+            }
+            else
+            {
+                relX = canvasX - (column * Tile.Diameter);
+            }
+
+            //use y = mx + c to determine which side of the line the canvas position falls on
+            double c = Tile.Diameter / 4;
+            double m = c / (Tile.Diameter / 2);
+
+            if (relY < (-m * relX) + c)
+            {
+                row--;
+
+                if (!IsOdd(row))
+                {
+                    column--;
+                }
+            }
+            else if (relY < (m * relX) - c)
+            {
+                row--;
+
+                if (IsOdd(row))
+                {
+                    column++;
+                }
+            }
+
+            result = GetTile(column, row);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the tile at a given coordinate, null if coordinate is out of range.
+        /// </summary>
+        private Tile GetTile(int x, int y)
+        {
+            Tile result = null;
+
+            if (x >= 0 && x < width &&
+                y >= 0 && y < height)
+            {
+                result = tiles[y][x];
+            }
+
+            return result;
+        }
+
+        #endregion
+
         #region Generation
 
         /// <summary>
@@ -90,7 +172,7 @@
 
         #endregion
 
-        #region Utility Methods
+        #region Helper Methods
 
         /// <summary>
         /// Determines whether an integer is odd
