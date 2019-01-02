@@ -26,6 +26,7 @@
         private bool initialised = false;
 
         //Tiles
+        private static Texture2D tileHighlight;
         private static Texture2D emptyTile, groundTile;
 
         //Units
@@ -36,6 +37,7 @@
         #region Properties
 
         //Tiles
+        public Texture2D TileHighlight => tileHighlight;
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
 
@@ -85,6 +87,7 @@
         /// </summary>
         private void InitialiseTiles(ContentManager content)
         {
+            tileHighlight = LoadTileTexture(content, "TileHighlight");
             emptyTile = LoadTileTexture(content, "EmptyTile");
             groundTile = LoadTileTexture(content, "GroundTile");
         }
