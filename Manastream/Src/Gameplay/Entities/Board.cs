@@ -76,10 +76,7 @@
                 highlightedUnit = highlightedTile.Occupant;
             }
 
-            if (MouseInfo.LeftMousePressed)
-            {
-                playerState = playerState.ClickTile(highlightedTile);
-            }
+            playerState = playerState.ProcessInput(highlightedTile);
         }
 
         /// <summary>
@@ -110,10 +107,7 @@
                 gameSpriteBatch.Draw(Resources.Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
             }
 
-            if (playerState.SelectedUnit != null)
-            {
-                gameSpriteBatch.Draw(Resources.Textures.UnitSelect, new Vector2(playerState.SelectedUnit.CanvasX, playerState.SelectedUnit.CanvasY), Color.White);
-            }
+            playerState.Draw(gameSpriteBatch);
 
             gameSpriteBatch.End();
         }

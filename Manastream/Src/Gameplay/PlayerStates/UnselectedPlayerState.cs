@@ -3,6 +3,8 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Utility;
+    using Microsoft.Xna.Framework.Graphics;
 
     #endregion
 
@@ -26,16 +28,26 @@
         #region Methods
 
         /// <summary>
-        /// Resolves tile clicks.
+        /// Processes user input.
         /// </summary>
-        public override PlayerState ClickTile(Tile tile)
+        public override PlayerState ProcessInput(Tile tile)
         {
-            if (tile != null && tile.Occupant != null)
+            if (MouseInfo.LeftMousePressed)
             {
-                return new SelectedPlayerState(tile.Occupant);
+                if (tile != null && tile.Occupant != null)
+                {
+                    return new SelectedPlayerState(tile.Occupant);
+                }
             }
 
             return this;
+        }
+
+        /// <summary>
+        /// Processes user input.
+        /// </summary>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
         }
 
         #endregion

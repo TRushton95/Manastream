@@ -39,9 +39,14 @@
         #region Methods
 
         /// <summary>
-        /// Defines a contract for a method that resolves tile clicks.
+        /// Processes user input.
         /// </summary>
-        public abstract PlayerState ClickTile(Tile tile);
+        public abstract PlayerState ProcessInput(Tile highlightedTile);
+
+        /// <summary>
+        /// Draws the state.
+        /// </summary>
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         #endregion
     }
