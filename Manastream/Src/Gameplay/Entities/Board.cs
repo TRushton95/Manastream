@@ -28,7 +28,7 @@
         #region Fields
 
         private int width, height;
-        private List<List<Tile>> tiles;
+        private Tile[,] tiles;
         private Tile highlightedTile;
         private Camera camera;
 
@@ -39,11 +39,10 @@
         /// <summary>
         /// Initialises an instance of the <see cref="Board"/> class.
         /// </summary>
-        public Board()
+        public Board(int width = DefaultWidth, int height = DefaultHeight)
         {
             this.width = DefaultWidth;
             this.height = DefaultHeight;
-            this.tiles = new List<List<Tile>>();
             this.camera = new Camera(0, 0);
         }
 
@@ -70,12 +69,9 @@
         {
             gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
 
-            foreach (List<Tile> row in tiles)
+            foreach (Tile tile in tiles)
             {
-                foreach (Tile tile in row)
-                {
-                    tile.Draw(gameSpriteBatch);
-                }
+                tile.Draw(gameSpriteBatch);
             }
 
             //DEBUG
@@ -90,6 +86,22 @@
         #endregion
 
         #region Tile Utility
+        
+        /// <summary>
+        /// Gets the tile at a given coordinate, null if coordinate is out of range.
+        /// </summary>
+        private Tile GetTile(int x, int y)
+        {
+            Tile result = null;
+
+            if (x >= 0 && x < tiles.GetLength(0) &&
+                y >= 0 && y < tiles.GetLength(1))
+            {
+                result = tiles[x,y];
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Gets the tile at the given canvas position.
@@ -157,22 +169,6 @@
             return result;
         }
 
-        /// <summary>
-        /// Gets the tile at a given coordinate, null if coordinate is out of range.
-        /// </summary>
-        private Tile GetTile(int x, int y)
-        {
-            Tile result = null;
-
-            if (x >= 0 && x < width &&
-                y >= 0 && y < height)
-            {
-                result = tiles[x][y];
-            }
-
-            return result;
-        }
-
         #endregion
 
         #region Generation
@@ -182,12 +178,10 @@
         /// </summary>
         public void Generate()
         {
-            List<List<Tile>> result = new List<List<Tile>>();
+            Tile[,] result = new Tile[width, height];
 
             for (int x = 0; x < width; x++)
             {
-                List<Tile> column = new List<Tile>();
-
                 for (int y = 0; y < height; y++)
                 {
                     int canvasXOffset = IsOdd(y) ? Tile.Diameter / 2 : 0;
@@ -195,10 +189,8 @@
                     int canvasX = x * Tile.Diameter + canvasXOffset;
                     int canvasY = (int)(y * (Tile.Diameter * 0.75));
 
-                    column.Add(new EmptyTile(x, y, canvasX, canvasY));
+                    result[x,y] = new EmptyTile(x, y, canvasX, canvasY);
                 }
-
-                result.Add(column);
             }
 
             tiles = result;
