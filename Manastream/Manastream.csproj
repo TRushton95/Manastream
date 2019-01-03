@@ -58,6 +58,9 @@
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Entities\Camera.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
+    <Compile Include="Src\Gameplay\PlayerStates\PlayerState.cs" />
+    <Compile Include="Src\Gameplay\PlayerStates\SelectedPlayerState.cs" />
+    <Compile Include="Src\Gameplay\PlayerStates\UnselectedPlayerState.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
     <Compile Include="Src\Utility\MouseInfo.cs" />

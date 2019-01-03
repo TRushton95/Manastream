@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.PlayerStates;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion

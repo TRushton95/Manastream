@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.PlayerStates;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -34,6 +35,7 @@
         private Unit highlightedUnit;
         private Camera camera;
         private Resources Resources = Resources.GetInstance();
+        private PlayerState playerState;
 
         #endregion
 
@@ -49,6 +51,8 @@
             this.tiles = new Tile[0, 0];
             this.units = new List<Unit>();
             this.camera = new Camera(0, 0);
+
+            this.playerState = new UnselectedPlayerState();
         }
 
         #endregion
@@ -70,6 +74,11 @@
             if (highlightedTile!= null)
             {
                 highlightedUnit = highlightedTile.Occupant;
+            }
+
+            if (MouseInfo.LeftMousePressed)
+            {
+                playerState = playerState.ClickTile(highlightedTile);
             }
         }
 
@@ -99,6 +108,11 @@
             if (highlightedUnit != null)
             {
                 gameSpriteBatch.Draw(Resources.Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
+            }
+
+            if (playerState.SelectedUnit != null)
+            {
+                gameSpriteBatch.Draw(Resources.Textures.UnitSelect, new Vector2(playerState.SelectedUnit.CanvasX, playerState.SelectedUnit.CanvasY), Color.White);
             }
 
             gameSpriteBatch.End();
