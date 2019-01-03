@@ -54,6 +54,7 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\EmptyTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\GroundTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
+    <Compile Include="Src\Gameplay\Entities\Actors\Unit.cs" />
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Entities\Camera.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />

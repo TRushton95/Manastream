@@ -23,8 +23,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
-        public Unit(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
-            : base(boardX, boardY, canvasX, canvasY, texture)
+        public Unit(Texture2D texture)
+            : base(0, 0, 0, 0, texture)
         {
         }
 
