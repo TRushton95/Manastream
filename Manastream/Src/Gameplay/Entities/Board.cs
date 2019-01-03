@@ -58,8 +58,9 @@
         {
             //DEBUG
             camera.Update();
-            Point adjustedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
-            highlightedTile = GetTileAtCanvasPosition(adjustedMouse.X, adjustedMouse.Y);
+            Point mappedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
+
+            highlightedTile = GetTileAtCanvasPosition(mappedMouse.X, mappedMouse.Y);
         }
 
         /// <summary>
