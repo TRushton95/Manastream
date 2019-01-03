@@ -29,6 +29,7 @@
         private static Texture2D emptyTile, groundTile;
 
         //Units
+        private static Texture2D unitHighlight, unitSelect;
         private static Texture2D blueUnit, redUnit;
 
         #endregion
@@ -41,6 +42,8 @@
         public Texture2D GroundTile => groundTile;
 
         //Units
+        public Texture2D UnitHighlight => unitHighlight;
+        public Texture2D UnitSelect => unitSelect;
         public Texture2D BlueUnit => blueUnit;
         public Texture2D RedUnit => redUnit;
 
@@ -83,6 +86,8 @@
         /// </summary>
         private void InitialiseUnits(ContentManager content)
         {
+            unitHighlight = LoadUnitTexture(content, "UnitHighlight");
+            unitSelect = LoadUnitTexture(content, "UnitSelect");
             blueUnit = LoadUnitTexture(content, "BlueUnit");
             redUnit = LoadUnitTexture(content, "RedUnit");
         }

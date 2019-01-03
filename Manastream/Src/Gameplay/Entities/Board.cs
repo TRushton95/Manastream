@@ -31,6 +31,7 @@
         private Tile[,] tiles;
         private List<Unit> units;
         private Tile highlightedTile;
+        private Unit highlightedUnit;
         private Camera camera;
         private Resources Resources = Resources.GetInstance();
 
@@ -65,6 +66,11 @@
             Point mappedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
 
             highlightedTile = GetTileAtCanvasPosition(mappedMouse.X, mappedMouse.Y);
+
+            if (highlightedTile!= null)
+            {
+                highlightedUnit = highlightedTile.Occupant;
+            }
         }
 
         /// <summary>
@@ -87,7 +93,12 @@
             //DEBUG
             if (highlightedTile != null)
             {
-                gameSpriteBatch.Draw(Resources.GetInstance().Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
+                gameSpriteBatch.Draw(Resources.Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
+            }
+
+            if (highlightedUnit != null)
+            {
+                gameSpriteBatch.Draw(Resources.Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
             }
 
             gameSpriteBatch.End();
