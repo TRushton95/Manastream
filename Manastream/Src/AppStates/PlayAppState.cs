@@ -3,8 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities;
-    using Manastream.Src.Utility;
-    using Microsoft.Xna.Framework;
+    using Manastream.Src.Gameplay.Entities.Actors;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -32,6 +31,7 @@
             
             board = new Board();
             board.Generate();
+            board.TrySpawnUnit(new Unit(Resources.Textures.BlueUnit), 2, 5);
         }
 
         #endregion

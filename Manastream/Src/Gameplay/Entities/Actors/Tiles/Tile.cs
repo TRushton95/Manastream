@@ -28,6 +28,7 @@
             : base(boardX, boardY, canvasX, canvasY, texture)
         {
             this.TileType = tileType;
+            this.Occupant = null;
         }
 
         #endregion
@@ -37,6 +38,12 @@
         public TileType TileType
         {
             get;
+        }
+
+        public Unit Occupant
+        {
+            get;
+            set;
         }
 
         #endregion

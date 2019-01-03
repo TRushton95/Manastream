@@ -2,12 +2,12 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
     using System;
     using System.Collections.Generic;
 
@@ -29,8 +29,10 @@
 
         private int width, height;
         private Tile[,] tiles;
+        private List<Unit> units;
         private Tile highlightedTile;
         private Camera camera;
+        private Resources Resources = Resources.GetInstance();
 
         #endregion
 
@@ -43,6 +45,8 @@
         {
             this.width = DefaultWidth;
             this.height = DefaultHeight;
+            this.tiles = new Tile[0, 0];
+            this.units = new List<Unit>();
             this.camera = new Camera(0, 0);
         }
 
@@ -75,6 +79,11 @@
                 tile.Draw(gameSpriteBatch);
             }
 
+            foreach (Unit unit in units)
+            {
+                unit.Draw(gameSpriteBatch);
+            }
+
             //DEBUG
             if (highlightedTile != null)
             {
@@ -82,6 +91,62 @@
             }
 
             gameSpriteBatch.End();
+        }
+
+        #endregion
+
+        #region Map Controls
+
+        /// <summary>
+        /// Attempt to spawn a unit at the specified location on the board and add it to the collection.
+        /// </summary>
+        public bool TrySpawnUnit(Unit unit, int x, int y)
+        {
+            bool result = false;
+
+            Tile tile = GetTile(x, y);
+
+            if (tile != null && tile.Occupant == null)
+            {
+                tile.Occupant = unit;
+                unit.BoardX = x;
+                unit.BoardY = y;
+                unit.CanvasX = tile.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                unit.CanvasY = tile.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+
+                units.Add(unit);
+
+                result = true;
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #region Generation
+
+        /// <summary>
+        /// Generates the default board.
+        /// </summary>
+        public void Generate()
+        {
+            Tile[,] result = new Tile[width, height];
+
+            for (int x = 0; x < width; x++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    int canvasXOffset = IsOdd(y) ? Tile.Diameter / 2 : 0;
+
+                    int canvasX = x * Tile.Diameter + canvasXOffset;
+                    int canvasY = (int)(y * (Tile.Diameter * 0.75));
+
+                    result[x,y] = new EmptyTile(x, y, canvasX, canvasY);
+                }
+            }
+
+            tiles = result;
         }
 
         #endregion
@@ -168,33 +233,6 @@
             result = GetTile(column, row);
 
             return result;
-        }
-
-        #endregion
-
-        #region Generation
-
-        /// <summary>
-        /// Generates the default board.
-        /// </summary>
-        public void Generate()
-        {
-            Tile[,] result = new Tile[width, height];
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    int canvasXOffset = IsOdd(y) ? Tile.Diameter / 2 : 0;
-
-                    int canvasX = x * Tile.Diameter + canvasXOffset;
-                    int canvasY = (int)(y * (Tile.Diameter * 0.75));
-
-                    result[x,y] = new EmptyTile(x, y, canvasX, canvasY);
-                }
-            }
-
-            tiles = result;
         }
 
         #endregion
