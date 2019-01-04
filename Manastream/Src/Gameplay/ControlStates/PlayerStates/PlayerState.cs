@@ -13,7 +13,7 @@
     /// <summary>
     /// The base player state class that represents a state of interface for a player on the board.
     /// </summary>
-    public abstract class PlayerState : IControlState
+    public abstract class PlayerState : ControlState
     {
         #region Constructors
 
@@ -33,20 +33,6 @@
         {
             get;
         }
-
-        #endregion
-
-        #region Methods
-        
-        /// <summary>
-        /// Processes user input.
-        /// </summary>
-        public abstract PlayerState ProcessInput();
-
-        /// <summary>
-        /// Draws the state.
-        /// </summary>
-        public abstract void Draw(SpriteBatch spriteBatch);
 
         #endregion
     }

@@ -2,8 +2,8 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
-    using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -17,6 +17,12 @@
     /// </summary>
     public class SelectedPlayerState : PlayerState
     {
+        #region Field
+
+        private readonly Texture2D unitSelectTexture = Resources.GetInstance().Textures.UnitSelect;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -34,9 +40,24 @@
         /// <summary>
         /// Processes user input.
         /// </summary>
-        public override PlayerState ProcessInput()
+        public override PlayerState ProcessInput(Board board, Point mouse)
         {
-            throw new NotImplementedException();
+            base.ProcessInput(board, mouse);
+
+            if (MouseInfo.LeftMousePressed)
+            {
+                if (HighlightedTile?.Occupant == null)
+                {
+                    return new UnselectedPlayerState();
+                }
+
+                if (HighlightedTile?.Occupant != SelectedUnit)
+                {
+                    return new SelectedPlayerState(HighlightedTile.Occupant);
+                }
+            }
+
+            return this;
         }
 
         /// <summary>
@@ -44,9 +65,9 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Texture2D unitHighlightTexture = Resources.GetInstance().Textures.UnitHighlight;
+            base.Draw(spriteBatch);
 
-            spriteBatch.Draw(unitHighlightTexture, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
+            spriteBatch.Draw(unitSelectTexture, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
         }
 
         #endregion

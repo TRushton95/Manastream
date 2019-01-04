@@ -2,8 +2,11 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.ControlStates.PlayerStates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Utility;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -17,6 +20,7 @@
 
         private SpriteBatch gameSpriteBatch;
         private Camera camera;
+        private PlayerState playerState;
         private Board board;
 
         #endregion
@@ -30,6 +34,7 @@
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
+            playerState = new UnselectedPlayerState();
             
             board = new Board();
             board.Generate();
@@ -38,10 +43,15 @@
 
         #endregion
 
+        /// <summary>
+        /// Updates the app state.
+        /// </summary>
         public override void Update()
         {
             camera.Update();
-            board.Update();
+
+            Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
+            playerState = playerState.ProcessInput(board, transformedMouse);
         }
 
         /// <summary>
@@ -53,6 +63,7 @@
         {
             gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
             board.Draw(gameSpriteBatch);
+            playerState.Draw(gameSpriteBatch);
             gameSpriteBatch.End();
 
             base.DrawState(uiSpriteBatch);

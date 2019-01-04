@@ -59,15 +59,6 @@
         #region Methods
 
         /// <summary>
-        /// Updates the board state.
-        /// Accepts mouse point as input so mouse may have camera transformation applied first.
-        /// </summary>
-        public void Update()
-        {
-
-        }
-
-        /// <summary>
         /// Renders the board.
         /// </summary>
         public void Draw(SpriteBatch gameSpriteBatch)

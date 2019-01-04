@@ -2,8 +2,9 @@
 {
     #region Usings
 
-    using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Utility;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System;
 
@@ -31,9 +32,19 @@
         /// <summary>
         /// Processes user input.
         /// </summary>
-        public override PlayerState ProcessInput()
+        public override PlayerState ProcessInput(Board board, Point mouse)
         {
-            throw new NotImplementedException();
+            base.ProcessInput(board, mouse);
+
+            if (MouseInfo.LeftMousePressed)
+            {
+                if (HighlightedUnit != null)
+                {
+                    return new SelectedPlayerState(HighlightedUnit);
+                }
+            }
+
+            return this;
         }
 
         /// <summary>
@@ -41,6 +52,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
         }
 
         #endregion
