@@ -5,8 +5,6 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
-    using Manastream.Src.Utility;
-    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
@@ -28,11 +26,7 @@
         #region Fields
 
         private int width, height;
-        private Tile[,] tiles;
         private List<Unit> units;
-        private Tile highlightedTile;
-        private Unit highlightedUnit;
-        private Camera camera;
         private Textures Textures = Resources.GetInstance().Textures;
 
         #endregion
@@ -46,9 +40,18 @@
         {
             this.width = DefaultWidth;
             this.height = DefaultHeight;
-            this.tiles = new Tile[0, 0];
+            this.Tiles = new Tile[0, 0];
             this.units = new List<Unit>();
-            this.camera = new Camera(0, 0);
+        }
+
+        #endregion
+
+        #region Properties
+
+        public Tile[,] Tiles
+        {
+            get;
+            private set;
         }
 
         #endregion
@@ -61,16 +64,7 @@
         /// </summary>
         public void Update()
         {
-            //DEBUG
-            camera.Update();
-            Point mappedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
 
-            highlightedTile = GetTileAtCanvasPosition(mappedMouse.X, mappedMouse.Y);
-
-            if (highlightedTile != null)
-            {
-                highlightedUnit = highlightedTile.Occupant;
-            }
         }
 
         /// <summary>
@@ -78,9 +72,7 @@
         /// </summary>
         public void Draw(SpriteBatch gameSpriteBatch)
         {
-            gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
-
-            foreach (Tile tile in tiles)
+            foreach (Tile tile in Tiles)
             {
                 tile.Draw(gameSpriteBatch);
             }
@@ -89,19 +81,6 @@
             {
                 unit.Draw(gameSpriteBatch);
             }
-
-            //DEBUG
-            if (highlightedTile != null)
-            {
-                gameSpriteBatch.Draw(Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
-            }
-
-            if (highlightedUnit != null)
-            {
-                gameSpriteBatch.Draw(Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
-            }
-
-            gameSpriteBatch.End();
         }
 
         #endregion
@@ -157,7 +136,7 @@
                 }
             }
 
-            tiles = result;
+            Tiles = result;
         }
 
         #endregion
@@ -171,10 +150,10 @@
         {
             Tile result = null;
 
-            if (x >= 0 && x < tiles.GetLength(0) &&
-                y >= 0 && y < tiles.GetLength(1))
+            if (x >= 0 && x < Tiles.GetLength(0) &&
+                y >= 0 && y < Tiles.GetLength(1))
             {
-                result = tiles[x,y];
+                result = Tiles[x,y];
             }
 
             return result;

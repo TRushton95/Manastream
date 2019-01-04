@@ -16,6 +16,7 @@
         #region Fields
 
         private SpriteBatch gameSpriteBatch;
+        private Camera camera;
         private Board board;
 
         #endregion
@@ -28,6 +29,7 @@
         public PlayAppState()
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
+            camera = new Camera(0, 0);
             
             board = new Board();
             board.Generate();
@@ -38,6 +40,7 @@
 
         public override void Update()
         {
+            camera.Update();
             board.Update();
         }
 
@@ -48,7 +51,9 @@
         /// </summary>
         public override void DrawState(SpriteBatch uiSpriteBatch)
         {
+            gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
             board.Draw(gameSpriteBatch);
+            gameSpriteBatch.End();
 
             base.DrawState(uiSpriteBatch);
         }
