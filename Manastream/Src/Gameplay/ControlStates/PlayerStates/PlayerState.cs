@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.Gameplay.PlayerStates
+﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
     #region Usings
 
@@ -13,7 +13,7 @@
     /// <summary>
     /// The base player state class that represents a state of interface for a player on the board.
     /// </summary>
-    public abstract class PlayerState
+    public abstract class PlayerState : IControlState
     {
         #region Constructors
 
@@ -37,11 +37,11 @@
         #endregion
 
         #region Methods
-
+        
         /// <summary>
         /// Processes user input.
         /// </summary>
-        public abstract PlayerState ProcessInput(Tile highlightedTile);
+        public abstract PlayerState ProcessInput();
 
         /// <summary>
         /// Draws the state.

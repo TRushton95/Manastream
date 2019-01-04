@@ -4,7 +4,6 @@
 
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
-    using Manastream.Src.Gameplay.PlayerStates;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -34,8 +33,7 @@
         private Tile highlightedTile;
         private Unit highlightedUnit;
         private Camera camera;
-        private Resources Resources = Resources.GetInstance();
-        private PlayerState playerState;
+        private Textures Textures = Resources.GetInstance().Textures;
 
         #endregion
 
@@ -51,8 +49,6 @@
             this.tiles = new Tile[0, 0];
             this.units = new List<Unit>();
             this.camera = new Camera(0, 0);
-
-            this.playerState = new UnselectedPlayerState();
         }
 
         #endregion
@@ -71,12 +67,10 @@
 
             highlightedTile = GetTileAtCanvasPosition(mappedMouse.X, mappedMouse.Y);
 
-            if (highlightedTile!= null)
+            if (highlightedTile != null)
             {
                 highlightedUnit = highlightedTile.Occupant;
             }
-
-            playerState = playerState.ProcessInput(highlightedTile);
         }
 
         /// <summary>
@@ -99,15 +93,13 @@
             //DEBUG
             if (highlightedTile != null)
             {
-                gameSpriteBatch.Draw(Resources.Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
+                gameSpriteBatch.Draw(Textures.TileHighlight, new Vector2(highlightedTile.CanvasX, highlightedTile.CanvasY), Color.White);
             }
 
             if (highlightedUnit != null)
             {
-                gameSpriteBatch.Draw(Resources.Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
+                gameSpriteBatch.Draw(Textures.UnitHighlight, new Vector2(highlightedUnit.CanvasX, highlightedUnit.CanvasY), Color.White);
             }
-
-            playerState.Draw(gameSpriteBatch);
 
             gameSpriteBatch.End();
         }

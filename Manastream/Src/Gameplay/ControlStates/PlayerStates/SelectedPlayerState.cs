@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.Gameplay.PlayerStates
+﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
     #region Usings
 
@@ -8,6 +8,7 @@
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System;
 
     #endregion
 
@@ -33,23 +34,13 @@
         /// <summary>
         /// Processes user input.
         /// </summary>
-        public override PlayerState ProcessInput(Tile tile)
+        public override PlayerState ProcessInput()
         {
-            if (MouseInfo.LeftMousePressed)
-            {
-                if (tile != null && tile.Occupant != null)
-                {
-                    return new SelectedPlayerState(tile.Occupant);
-                }
-
-                return new UnselectedPlayerState();
-            }
-
-            return this;
+            throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Processes user input.
+        /// Draws the state.
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
