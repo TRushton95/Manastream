@@ -18,8 +18,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="InstantDamageEffect"/> class.
         /// </summary>
-        public InstantDamageEffect(int value, TargetType targetType, Unit caster)
-            : base(targetType, caster)
+        public InstantDamageEffect(int value, TargetType targetType)
+            : base(targetType)
         {
             this.Value = value;
         }
@@ -40,9 +40,9 @@
         /// <summary>
         /// Executes the effect.
         /// </summary>
-        public override void Execute(Tile targetTile)
+        public override void Execute(Tile targetTile, Unit caster)
         {
-            if (ValidateTarget(targetTile))
+            if (ValidateTarget(targetTile, caster))
             {
                 AtomicEffects.Damage(targetTile.Occupant, Value);
             }

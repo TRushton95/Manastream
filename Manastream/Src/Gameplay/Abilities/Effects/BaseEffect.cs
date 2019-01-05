@@ -19,10 +19,9 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="BaseEffect"/> class.
         /// </summary>
-        public BaseEffect(TargetType targetType, Unit caster)
+        public BaseEffect(TargetType targetType)
         {
             this.TargetType = TargetType;
-            this.Caster = caster;
         }
 
         #endregion
@@ -34,11 +33,6 @@
             get;
         }
 
-        public Unit Caster
-        {
-            get;
-        }
-
         #endregion
 
         #region Methods
@@ -46,14 +40,14 @@
         /// <summary>
         /// Executes the effect.
         /// </summary>
-        public abstract void Execute(Tile targetTile);
+        public abstract void Execute(Tile targetTile, Unit caster);
 
         /// <summary>
         /// Returns a value indicating whether the tile is a valid target based on the target type.
         /// </summary>
-        protected bool ValidateTarget(Tile targetTile)
+        protected bool ValidateTarget(Tile targetTile, Unit caster)
         {
-            return TargetValidationService.Validate(targetTile, TargetType, Caster);
+            return TargetValidationService.Validate(targetTile, TargetType, caster);
         }
 
         #endregion
