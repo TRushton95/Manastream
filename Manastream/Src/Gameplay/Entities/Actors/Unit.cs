@@ -2,9 +2,9 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Graphics;
-    using Microsoft.Xna.Framework.Graphics;
     using System.Collections.Generic;
 
     #endregion
@@ -25,7 +25,7 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
-        public Unit(int maxHealth, Animation animation)
+        public Unit(int maxHealth, List<Ability> abilities, Animation animation)
             : base(0, 0, 0, 0, animation)
         {
             this.MaxHealth = maxHealth;
@@ -43,6 +43,12 @@
         }
 
         public int CurrentHealth
+        {
+            get;
+            set;
+        }
+
+        public List<Ability> Abilities
         {
             get;
             set;
