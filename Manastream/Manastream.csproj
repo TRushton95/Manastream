@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Src\Gameplay\Abilities\Effects\AtomicEffects.cs" />
     <Compile Include="Src\Gameplay\Abilities\Effects\BaseEffect.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Effects\InstantDamageEffect.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\AreaEffectTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\SingleTargetTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\Template.cs" />
