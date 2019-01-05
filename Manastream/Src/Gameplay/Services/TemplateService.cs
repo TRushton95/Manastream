@@ -39,14 +39,14 @@
         /// <summary>
         /// Get the tiles affected by a given template.
         /// </summary>
-        public static Point[] GetAffectedTileCoordinates(Point targetTile, Template template)
+        public static List<Point> GetAffectedTileCoordinates(Point targetTile, Template template)
         {
             if (targetTile == null || template == null)
             {
                 return null;
             }
 
-            Point[] result = null;
+            List<Point> result = null;
 
             switch (template.TemplateType)
             {
@@ -62,14 +62,6 @@
             return result;
         }
 
-        /// <summary>
-        /// A negative-safe method for determining if an integer is odd.
-        /// </summary>
-        private static bool IsOdd(int i)
-        {
-            return Math.Abs(i % 2) == 1;
-        }
-
         #endregion
 
         #region Template Resolution
@@ -77,9 +69,9 @@
         /// <summary>
         /// Gets the tiles affected by the single target template.
         /// </summary>
-        public static Point[] ResolveSingleTargetTemplate(Point targetTile)
+        public static List<Point> ResolveSingleTargetTemplate(Point targetTile)
         {
-            Point[] result = new Point[1]
+            List<Point> result = new List<Point>()
             {
                 new Point(targetTile.X, targetTile.Y)
             };
@@ -90,7 +82,7 @@
         /// <summary>
         /// Gets the tiles affected by the area effect template.
         /// </summary>
-        public static Point[] ResolveAreaEffectTemplate(Point targetTile, AreaEffectTemplate template)
+        public static List<Point> ResolveAreaEffectTemplate(Point targetTile, AreaEffectTemplate template)
         {
             List<Point> result = new List<Point>();
 
@@ -120,7 +112,7 @@
                 ringRadius++;
             }
 
-            return result.ToArray();
+            return result;
         }
 
         #endregion
@@ -193,6 +185,18 @@
         private static Point Right(Point tile)
         {
             return new Point(tile.X + 1, tile.Y);
+        }
+
+        #endregion
+
+        #region Utility Methods
+        
+        /// <summary>
+        /// A negative-safe method for determining if an integer is odd.
+        /// </summary>
+        private static bool IsOdd(int i)
+        {
+            return Math.Abs(i % 2) == 1;
         }
 
         #endregion

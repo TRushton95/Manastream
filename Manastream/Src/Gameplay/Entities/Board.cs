@@ -5,6 +5,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System.Collections.Generic;
 
@@ -144,6 +145,18 @@
                 y >= 0 && y < Tiles.GetLength(1))
             {
                 result = Tiles[x,y];
+            }
+
+            return result;
+        }
+
+        public List<Tile> GetTiles(List<Point> coordinates)
+        {
+            List<Tile> result = new List<Tile>();
+
+            foreach (Point point in coordinates)
+            {
+                result.Add(GetTile(point.X, point.Y));
             }
 
             return result;
