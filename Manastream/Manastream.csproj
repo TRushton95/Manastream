@@ -50,6 +50,8 @@
     <Compile Include="Src\Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Effects\AtomicEffects.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Effects\BaseEffect.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\AreaEffectTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\SingleTargetTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\Template.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Unit.cs" />
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Entities\Camera.cs" />
+    <Compile Include="Src\Gameplay\Enums\TargetType.cs" />
     <Compile Include="Src\Gameplay\Enums\TemplateType.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\PlayerState.cs" />

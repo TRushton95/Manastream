@@ -42,7 +42,7 @@
 
             //DEBUG
             board.Generate();
-            board.TrySpawnUnit(new Unit(new Animation(50, 50, 1000, 2, Resources.Textures.Wizard)), 2, 5);
+            board.TrySpawnUnit(new Unit(10, new Animation(50, 50, 1000, 2, Resources.Textures.Wizard)), 2, 5);
         }
 
         #endregion

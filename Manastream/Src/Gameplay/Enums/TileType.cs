@@ -1,7 +1,7 @@
 ﻿namespace Manastream.Src.Gameplay.Enums
 {
     /// <summary>
-    /// An enumeration that represents the type of available tiles.
+    /// The available tile types.
     /// </summary>
     public enum TileType
     {
