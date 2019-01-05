@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Abilities.Templates;
+    using Manastream.Src.Gameplay.Enums;
     using Microsoft.Xna.Framework;
     using System;
     using System.Collections.Generic;
@@ -38,13 +39,42 @@
         /// <summary>
         /// Get the tiles affected by a given template.
         /// </summary>
-        public static Point[] GetTilesFromTemplate(Point targetTile, AreaEffectTemplate template)
+        public static Point[] GetTilesFromTemplate(Point targetTile, Template template)
         {
             if (targetTile == null || template == null)
             {
                 return null;
             }
 
+            Point[] result = null;
+
+            switch (template.TemplateType)
+            {
+                case TemplateType.AreaEffect:
+                    result = ResolveAreaEffectTemplate(targetTile, (AreaEffectTemplate)template);
+                    break;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// A negative-safe method for determining if an integer is odd.
+        /// </summary>
+        private static bool IsOdd(int i)
+        {
+            return Math.Abs(i % 2) == 1;
+        }
+
+        #endregion
+
+        #region Template Resolution
+
+        /// <summary>
+        /// Gets the tiles affected by the area effect template
+        /// </summary>
+        public static Point[] ResolveAreaEffectTemplate(Point targetTile, AreaEffectTemplate template)
+        {
             List<Point> result = new List<Point>();
 
             Point currentTile = targetTile;
@@ -74,14 +104,6 @@
             }
 
             return result.ToArray();
-        }
-
-        /// <summary>
-        /// A negative-safe method for determining if an integer is odd.
-        /// </summary>
-        private static bool IsOdd(int i)
-        {
-            return Math.Abs(i % 2) == 1;
         }
 
         #endregion
