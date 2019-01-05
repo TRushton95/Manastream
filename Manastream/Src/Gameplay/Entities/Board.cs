@@ -135,7 +135,8 @@
         #region Tile Utility
         
         /// <summary>
-        /// Gets the tile at a given coordinate, null if coordinate is out of range.
+        /// Gets the tile at a given coordinate.
+        /// Result is null if coordinate is out of range.
         /// </summary>
         public Tile GetTile(int x, int y)
         {
@@ -149,14 +150,23 @@
 
             return result;
         }
-
+        
+        /// <summary>
+        /// Gets a list of tiles at the given coordinates.
+        /// A tile will not be included if it is out of range.
+        /// </summary>
         public List<Tile> GetTiles(List<Point> coordinates)
         {
             List<Tile> result = new List<Tile>();
 
             foreach (Point point in coordinates)
             {
-                result.Add(GetTile(point.X, point.Y));
+                Tile tile = (GetTile(point.X, point.Y));
+
+                if (tile != null)
+                {
+                    result.Add(tile);
+                }
             }
 
             return result;
