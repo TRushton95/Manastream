@@ -39,7 +39,7 @@
         /// <summary>
         /// Get the tiles affected by a given template.
         /// </summary>
-        public static Point[] GetTilesFromTemplate(Point targetTile, Template template)
+        public static Point[] GetAffectedTileCoordinates(Point targetTile, Template template)
         {
             if (targetTile == null || template == null)
             {

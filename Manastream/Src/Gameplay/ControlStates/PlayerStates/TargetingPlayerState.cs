@@ -67,7 +67,7 @@
 
             if (HighlightedTile != null)
             {
-                Point[] tileCoords = TemplateService.GetTilesFromTemplate(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedTemplate);
+                Point[] tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedTemplate);
 
                 foreach (Point tileCoord in tileCoords)
                 {

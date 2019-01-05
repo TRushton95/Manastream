@@ -37,6 +37,8 @@
             playerState = new UnselectedPlayerState();
             
             board = new Board();
+
+            //DEBUG
             board.Generate();
             board.TrySpawnUnit(new Unit(Resources.Textures.BlueUnit), 2, 5);
         }
