@@ -2,13 +2,14 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Abilities.Templates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
+    using Microsoft.Xna.Framework.Input;
 
     #endregion
 
@@ -17,12 +18,6 @@
     /// </summary>
     public class SelectedPlayerState : PlayerState
     {
-        #region Field
-
-        private readonly Texture2D unitSelectTexture = Resources.GetInstance().Textures.UnitSelect;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -57,6 +52,12 @@
                 }
             }
 
+            //DEBUG
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                return new TargetingPlayerState(new AreaEffectTemplate(2), SelectedUnit);
+            }
+
             return this;
         }
 
@@ -67,7 +68,7 @@
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(unitSelectTexture, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
+            spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
         }
 
         #endregion

@@ -17,6 +17,12 @@
     /// </summary>
     public abstract class ControlState
     {
+        #region Fields
+
+        private Textures textures = Resources.GetInstance().Textures;
+
+        #endregion
+
         #region Properties
 
         protected Tile HighlightedTile
@@ -31,7 +37,7 @@
             set;
         }
 
-        protected Textures Textures => Resources.GetInstance().Textures;
+        protected Textures Textures => textures;
 
         #endregion
 
