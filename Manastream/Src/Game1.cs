@@ -84,7 +84,7 @@
 
             // TODO: Add your update logic here
             MouseInfo.Update();
-            appState.Update();
+            appState.Update(gameTime);
 
             base.Update(gameTime);
         }

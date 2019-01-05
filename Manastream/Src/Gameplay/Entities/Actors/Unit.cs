@@ -3,7 +3,9 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actor;
+    using Manastream.Src.Gameplay.Graphics;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -23,8 +25,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
-        public Unit(Texture2D texture)
-            : base(0, 0, 0, 0, texture)
+        public Unit(Animation animation)
+            : base(0, 0, 0, 0, animation)
         {
         }
 

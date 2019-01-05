@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.GameResources;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
 
     #endregion
@@ -20,7 +21,7 @@
 
         #region Methods
 
-        public abstract void Update();
+        public abstract void Update(GameTime gameTime);
 
         /// <summary>
         /// Draws the appstate.

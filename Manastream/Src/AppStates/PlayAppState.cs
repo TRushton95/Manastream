@@ -5,9 +5,11 @@
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -40,7 +42,7 @@
 
             //DEBUG
             board.Generate();
-            board.TrySpawnUnit(new Unit(Resources.Textures.BlueUnit), 2, 5);
+            board.TrySpawnUnit(new Unit(new Animation(50, 50, 1000, 2, Resources.Textures.Wizard)), 2, 5);
         }
 
         #endregion
@@ -48,12 +50,13 @@
         /// <summary>
         /// Updates the app state.
         /// </summary>
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             camera.Update();
 
             Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
             playerState = playerState.ProcessInput(board, transformedMouse);
+            board.Update(gameTime);
         }
 
         /// <summary>

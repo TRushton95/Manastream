@@ -2,9 +2,11 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -15,16 +17,17 @@
     {
         #region Constructors
 
-        /// <summary>C:\Github\Manastream\Manastream\Src\Gameplay\Entities\Actors\GameActor.cs
+        /// <summary>
         /// Initialises a new instance of the <see cref="GameActor"/> class.
         /// </summary>
-        public GameActor(int boardX, int boardY, int canvasX, int canvasY, Texture2D texture)
+        public GameActor(int boardX, int boardY, int canvasX, int canvasY, Animation animation)
         {
             this.BoardX = boardX;
             this.BoardY = boardY;
             this.CanvasX = canvasX;
             this.CanvasY = canvasY;
-            this.Texture = texture;
+            this.Animation = animation;
+            this.AnimationIndex = 0;
         }
 
         #endregion
@@ -67,7 +70,12 @@
             set;
         }
 
-        public Texture2D Texture
+        public Animation Animation
+        {
+            get;
+        }
+
+        protected int AnimationIndex
         {
             get;
             set;
@@ -83,11 +91,19 @@
         #region Methods
 
         /// <summary>
+        /// Updates the game actor.
+        /// </summary>
+        public void Update(GameTime gameTime)
+        {
+            Animation.Update(gameTime);
+        }
+
+        /// <summary>
         /// Renders the game actor.
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, new Vector2(CanvasX, CanvasY), Color.White);
+            Animation.Draw(spriteBatch, CanvasX, CanvasY);
         }
 
         #endregion

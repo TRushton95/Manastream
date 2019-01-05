@@ -4,7 +4,10 @@
 
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Enums;
+    using Manastream.Src.Gameplay.Graphics;
+    using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -24,8 +27,9 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Tile"/> class.
         /// </summary>
+        //DEBUG  - Currently only passing a texture and manually building non-moving animation.
         public Tile(int boardX, int boardY, int canvasX, int canvasY, TileType tileType, Texture2D texture)
-            : base(boardX, boardY, canvasX, canvasY, texture)
+            : base(boardX, boardY, canvasX, canvasY, new Animation(100, 100, 0, 1, texture))
         {
             this.TileType = tileType;
             this.Occupant = null;

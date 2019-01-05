@@ -58,6 +58,19 @@
 
         #region Methods
 
+        public void Update(GameTime gameTime)
+        {
+            foreach (Tile tile in Tiles)
+            {
+                tile.Update(gameTime);
+            }
+
+            foreach (Unit unit in units)
+            {
+                unit.Update(gameTime);
+            }
+        }
+
         /// <summary>
         /// Renders the board.
         /// </summary>
