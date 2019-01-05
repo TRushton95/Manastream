@@ -87,10 +87,7 @@
             {
                 foreach (Tile tile in templateAffectedTiles)
                 {
-                    int x = tile.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-                    int y = tile.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-
-                    spriteBatch.Draw(Textures.RedUnit, new Vector2(x, y), Color.White);
+                    spriteBatch.Draw(Textures.RedTileFilter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
                 }
             }
         }
