@@ -29,7 +29,7 @@
         /// </summary>
         //DEBUG  - Currently only passing a texture and manually building non-moving animation.
         public Tile(int boardX, int boardY, int canvasX, int canvasY, TileType tileType, Texture2D texture)
-            : base(boardX, boardY, canvasX, canvasY, new Animation(100, 100, 0, 1, texture))
+            : base(boardX, boardY, canvasX, canvasY, new Animation(101, 101, 0, 1, texture))
         {
             this.TileType = tileType;
             this.Occupant = null;
