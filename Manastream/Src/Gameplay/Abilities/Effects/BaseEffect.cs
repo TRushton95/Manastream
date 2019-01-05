@@ -5,6 +5,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Enums;
+    using Manastream.Src.Gameplay.Services;
 
     #endregion
 
@@ -46,6 +47,14 @@
         /// Executes the effect.
         /// </summary>
         public abstract void Execute(Tile targetTile);
+
+        /// <summary>
+        /// Returns a value indicating whether the tile is a valid target based on the target type.
+        /// </summary>
+        protected bool ValidateTarget(Tile targetTile)
+        {
+            return TargetValidationService.Validate(targetTile, TargetType, Caster);
+        }
 
         #endregion
     }

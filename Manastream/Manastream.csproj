@@ -71,6 +71,7 @@
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\SelectedPlayerState.cs" />
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\UnselectedPlayerState.cs" />
     <Compile Include="Src\Gameplay\Graphics\Animation.cs" />
+    <Compile Include="Src\Gameplay\Services\TargetValidationService.cs" />
     <Compile Include="Src\Gameplay\Services\TemplateService.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
