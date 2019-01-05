@@ -25,9 +25,27 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
-        public Unit(Animation animation)
+        public Unit(int maxHealth, Animation animation)
             : base(0, 0, 0, 0, animation)
         {
+            this.MaxHealth = maxHealth;
+            this.CurrentHealth = maxHealth;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public int MaxHealth
+        {
+            get;
+            set;
+        }
+
+        public int CurrentHealth
+        {
+            get;
+            set;
         }
 
         #endregion
