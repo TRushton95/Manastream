@@ -2,11 +2,15 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Abilities.Templates;
     using Manastream.Src.Gameplay.Entities;
+    using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Services;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -15,6 +19,13 @@
     /// </summary>
     public class UnselectedPlayerState : PlayerState
     {
+        #region Fields
+
+        private AreaEffectTemplate template; //DEBUG
+        private List<Tile> tiles;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -23,6 +34,8 @@
         public UnselectedPlayerState()
             : base(null)
         {
+            this.template = new AreaEffectTemplate(2);
+            this.tiles = new List<Tile>();
         }
 
         #endregion
@@ -44,6 +57,22 @@
                 }
             }
 
+            tiles = new List<Tile>();
+
+            if (HighlightedTile != null)
+            {
+                Point[] tileCoords = TemplateService.GetTilesFromTemplate(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), template);
+                
+                foreach (Point tileCoord in tileCoords)
+                {
+                    Tile tile = board.GetTile(tileCoord.X, tileCoord.Y);
+                    if (tile != null)
+                    {
+                        tiles.Add(tile);
+                    }
+                }
+            }
+
             return this;
         }
 
@@ -53,6 +82,18 @@
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+
+            //DEBUG
+            if (tiles.Count > 0)
+            {
+                foreach (Tile tile in tiles)
+                {
+                    int x = tile.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                    int y = tile.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+
+                    spriteBatch.Draw(Textures.RedUnit, new Vector2(x, y), Color.White);
+                }
+            }
         }
 
         #endregion

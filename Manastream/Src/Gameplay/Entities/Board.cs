@@ -6,7 +6,6 @@
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
     using System.Collections.Generic;
 
     #endregion
@@ -137,7 +136,7 @@
         /// <summary>
         /// Gets the tile at a given coordinate, null if coordinate is out of range.
         /// </summary>
-        private Tile GetTile(int x, int y)
+        public Tile GetTile(int x, int y)
         {
             Tile result = null;
 
@@ -191,23 +190,19 @@
             if (relY < (-m * relX) + c) //left edge
             {
                 row--;
-                Console.WriteLine("Left edge: Row--");
 
                 if (!rowIsOdd)
                 {
                     column--;
-                    Console.WriteLine("Left edge: Column--");
                 }
             }
             else if (relY < (m * relX) - c) //right edge
             {
                 row--;
-                Console.WriteLine("Right edge: Row--");
 
                 if (rowIsOdd)
                 {
                     column++;
-                    Console.WriteLine("Right edge: Column++");
                 }
             }
 
