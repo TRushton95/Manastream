@@ -21,7 +21,7 @@
     {
         #region Fields
 
-        private AreaEffectTemplate template; //DEBUG
+        private Template template; //DEBUG
         private List<Tile> tiles;
 
         #endregion
@@ -34,7 +34,7 @@
         public UnselectedPlayerState()
             : base(null)
         {
-            this.template = new AreaEffectTemplate(2);
+            this.template = new SingleTargetTemplate();
             this.tiles = new List<Tile>();
         }
 

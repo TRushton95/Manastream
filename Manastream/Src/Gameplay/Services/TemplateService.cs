@@ -50,6 +50,10 @@
 
             switch (template.TemplateType)
             {
+                case TemplateType.SingleTarget:
+                    result = ResolveSingleTargetTemplate(targetTile);
+                    break;
+
                 case TemplateType.AreaEffect:
                     result = ResolveAreaEffectTemplate(targetTile, (AreaEffectTemplate)template);
                     break;
@@ -71,7 +75,20 @@
         #region Template Resolution
 
         /// <summary>
-        /// Gets the tiles affected by the area effect template
+        /// Gets the tiles affected by the single target template.
+        /// </summary>
+        public static Point[] ResolveSingleTargetTemplate(Point targetTile)
+        {
+            Point[] result = new Point[1]
+            {
+                new Point(targetTile.X, targetTile.Y)
+            };
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the tiles affected by the area effect template.
         /// </summary>
         public static Point[] ResolveAreaEffectTemplate(Point targetTile, AreaEffectTemplate template)
         {
