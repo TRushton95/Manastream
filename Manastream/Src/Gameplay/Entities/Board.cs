@@ -137,9 +137,24 @@
             Tile destination = GetTile(x, y);
             List<Tile> path = DijkstraSearch(origin, destination);
 
-            //TO-DO movement cost logic
+            if (path.Count == 1)
+            {
+                Console.WriteLine("Cannot move there!");
 
-            result = TryRelocateUnit(unit, destination);
+                return false;
+            }
+
+            if (unit.CurrentEnergy >= path.Count - 1)
+            {
+                result = TryRelocateUnit(unit, destination);
+                unit.CurrentEnergy -= path.Count - 1;
+
+                Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
+            }
+            else
+            {
+                Console.WriteLine("Not enough energy!");
+            }
 
             return result;
         }

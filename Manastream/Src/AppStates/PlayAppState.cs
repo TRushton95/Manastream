@@ -46,7 +46,7 @@
             board.Generate();
 
             Unit testUnit = new Unit(
-                10,
+                10, 10,
                 new List<Ability>()
                 {
                     AbilityFactory.Frostbolt()

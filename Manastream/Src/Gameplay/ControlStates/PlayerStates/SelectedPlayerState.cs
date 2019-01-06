@@ -70,14 +70,6 @@
                 }
             }
 
-            if (MouseInfo.RightMousedPressed)
-            {
-                if (HighlightedTile != null)
-                {
-                    board.TryMoveUnit(SelectedUnit, HighlightedTile.BoardX, HighlightedTile.BoardY);
-                }
-            }
-
             //DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
