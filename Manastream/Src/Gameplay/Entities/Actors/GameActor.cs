@@ -75,6 +75,10 @@
             get;
         }
 
+        public Point BoardPosition => new Point(BoardX, BoardY);
+
+        public Vector2 CanvasPosition => new Vector2(CanvasX, CanvasY);
+
         protected int AnimationIndex
         {
             get;
