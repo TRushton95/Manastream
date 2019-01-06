@@ -72,7 +72,7 @@
                 templateAffectedTiles = board.GetTiles(tileCoords);
             }
 
-            if (MouseInfo.LeftMouseDown)
+            if (MouseInfo.LeftMousePressed)
             {
                 SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
             }
