@@ -2,7 +2,6 @@
 {
     #region Usings
 
-    using Manastream.Src.Gameplay.Abilities.Templates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.GameResources;

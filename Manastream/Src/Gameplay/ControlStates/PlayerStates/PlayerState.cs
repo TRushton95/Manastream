@@ -3,10 +3,6 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors;
-    using Manastream.Src.Gameplay.Entities.Actors.Tiles;
-    using Manastream.Src.GameResources;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
 
     #endregion
 

@@ -1,9 +1,8 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
-    using Manastream.Src.Gameplay.Abilities;
     #region Usings
 
-    using Manastream.Src.Gameplay.Abilities.Templates;
+    using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
@@ -14,7 +13,7 @@
     using System.Collections.Generic;
 
     #endregion
-    
+
     /// <summary>
     /// The targeting player state class that represents the player interactions when a unit and an ability is selected.
     /// </summary>
