@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
+    using Manastream.Src.Gameplay.Abilities;
     #region Usings
 
     using Manastream.Src.Gameplay.Abilities.Templates;
@@ -30,10 +31,10 @@
         /// <summary>
         /// Creates a new instance of the <see cref="TargetingPlayerState"/> class.
         /// </summary>
-        public TargetingPlayerState(Template selectedTemplate, Unit selectedUnit)
+        public TargetingPlayerState(Ability selectedAbility, Unit selectedUnit)
             : base(selectedUnit)
         {
-            this.SelectedTemplate = selectedTemplate;
+            this.SelectedAbility = selectedAbility;
             this.templateAffectedTiles = new List<Tile>();
         }
 
@@ -42,7 +43,7 @@
         #region Properties
 
         //DEBUG - Change this to selected ability once created, and take template from there
-        public Template SelectedTemplate
+        public Ability SelectedAbility
         {
             get;
         }
@@ -67,8 +68,13 @@
 
             if (HighlightedTile != null)
             {
-                List<Point> tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedTemplate);
+                List<Point> tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedAbility.Template);
                 templateAffectedTiles = board.GetTiles(tileCoords);
+            }
+
+            if (MouseInfo.LeftMouseDown)
+            {
+                SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
             }
 
             return this;
