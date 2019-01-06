@@ -18,7 +18,7 @@
         {
             return new Ability(
                 "Frostbolt",
-                TargetType.Enemy,
+                TargetType.Any,
                 new SingleTargetTemplate(),
                 new List<BaseEffect>()
                 {
