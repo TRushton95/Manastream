@@ -17,7 +17,7 @@
     {
         #region Constants
 
-        public const int Diameter = 50;
+        public const int Diameter = 75;
 
         #endregion
 

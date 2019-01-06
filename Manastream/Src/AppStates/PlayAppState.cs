@@ -51,7 +51,7 @@
                 {
                     AbilityFactory.Frostbolt()
                 },
-                new Animation(50, 50, 1000, 2, Resources.Textures.Wizard));
+                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
 
             board.TrySpawnUnit(testUnit, 2, 5);
         }
