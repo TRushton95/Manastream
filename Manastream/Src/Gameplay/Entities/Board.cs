@@ -463,7 +463,7 @@
         }
 
         /// <summary>
-        /// Determines whether an integer is odd
+        /// Determines whether an integer is odd.
         /// </summary>
         private static bool IsOdd(int i)
         {
@@ -472,8 +472,11 @@
 
         #endregion
 
-        #region Structs
+        #region Internal Classes
 
+        /// <summary>
+        /// The node class used in the Dijkstra Search algorithm.
+        /// </summary>
         private class DijkstraNode
         {
             public DijkstraNode(Tile tile, int cost)
