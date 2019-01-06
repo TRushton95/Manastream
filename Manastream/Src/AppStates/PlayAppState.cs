@@ -45,7 +45,7 @@
             //DEBUG
             board.Generate();
 
-            Unit testUnit = new Unit(
+            Unit wizard = new Unit(
                 10, 10,
                 new List<Ability>()
                 {
@@ -53,7 +53,16 @@
                 },
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
 
-            board.TrySpawnUnit(testUnit, 2, 5);
+            Unit knight = new Unit(
+                20, 10,
+                new List<Ability>()
+                {
+                    AbilityFactory.Lunge()
+                },
+                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Knight));
+
+            board.TrySpawnUnit(wizard, 2, 5);
+            board.TrySpawnUnit(knight, 7, 5);
         }
 
         #endregion

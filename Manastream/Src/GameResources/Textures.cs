@@ -31,7 +31,7 @@
 
         //Units
         private static Texture2D unitHighlight, unitSelect;
-        private static Texture2D wizard;
+        private static Texture2D wizard, knight;
 
         #endregion
 
@@ -47,6 +47,7 @@
         public Texture2D UnitHighlight => unitHighlight;
         public Texture2D UnitSelect => unitSelect;
         public Texture2D Wizard => wizard;
+        public Texture2D Knight => knight;
 
         #endregion
 
@@ -91,6 +92,7 @@
             unitHighlight = LoadUnitTexture(content, "UnitHighlight");
             unitSelect = LoadUnitTexture(content, "UnitSelect");
             wizard = LoadUnitTexture(content, "Wizard");
+            knight = LoadUnitTexture(content, "Knight");
         }
 
         #endregion

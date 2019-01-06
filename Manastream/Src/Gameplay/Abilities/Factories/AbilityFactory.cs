@@ -18,11 +18,23 @@
         {
             return new Ability(
                 "Frostbolt",
-                TargetType.Any,
+                TargetType.Enemy,
                 new SingleTargetTemplate(),
                 new List<BaseEffect>()
                 {
                     new InstantDamageEffect(2, TargetType.Enemy)
+                });
+        }
+
+        public static Ability Lunge()
+        {
+            return new Ability(
+                "Lunge",
+                TargetType.Enemy,
+                new SingleTargetTemplate(),
+                new List<BaseEffect>()
+                {
+                    new InstantDamageEffect(5, TargetType.Enemy)
                 });
         }
 
