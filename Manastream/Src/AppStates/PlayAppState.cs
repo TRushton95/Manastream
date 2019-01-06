@@ -62,7 +62,7 @@
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Knight));
 
             board.TrySpawnUnit(wizard, 2, 5);
-            board.TrySpawnUnit(knight, 7, 5);
+            board.TrySpawnUnit(knight, 8, 5);
         }
 
         #endregion

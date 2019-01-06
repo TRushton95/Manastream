@@ -146,10 +146,12 @@
 
             if (unit.CurrentEnergy >= path.Count - 1)
             {
-                result = TryRelocateUnit(unit, destination);
-                unit.CurrentEnergy -= path.Count - 1;
-
-                Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
+                if (TryRelocateUnit(unit, destination))
+                {
+                    unit.CurrentEnergy -= path.Count - 1;
+                    Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
+                    result = true;
+                }
             }
             else
             {
@@ -475,6 +477,12 @@
         /// </summary>
         private bool TryRelocateUnit(Unit unit, Tile destination)
         {
+            if (!destination.Traversable || destination.Occupant != null)
+            {
+                Console.WriteLine("Cannot place a unit there!");
+                return false;
+            }
+
             bool result = false;
 
             if (destination != null && destination.Occupant == null)
