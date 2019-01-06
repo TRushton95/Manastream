@@ -55,7 +55,7 @@
             //DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                return new TargetingPlayerState(new AreaEffectTemplate(2), SelectedUnit);
+                return new TargetingPlayerState(SelectedUnit.Abilities[0], SelectedUnit);
             }
 
             return this;

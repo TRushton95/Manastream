@@ -1,5 +1,7 @@
 ﻿namespace Manastream.Src.AppStates
 {
+    using Manastream.Src.Gameplay.Abilities;
+    using Manastream.Src.Gameplay.Abilities.Factories;
     #region Usings
 
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
@@ -42,7 +44,16 @@
 
             //DEBUG
             board.Generate();
-            board.TrySpawnUnit(new Unit(new Animation(50, 50, 1000, 2, Resources.Textures.Wizard)), 2, 5);
+
+            Unit testUnit = new Unit(
+                10,
+                new List<Ability>()
+                {
+                    AbilityFactory.Frostbolt()
+                },
+                new Animation(50, 50, 1000, 2, Resources.Textures.Wizard));
+
+            board.TrySpawnUnit(testUnit, 2, 5);
         }
 
         #endregion
