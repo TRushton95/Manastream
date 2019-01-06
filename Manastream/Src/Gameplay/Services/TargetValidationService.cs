@@ -20,6 +20,11 @@
         /// </summary>
         public static bool Validate(Tile targetTile, TargetType targetType, Unit caster)
         {
+            if (targetTile == null)
+            {
+                return false;
+            }
+
             bool result = false;
 
             switch (targetType)
