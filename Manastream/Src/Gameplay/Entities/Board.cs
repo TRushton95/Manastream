@@ -115,19 +115,12 @@
         {
             bool result = false;
 
-            Tile tile = GetTile(x, y);
-
-            if (tile != null && tile.Occupant == null)
+            Tile destination = GetTile(x, y);
+            result = TryRelocateUnit(unit, destination);
+            
+            if (result == true)
             {
-                tile.Occupant = unit;
-                unit.BoardX = x;
-                unit.BoardY = y;
-                unit.CanvasX = tile.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-                unit.CanvasY = tile.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-
                 units.Add(unit);
-
-                result = true;
             }
 
             return result;
@@ -142,9 +135,11 @@
 
             Tile origin = GetTile(unit.BoardX, unit.BoardY);
             Tile destination = GetTile(x, y);
-
             List<Tile> path = DijkstraSearch(origin, destination);
-            result = true;
+
+            //TO-DO movement cost logic
+
+            result = TryRelocateUnit(unit, destination);
 
             return result;
         }
@@ -444,6 +439,27 @@
             path.Reverse();
 
             return path;
+        }
+
+        /// <summary>
+        /// Attempt to move a unit to the new destination tile.
+        /// </summary>
+        private bool TryRelocateUnit(Unit unit, Tile destination)
+        {
+            bool result = false;
+
+            if (destination != null && destination.Occupant == null)
+            {
+                destination.Occupant = unit;
+                unit.BoardX = destination.BoardX;
+                unit.BoardY = destination.BoardY;
+                unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                unit.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+
+                result = true;
+            }
+
+            return result;
         }
 
         /// <summary>

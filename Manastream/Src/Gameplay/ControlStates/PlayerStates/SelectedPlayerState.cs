@@ -63,6 +63,11 @@
             if (HighlightedTile != null)
             {
                 path = board.GetPath(SelectedUnit, HighlightedTile);
+
+                if (MouseInfo.RightMousedPressed)
+                {
+                    board.TryMoveUnit(SelectedUnit, HighlightedTile.BoardX, HighlightedTile.BoardY);
+                }
             }
 
             if (MouseInfo.RightMousedPressed)
