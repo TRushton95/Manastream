@@ -16,7 +16,7 @@
     #endregion
     
     /// <summary>
-    /// The targeting player state class that represents the interactions when a unit and an ability is selected.
+    /// The targeting player state class that represents the player interactions when a unit and an ability is selected.
     /// </summary>
     public class TargetingPlayerState : PlayerState
     {

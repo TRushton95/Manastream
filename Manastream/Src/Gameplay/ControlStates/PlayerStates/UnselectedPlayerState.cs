@@ -10,7 +10,7 @@
     #endregion
 
     /// <summary>
-    /// The unselected player state class that represents the interactions when no unit is selected.
+    /// The unselected player state class that represents the player interactions when no unit is selected.
     /// </summary>
     public class UnselectedPlayerState : PlayerState
     {

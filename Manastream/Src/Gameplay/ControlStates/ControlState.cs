@@ -13,7 +13,7 @@
     #endregion
 
     /// <summary>
-    /// The control state interface that defines a contract of how the player must interact with the board
+    /// The control state interface that defines a contract of how the player interacts with the board
     /// </summary>
     public abstract class ControlState
     {
