@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Abilities;
+    using Manastream.Src.Gameplay.Abilities.Ticks;
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Graphics;
     using System.Collections.Generic;
@@ -31,6 +32,7 @@
             this.MaxHealth = maxHealth;
             this.CurrentHealth = maxHealth;
             this.Abilities = abilities;
+            this.Ticks = new List<BaseTick>();
         }
 
         #endregion
@@ -50,6 +52,12 @@
         }
 
         public List<Ability> Abilities
+        {
+            get;
+            set;
+        }
+
+        public List<BaseTick> Ticks
         {
             get;
             set;

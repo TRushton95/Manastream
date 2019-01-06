@@ -53,11 +53,14 @@
     <Compile Include="Src\Gameplay\Abilities\Ability.cs" />
     <Compile Include="Src\Gameplay\Abilities\Effects\AtomicEffects.cs" />
     <Compile Include="Src\Gameplay\Abilities\Effects\BaseEffect.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Effects\DamageOverTimeEffect.cs" />
     <Compile Include="Src\Gameplay\Abilities\Effects\InstantDamageEffect.cs" />
     <Compile Include="Src\Gameplay\Abilities\Factories\AbilityFactory.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\AreaEffectTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\SingleTargetTemplate.cs" />
     <Compile Include="Src\Gameplay\Abilities\Templates\Template.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Ticks\BaseTick.cs" />
+    <Compile Include="Src\Gameplay\Abilities\Ticks\DamageTick.cs" />
     <Compile Include="Src\Gameplay\ControlStates\ControlState.cs" />
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\TargetingPlayerState.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\GameActor.cs" />
