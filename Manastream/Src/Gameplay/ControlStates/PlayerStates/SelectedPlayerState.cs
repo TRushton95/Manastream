@@ -44,6 +44,8 @@
         /// </summary>
         public override PlayerState ProcessInput(Board board, Point mouse)
         {
+            path = null;
+
             base.ProcessInput(board, mouse);
 
             if (MouseInfo.LeftMousePressed)
@@ -58,8 +60,7 @@
                     return new SelectedPlayerState(HighlightedTile.Occupant);
                 }
             }
-
-            path = null;
+            
             if (HighlightedTile != null)
             {
                 path = board.GetPath(SelectedUnit, HighlightedTile);
