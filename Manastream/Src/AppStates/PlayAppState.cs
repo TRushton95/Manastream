@@ -1,9 +1,9 @@
 ﻿namespace Manastream.Src.AppStates
 {
-    using Manastream.Src.Gameplay.Abilities;
-    using Manastream.Src.Gameplay.Abilities.Factories;
     #region Usings
 
+    using Manastream.Src.Gameplay.Abilities;
+    using Manastream.Src.Gameplay.Abilities.Factories;
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;

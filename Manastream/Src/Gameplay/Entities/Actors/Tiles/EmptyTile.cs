@@ -11,11 +11,13 @@
     /// </summary>
     public class EmptyTile : Tile
     {
+        private static int movementCost = 10;
+
         /// <summary>
         /// Initialises an instance of the <see cref="EmptyTile"/> class.
         /// </summary>
         public EmptyTile(int boardX, int boardY, int canvasX, int canvasY)
-            : base(boardX, boardY, canvasX, canvasY, TileType.Empty, Textures.EmptyTile)
+            : base(boardX, boardY, canvasX, canvasY, movementCost, TileType.Empty, Textures.EmptyTile)
         {
         }
     }

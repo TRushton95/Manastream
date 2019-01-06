@@ -7,7 +7,15 @@
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+
+    #endregion
+
+    #region Delegates
+
+    public delegate Point GetAdjacentTile(Point tile);
 
     #endregion
 
@@ -53,6 +61,15 @@
             get;
             private set;
         }
+
+        public static GetAdjacentTile[] AdjacentTileMethods => new GetAdjacentTile[6] {
+                BottomRight,
+                BottomLeft,
+                Left,
+                TopLeft,
+                TopRight,
+                Right
+        };
 
         #endregion
 
@@ -116,6 +133,22 @@
             return result;
         }
 
+        /// <summary>
+        /// Attempt to move a unit to the specified location on the board.
+        /// </summary>
+        public bool TryMoveUnit(Unit unit, int x, int y)
+        {
+            bool result = false;
+
+            Tile origin = GetTile(unit.BoardX, unit.BoardY);
+            Tile destination = GetTile(x, y);
+
+            List<Tile> path = DijkstraSearch(origin, destination);
+            result = true;
+
+            return result;
+        }
+
         #endregion
 
         #region Generation
@@ -136,7 +169,15 @@
                     int canvasX = x * Tile.Diameter + canvasXOffset;
                     int canvasY = (int)(y * (Tile.Diameter * 0.75));
 
-                    result[x,y] = new EmptyTile(x, y, canvasX, canvasY);
+                    //DEBUG - default board will be all empty once map creation is added
+                    if (IsOdd(y) && IsOdd(x))
+                    {
+                        result[x, y] = new EmptyTile(x, y, canvasX, canvasY);
+                    }
+                    else
+                    {
+                        result[x, y] = new GroundTile(x, y, canvasX, canvasY);
+                    }
                 }
             }
 
@@ -145,8 +186,8 @@
 
         #endregion
 
-        #region Tile Utility
-        
+        #region Tile Retrieval
+
         /// <summary>
         /// Gets the tile at a given coordinate.
         /// Result is null if coordinate is out of range.
@@ -158,12 +199,12 @@
             if (x >= 0 && x < Tiles.GetLength(0) &&
                 y >= 0 && y < Tiles.GetLength(1))
             {
-                result = Tiles[x,y];
+                result = Tiles[x, y];
             }
 
             return result;
         }
-        
+
         /// <summary>
         /// Gets a list of tiles at the given coordinates.
         /// A tile will not be included if it is out of range.
@@ -197,10 +238,10 @@
 
             int row = canvasY / rowHeight;
             bool rowIsOdd = IsOdd(row); //row is mutable during these calculations
-            
+
             int adjustedCanvasX = rowIsOdd ? canvasX - (Tile.Diameter / 2) : canvasX;
             int column = adjustedCanvasX / Tile.Diameter;
-            
+
             if (adjustedCanvasX < 0 || canvasY < 0) //Hack to avoid error as a result of diving a negative still resulting in column 0
             {
                 return null;
@@ -247,18 +288,193 @@
             return result;
         }
 
+        /// <summary>
+        /// Gets a list of tiles representing the path from the unit to the destination.
+        /// </summary>
+        public List<Tile> GetPath(Unit unit, Tile destination)
+        {
+            Tile origin = GetTile(unit.BoardX, unit.BoardY);
+
+            return DijkstraSearch(origin, destination);
+        }
+
+        #endregion
+
+        #region Adjacent Tiles
+
+        /// <summary>
+        /// Get the tile coordinates to the top right of a point.
+        /// </summary>
+        public static Point TopRight(Point tile)
+        {
+            if (IsOdd(tile.Y))
+            {
+                return new Point(tile.X + 1, tile.Y - 1);
+            }
+
+            return new Point(tile.X, tile.Y - 1);
+        }
+
+        /// <summary>
+        /// Get the tile coordinates to the bottom right of a point.
+        /// </summary>
+        public static Point BottomRight(Point tile)
+        {
+            if (IsOdd(tile.Y))
+            {
+                return new Point(tile.X + 1, tile.Y + 1);
+            }
+
+            return new Point(tile.X, tile.Y + 1);
+        }
+
+        /// <summary>
+        /// Get the tile coordinates to the bottom left of a point.
+        /// </summary>
+        public static Point BottomLeft(Point tile)
+        {
+            if (IsOdd(tile.Y))
+            {
+                return new Point(tile.X, tile.Y + 1);
+            }
+
+            return new Point(tile.X - 1, tile.Y + 1);
+        }
+
+        /// <summary>
+        /// Get the tile coordinates to the left of a point.
+        /// </summary>
+        public static Point Left(Point tile)
+        {
+            return new Point(tile.X - 1, tile.Y);
+        }
+
+        /// <summary>
+        /// Get the tile coordinates to the top left of a point.
+        /// </summary>
+        public static Point TopLeft(Point tile)
+        {
+            if (IsOdd(tile.Y))
+            {
+                return new Point(tile.X, tile.Y - 1);
+            }
+
+            return new Point(tile.X - 1, tile.Y - 1);
+        }
+
+        /// <summary>
+        /// Get the tile coordinates to the right of a point.
+        /// </summary>
+        public static Point Right(Point tile)
+        {
+            return new Point(tile.X + 1, tile.Y);
+        }
+
         #endregion
 
         #region Helper Methods
 
         /// <summary>
+        /// The Dikstra Seach algorithm that returns a list of tiles representing the most efficient path from an origin to a destination.
+        /// </summary>
+        private List<Tile> DijkstraSearch(Tile origin, Tile destination)
+        {
+            //Initialisation
+            List<Tile> unvisitedNodes = new List<Tile>();
+            List<DijkstraNode> distance = new List<DijkstraNode>();
+
+            foreach (Tile tile in Tiles)
+            {
+                int cost = int.MaxValue;
+
+                if (tile == origin)
+                {
+                    cost = 0;
+                }
+                distance.Add(new DijkstraNode(tile, cost));
+                unvisitedNodes.Add(tile);
+            }
+
+            Tile currentTile = origin;
+
+            //Algorithm
+            while (unvisitedNodes.Count > 0)
+            {
+
+                List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
+                List<Tile> unvisitedAdjacentTiles = distance.Where(node => adjacentTiles.Contains(node.tile))
+                                                            .Select(node => node.tile).ToList();
+
+                DijkstraNode currentNode = distance.Single(node => node.tile == currentTile);
+
+                foreach (Tile adjacentTile in unvisitedAdjacentTiles)
+                {
+                    DijkstraNode adjacentNode = distance.Single(node => node.tile == adjacentTile);
+
+                    int cost = currentNode.cost + adjacentTile.MovementCost;
+                    
+                    if (cost < adjacentNode.cost)
+                    {
+                        adjacentNode.cost = cost;
+                        adjacentNode.parent = currentNode;
+                    }
+                }
+
+                //Mark node as visited?
+                currentNode.visited = true;
+                unvisitedNodes.Remove(currentTile);
+
+                if (currentTile == destination)
+                {
+                    break;
+                }
+
+                currentTile = distance.Where(node => unvisitedNodes.Contains(node.tile)).OrderBy(node => node.cost).First().tile;
+            }
+
+            DijkstraNode reverseSearchNode = distance.Single(node => node.tile == currentTile);
+            List<Tile> path = new List<Tile>();
+
+            while (reverseSearchNode != null)
+            {
+                path.Add(reverseSearchNode.tile);
+                reverseSearchNode = reverseSearchNode.parent;
+            }
+
+            path.Reverse();
+
+            return path;
+        }
+
+        /// <summary>
         /// Determines whether an integer is odd
         /// </summary>
-        private bool IsOdd(int i)
+        private static bool IsOdd(int i)
         {
-            return i % 2 == 1;
+            return Math.Abs(i % 2) == 1;
+        }
+
+        #endregion
+
+        #region Structs
+
+        private class DijkstraNode
+        {
+            public DijkstraNode(Tile tile, int cost)
+            {
+                this.tile = tile;
+                this.cost = cost;
+                this.visited = false;
+                this.parent = null;
+            }
+
+            public Tile tile;
+            public int cost;
+            public bool visited;
+            public DijkstraNode parent;
         }
 
         #endregion
     }
+
 }

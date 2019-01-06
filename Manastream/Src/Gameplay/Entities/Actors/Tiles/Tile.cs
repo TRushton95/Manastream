@@ -28,9 +28,10 @@
         /// Initialises a new instance of the <see cref="Tile"/> class.
         /// </summary>
         //DEBUG  - Currently only passing a texture and manually building non-moving animation.
-        public Tile(int boardX, int boardY, int canvasX, int canvasY, TileType tileType, Texture2D texture)
+        public Tile(int boardX, int boardY, int canvasX, int canvasY, int movementCost, TileType tileType, Texture2D texture)
             : base(boardX, boardY, canvasX, canvasY, new Animation(101, 101, 0, 1, texture))
         {
+            this.MovementCost = movementCost;
             this.TileType = tileType;
             this.Occupant = null;
         }
@@ -38,7 +39,12 @@
         #endregion
 
         #region Properties
-            
+
+        public int MovementCost
+        {
+            get;
+        }
+
         public TileType TileType
         {
             get;

@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Abilities.Templates;
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Enums;
     using Microsoft.Xna.Framework;
     using System;
@@ -15,24 +16,6 @@
     /// </summary>
     public static class TemplateService
     {
-        #region Delegates
-        
-        private delegate Point GetAdjacentTile(Point tile);
-
-        #endregion
-
-        #region Fields
-
-        private static readonly GetAdjacentTile[] adjacentTileMethods = new GetAdjacentTile[6] {
-                BottomRight,
-                BottomLeft,
-                Left,
-                TopLeft,
-                TopRight,
-                Right
-        };
-
-        #endregion
 
         #region Methods
 
@@ -102,9 +85,9 @@
             int ringRadius = 1;
             for (int i = 0; i < template.Radius; i++)
             {
-                currentTile = TopRight(currentTile);
+                currentTile = Board.TopRight(currentTile);
 
-                foreach (GetAdjacentTile adjacentTile in adjacentTileMethods)
+                foreach (GetAdjacentTile adjacentTile in Board.AdjacentTileMethods)
                 {
                     addLineOfTiles(adjacentTile, ringRadius);
                 }
@@ -113,78 +96,6 @@
             }
 
             return result;
-        }
-
-        #endregion
-
-        #region Adjacent Tiles
-
-        /// <summary>
-        /// Get the tile coordinates to the top right of a point.
-        /// </summary>
-        private static Point TopRight(Point tile)
-        {
-            if (IsOdd(tile.Y))
-            {
-                return new Point(tile.X + 1, tile.Y - 1);
-            }
-
-            return new Point(tile.X, tile.Y - 1);
-        }
-
-        /// <summary>
-        /// Get the tile coordinates to the bottom right of a point.
-        /// </summary>
-        private static Point BottomRight(Point tile)
-        {
-            if (IsOdd(tile.Y))
-            {
-                return new Point(tile.X + 1, tile.Y + 1);
-            }
-
-            return new Point(tile.X, tile.Y + 1);
-        }
-
-        /// <summary>
-        /// Get the tile coordinates to the bottom left of a point.
-        /// </summary>
-        private static Point BottomLeft(Point tile)
-        {
-            if (IsOdd(tile.Y))
-            {
-                return new Point(tile.X, tile.Y + 1);
-            }
-
-            return new Point(tile.X - 1, tile.Y + 1);
-        }
-
-        /// <summary>
-        /// Get the tile coordinates to the left of a point.
-        /// </summary>
-        private static Point Left(Point tile)
-        {
-            return new Point(tile.X - 1, tile.Y);
-        }
-
-        /// <summary>
-        /// Get the tile coordinates to the top left of a point.
-        /// </summary>
-        private static Point TopLeft(Point tile)
-        {
-            if (IsOdd(tile.Y))
-            {
-                return new Point(tile.X, tile.Y - 1);
-            }
-
-            return new Point(tile.X - 1, tile.Y - 1);
-        }
-
-        /// <summary>
-        /// Get the tile coordinates to the right of a point.
-        /// </summary>
-        private static Point Right(Point tile)
-        {
-            return new Point(tile.X + 1, tile.Y);
         }
 
         #endregion

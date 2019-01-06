@@ -4,11 +4,13 @@
 
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -17,6 +19,12 @@
     /// </summary>
     public class SelectedPlayerState : PlayerState
     {
+        #region Fields
+
+        List<Tile> path;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -51,6 +59,20 @@
                 }
             }
 
+            path = null;
+            if (HighlightedTile != null)
+            {
+                path = board.GetPath(SelectedUnit, HighlightedTile);
+            }
+
+            if (MouseInfo.RightMousedPressed)
+            {
+                if (HighlightedTile != null)
+                {
+                    board.TryMoveUnit(SelectedUnit, HighlightedTile.BoardX, HighlightedTile.BoardY);
+                }
+            }
+
             //DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
@@ -68,6 +90,14 @@
             base.Draw(spriteBatch);
 
             spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
+
+            if (path != null)
+            {
+                foreach (Tile tile in path)
+                {
+                    spriteBatch.Draw(Textures.RedTileFilter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
+                }
+            }
         }
 
         #endregion
