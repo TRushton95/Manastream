@@ -21,7 +21,7 @@
         /// </summary>
         public BaseEffect(TargetType targetType)
         {
-            this.TargetType = TargetType;
+            this.TargetType = targetType;
         }
 
         #endregion
