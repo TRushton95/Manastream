@@ -30,6 +30,7 @@
         {
             this.MaxHealth = maxHealth;
             this.CurrentHealth = maxHealth;
+            this.Abilities = abilities;
         }
 
         #endregion
