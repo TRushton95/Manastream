@@ -375,19 +375,30 @@
         private List<Tile> DijkstraSearch(Tile origin, Tile destination)
         {
             //Initialisation
-            List<Tile> unvisitedNodes = new List<Tile>();
+            DijkstraNode originNode, destinationNode;
+
+            List<DijkstraNode> unvisitedNodes = new List<DijkstraNode>();
             List<DijkstraNode> distance = new List<DijkstraNode>();
 
             foreach (Tile tile in Tiles)
             {
                 int cost = int.MaxValue;
 
+                DijkstraNode newNode = new DijkstraNode(tile, cost);
+
                 if (tile == origin)
                 {
-                    cost = 0;
+                    newNode.cost = 0;
+                    originNode = newNode;
                 }
-                distance.Add(new DijkstraNode(tile, cost));
-                unvisitedNodes.Add(tile);
+
+                if (tile == destination)
+                {
+                    destinationNode = newNode;
+                }
+
+                distance.Add(newNode);
+                unvisitedNodes.Add(newNode);
             }
 
             Tile currentTile = origin;
@@ -395,18 +406,21 @@
             //Algorithm
             while (unvisitedNodes.Count > 0)
             {
-
+                /*
                 List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
                 List<Tile> unvisitedAdjacentTiles = distance.Where(node => adjacentTiles.Contains(node.tile))
                                                             .Select(node => node.tile).ToList();
+                */
+
+                List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
+                List<DijkstraNode> adjacentNodes = distance.Where(node => adjacentTiles.Contains(node.tile)).ToList();
+                List<DijkstraNode> unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
 
                 DijkstraNode currentNode = distance.Single(node => node.tile == currentTile);
 
-                foreach (Tile adjacentTile in unvisitedAdjacentTiles)
+                foreach (DijkstraNode adjacentNode in unvisitedAdjacentNodes)
                 {
-                    DijkstraNode adjacentNode = distance.Single(node => node.tile == adjacentTile);
-
-                    int cost = currentNode.cost + adjacentTile.MovementCost;
+                    int cost = currentNode.cost + adjacentNode.tile.MovementCost;
                     
                     if (cost < adjacentNode.cost)
                     {
@@ -417,14 +431,14 @@
 
                 //Mark node as visited?
                 currentNode.visited = true;
-                unvisitedNodes.Remove(currentTile);
+                unvisitedNodes.Remove(currentNode);
 
                 if (currentTile == destination)
                 {
                     break;
                 }
 
-                currentTile = distance.Where(node => unvisitedNodes.Contains(node.tile)).OrderBy(node => node.cost).First().tile;
+                currentTile = distance.Where(node => !node.visited).OrderBy(node => node.cost).First().tile;
             }
 
             DijkstraNode reverseSearchNode = distance.Single(node => node.tile == currentTile);
@@ -450,7 +464,10 @@
 
             if (destination != null && destination.Occupant == null)
             {
+                Tile origin = GetTile(unit.BoardX, unit.BoardY);
+                origin.Occupant = null;
                 destination.Occupant = unit;
+
                 unit.BoardX = destination.BoardX;
                 unit.BoardY = destination.BoardY;
                 unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
