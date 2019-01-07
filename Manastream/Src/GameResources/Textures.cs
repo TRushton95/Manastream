@@ -27,7 +27,7 @@
         //Tiles
         private static Texture2D tileHighlight;
         private static Texture2D emptyTile, groundTile;
-        private static Texture2D redTileFilter;
+        private static Texture2D greenTileFilter, redTileFilter;
 
         //Units
         private static Texture2D unitHighlight, unitSelect;
@@ -41,6 +41,7 @@
         public Texture2D TileHighlight => tileHighlight;
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
+        public Texture2D GreenTileFilter => greenTileFilter;
         public Texture2D RedTileFilter => redTileFilter;
 
         //Units
@@ -82,6 +83,7 @@
             emptyTile = LoadTileTexture(content, "EmptyTile");
             groundTile = LoadTileTexture(content, "GroundTile");
             redTileFilter = LoadTileTexture(content, "RedTileFilter");
+            greenTileFilter = LoadTileTexture(content, "GreenTileFilter");
         }
 
         /// <summary>
