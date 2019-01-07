@@ -64,6 +64,7 @@
             if (HighlightedTile != null)
             {
                 path = board.GetPath(SelectedUnit, HighlightedTile);
+                path.RemoveAt(0); // TO-DO Do we ever need the origin tile? Could remove from method if not.
 
                 if (MouseInfo.RightMousedPressed)
                 {
@@ -89,12 +90,14 @@
 
             spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
 
-            if (path != null)
+            if (path != null && path.Count > 0)
             {
-                foreach (Tile tile in path)
+                for (int i = 0; i < path.Count - 1; i++)
                 {
-                    spriteBatch.Draw(Textures.RedTileFilter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
+                    spriteBatch.Draw(Textures.MoveArrow, new Vector2(path[i].CanvasX, path[i].CanvasY), Color.White);
                 }
+
+                spriteBatch.Draw(Textures.GreenTileFilter, new Vector2(path[path.Count - 1].CanvasX, path[path.Count - 1].CanvasY), Color.White);
             }
         }
 

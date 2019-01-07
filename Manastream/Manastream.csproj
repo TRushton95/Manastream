@@ -94,6 +94,7 @@
     <Content Include="Content\Tiles\EmptyTile.png" />
     <Content Include="Content\Tiles\GreenTileFilter.png" />
     <Content Include="Content\Tiles\GroundTile.png" />
+    <Content Include="Content\Tiles\MoveArrow.png" />
     <Content Include="Content\Tiles\RedTileFilter.png" />
     <Content Include="Content\Tiles\TileHighlight.png" />
     <Content Include="Content\Units\Knight.png" />
