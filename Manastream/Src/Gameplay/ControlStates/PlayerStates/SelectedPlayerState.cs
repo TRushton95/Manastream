@@ -10,6 +10,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using System;
     using System.Collections.Generic;
 
     #endregion
@@ -20,8 +21,9 @@
     public class SelectedPlayerState : PlayerState
     {
         #region Fields
-
-        List<Tile> path;
+        
+        private List<Tile> path;
+        private readonly Vector2 rotationOrigin = new Vector2(Tile.Diameter / 2, Tile.Diameter / 2);
 
         #endregion
 
@@ -94,10 +96,15 @@
             {
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    spriteBatch.Draw(Textures.MoveArrow, new Vector2(path[i].CanvasX, path[i].CanvasY), Color.White);
+                    Vector2 direction = path[i + 1].CanvasPosition - path[i].CanvasPosition;
+                    direction.Normalize();
+                    float rotation = (float)Math.Atan2(direction.Y, direction.X);
+
+                    spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
                 }
 
-                spriteBatch.Draw(Textures.GreenTileFilter, new Vector2(path[path.Count - 1].CanvasX, path[path.Count - 1].CanvasY), Color.White);
+                Vector2 pathEnd = path[path.Count - 1].CanvasPosition;
+                spriteBatch.Draw(Textures.GreenTileFilter, pathEnd, Color.White);
             }
         }
 
