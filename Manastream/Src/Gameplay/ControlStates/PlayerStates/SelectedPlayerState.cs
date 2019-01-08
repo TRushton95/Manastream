@@ -66,7 +66,6 @@
             if (HighlightedTile != null)
             {
                 path = board.GetPath(SelectedUnit, HighlightedTile);
-                path.RemoveAt(0); // TO-DO Do we ever need the origin tile? Could remove from method if not.
 
                 if (MouseInfo.RightMousedPressed)
                 {
