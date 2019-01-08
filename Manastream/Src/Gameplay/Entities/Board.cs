@@ -423,12 +423,6 @@
             //Algorithm
             while (unvisitedNodes.Count > 0)
             {
-                /*
-                List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
-                List<Tile> unvisitedAdjacentTiles = distance.Where(node => adjacentTiles.Contains(node.tile))
-                                                            .Select(node => node.tile).ToList();
-                */
-
                 List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
                 List<DijkstraNode> adjacentNodes = distance.Where(node => adjacentTiles.Contains(node.tile)).ToList();
                 List<DijkstraNode> unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();

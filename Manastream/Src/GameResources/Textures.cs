@@ -25,12 +25,11 @@
         private bool initialised = false;
 
         //Tiles
-        private static Texture2D tileHighlight;
+        private static Texture2D tileHighlight, unitSelect;
         private static Texture2D emptyTile, groundTile;
         private static Texture2D greenTileFilter, redTileFilter, moveArrow;
 
         //Units
-        private static Texture2D unitHighlight, unitSelect;
         private static Texture2D wizard, knight;
 
         #endregion
@@ -39,6 +38,7 @@
 
         //Tiles
         public Texture2D TileHighlight => tileHighlight;
+        public Texture2D UnitSelect => unitSelect;
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
         public Texture2D GreenTileFilter => greenTileFilter;
@@ -46,8 +46,6 @@
         public Texture2D MoveArrow => moveArrow;
 
         //Units
-        public Texture2D UnitHighlight => unitHighlight;
-        public Texture2D UnitSelect => unitSelect;
         public Texture2D Wizard => wizard;
         public Texture2D Knight => knight;
 
@@ -81,6 +79,7 @@
         private void InitialiseTiles(ContentManager content)
         {
             tileHighlight = LoadTileTexture(content, "TileHighlight");
+            unitSelect = LoadTileTexture(content, "UnitSelect");
             emptyTile = LoadTileTexture(content, "EmptyTile");
             groundTile = LoadTileTexture(content, "GroundTile");
             redTileFilter = LoadTileTexture(content, "RedTileFilter");
@@ -93,8 +92,6 @@
         /// </summary>
         private void InitialiseUnits(ContentManager content)
         {
-            unitHighlight = LoadUnitTexture(content, "UnitHighlight");
-            unitSelect = LoadUnitTexture(content, "UnitSelect");
             wizard = LoadUnitTexture(content, "Wizard");
             knight = LoadUnitTexture(content, "Knight");
         }

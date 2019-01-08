@@ -67,11 +67,6 @@
             {
                 spriteBatch.Draw(Textures.TileHighlight, new Vector2(HighlightedTile.CanvasX, HighlightedTile.CanvasY), Color.White);
             }
-
-            if (HighlightedUnit != null)
-            {
-                spriteBatch.Draw(Textures.UnitHighlight, new Vector2(HighlightedUnit.CanvasX, HighlightedUnit.CanvasY), Color.White);
-            }
         }
 
         #endregion

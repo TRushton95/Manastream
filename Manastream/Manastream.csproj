@@ -96,10 +96,9 @@
     <Content Include="Content\Tiles\GroundTile.png" />
     <Content Include="Content\Tiles\MoveArrow.png" />
     <Content Include="Content\Tiles\RedTileFilter.png" />
+    <Content Include="Content\Tiles\UnitSelect.png" />
     <Content Include="Content\Tiles\TileHighlight.png" />
     <Content Include="Content\Units\Knight.png" />
-    <Content Include="Content\Units\UnitHighlight.png" />
-    <Content Include="Content\Units\UnitSelect.png" />
     <Content Include="Content\Units\Wizard.png" />
     <Content Include="Icon.ico" />
   </ItemGroup>
