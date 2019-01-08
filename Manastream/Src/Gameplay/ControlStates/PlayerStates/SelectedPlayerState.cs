@@ -94,6 +94,7 @@
 
             if (path != null && path.Count > 0)
             {
+                //TO-DO this isn't the place for this logic - drawing not calculating
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     Vector2 direction = path[i + 1].CanvasPosition - path[i].CanvasPosition;
