@@ -86,8 +86,6 @@
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
-
             if (templateAffectedTiles.Count > 0)
             {
                 foreach (Tile tile in templateAffectedTiles)

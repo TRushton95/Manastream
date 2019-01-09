@@ -89,8 +89,6 @@
         {
             base.Draw(spriteBatch);
 
-            spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnit.CanvasX, SelectedUnit.CanvasY), Color.White);
-
             if (path != null && path.Count > 0)
             {
                 //TO-DO this isn't the place for this logic - drawing not calculating
