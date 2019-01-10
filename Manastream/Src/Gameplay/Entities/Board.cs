@@ -148,7 +148,7 @@
             {
                 if (TryRelocateUnit(unit, destination))
                 {
-                    unit.CurrentEnergy -= path.Count - 1;
+                    unit.CurrentEnergy -= path.Count;
                     Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
                     result = true;
                 }
