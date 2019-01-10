@@ -91,19 +91,34 @@
 
             if (path != null && path.Count > 0)
             {
-                //TO-DO this isn't the place for this logic - drawing not calculating
                 for (int i = 0; i < path.Count - 1; i++)
                 {
-                    Vector2 direction = path[i + 1].CanvasPosition - path[i].CanvasPosition;
-                    direction.Normalize();
-                    float rotation = (float)Math.Atan2(direction.Y, direction.X);
-
+                    float rotation = GetArrowRotation(path[i + 1], path[i]);
                     spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
                 }
 
                 Vector2 pathEnd = path[path.Count - 1].CanvasPosition;
                 spriteBatch.Draw(Textures.GreenTileFilter, pathEnd, Color.White);
             }
+        }
+
+        /// <summary>
+        /// Calculates the rotation for a movement arrow to point to another tile.
+        /// </summary>
+        private float GetArrowRotation(Tile currentTile, Tile nextTile)
+        {
+            if (currentTile == null && nextTile == null)
+            {
+                return float.NaN;
+            }
+
+            float result = 0;
+            
+            Vector2 direction = currentTile.CanvasPosition - nextTile.CanvasPosition;
+            direction.Normalize();
+            result = (float)Math.Atan2(direction.Y, direction.X);
+
+            return result;
         }
 
         #endregion
