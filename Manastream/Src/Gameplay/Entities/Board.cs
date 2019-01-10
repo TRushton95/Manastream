@@ -137,14 +137,14 @@
             Tile destination = GetTile(x, y);
             List<Tile> path = DijkstraSearch(origin, destination);
 
-            if (path.Count == 1)
+            if (path.Count == 0)
             {
                 Console.WriteLine("Cannot move there!");
 
                 return false;
             }
 
-            if (unit.CurrentEnergy >= path.Count - 1)
+            if (unit.CurrentEnergy >= path.Count)
             {
                 if (TryRelocateUnit(unit, destination))
                 {
