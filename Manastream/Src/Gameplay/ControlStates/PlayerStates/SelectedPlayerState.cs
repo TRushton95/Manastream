@@ -97,8 +97,14 @@
                     spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
                 }
 
-                Vector2 pathEnd = path[path.Count - 1].CanvasPosition;
-                spriteBatch.Draw(Textures.GreenTileFilter, pathEnd, Color.White);
+                int totalCost = 0;
+                foreach (Tile tile in path)
+                {
+                    totalCost += tile.MovementCost;
+                    Texture2D filter = totalCost > SelectedUnit.CurrentEnergy ? Textures.RedTileFilter : Textures.GreenTileFilter;
+
+                    spriteBatch.Draw(filter, tile.CanvasPosition, Color.White);
+                }
             }
         }
 
