@@ -314,7 +314,7 @@
         {
             Tile origin = GetTile(unit.BoardX, unit.BoardY);
 
-            return DijkstraSearch(origin, destination, false);
+            return DijkstraSearch(origin, destination, true);
         }
 
         #endregion
@@ -397,7 +397,7 @@
         /// The Dikstra Seach algorithm that returns a list of tiles representing the most efficient path from an origin to a destination.
         /// Interactive argument determines whether the ability is affected by movement cost, traversable, etc.
         /// </summary>
-        private List<Tile> DijkstraSearch(Tile origin, Tile destination, bool interactive = true)
+        private List<Tile> DijkstraSearch(Tile origin, Tile destination, bool ignoreEnvironment = false)
         {
             //Initialisation
             DijkstraNode originNode, destinationNode;
@@ -435,20 +435,20 @@
                 List<DijkstraNode> adjacentNodes = distance.Where(node => adjacentTiles.Contains(node.tile)).ToList();
                 List<DijkstraNode> unvisitedAdjacentNodes;
 
-                if (interactive)
+                if (ignoreEnvironment)
                 {
-                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
+                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited).ToList();
                 }
                 else
                 {
-                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited).ToList();
+                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
                 }
 
                 DijkstraNode currentNode = distance.Single(node => node.tile == currentTile);
 
                 foreach (DijkstraNode adjacentNode in unvisitedAdjacentNodes)
                 {
-                    int tileCost = interactive ? adjacentNode.tile.MovementCost : 1;
+                    int tileCost = ignoreEnvironment ? 1: adjacentNode.tile.MovementCost;
                     int cost = currentNode.cost + tileCost;
                     
                     if (cost < adjacentNode.cost)
