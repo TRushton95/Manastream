@@ -50,7 +50,7 @@
 
             path = null;
 
-            if (MouseInfo.LeftMousePressed)
+            if (MouseInfo.RightMousedPressed)
             {
                 if (HighlightedTile?.Occupant == null)
                 {
@@ -67,7 +67,7 @@
             {
                 path = board.GetUnitPath(SelectedUnit, HighlightedTile);
 
-                if (MouseInfo.RightMousedPressed)
+                if (MouseInfo.LeftMousePressed)
                 {
                     board.TryMoveUnit(SelectedUnit, HighlightedTile.BoardX, HighlightedTile.BoardY);
                 }
