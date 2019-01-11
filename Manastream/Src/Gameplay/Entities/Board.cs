@@ -144,11 +144,13 @@
                 return false;
             }
 
-            if (unit.CurrentEnergy >= path.Count)
+            int energyCost = path.Sum(Tile => Tile.MovementCost);
+
+            if (unit.CurrentEnergy >= energyCost)
             {
                 if (TryRelocateUnit(unit, destination))
                 {
-                    unit.CurrentEnergy -= path.Count;
+                    unit.CurrentEnergy -= energyCost;
                     Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
                     result = true;
                 }
