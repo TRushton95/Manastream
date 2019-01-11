@@ -6,6 +6,7 @@
     public enum TileType
     {
         Empty,
-        Ground
+        Ground,
+        Water
     }
 }

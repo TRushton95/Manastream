@@ -67,6 +67,7 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\EmptyTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\GroundTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
+    <Compile Include="Src\Gameplay\Entities\Actors\Tiles\WaterTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Unit.cs" />
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Entities\Camera.cs" />
@@ -98,6 +99,7 @@
     <Content Include="Content\Tiles\RedTileFilter.png" />
     <Content Include="Content\Tiles\UnitSelect.png" />
     <Content Include="Content\Tiles\TileHighlight.png" />
+    <Content Include="Content\Tiles\WaterTIle.png" />
     <Content Include="Content\Units\Knight.png" />
     <Content Include="Content\Units\Wizard.png" />
     <Content Include="Icon.ico" />
