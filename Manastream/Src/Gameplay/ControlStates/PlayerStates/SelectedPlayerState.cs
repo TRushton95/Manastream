@@ -65,7 +65,7 @@
             
             if (HighlightedTile != null)
             {
-                path = board.GetPath(SelectedUnit, HighlightedTile);
+                path = board.GetUnitPath(SelectedUnit, HighlightedTile);
 
                 if (MouseInfo.RightMousedPressed)
                 {

@@ -303,11 +303,18 @@
         /// <summary>
         /// Gets a list of tiles representing the path from the unit to the destination.
         /// </summary>
-        public List<Tile> GetPath(Unit unit, Tile destination)
+        public List<Tile> GetUnitPath(Unit unit, Tile destination)
         {
             Tile origin = GetTile(unit.BoardX, unit.BoardY);
 
             return DijkstraSearch(origin, destination);
+        }
+
+        public List<Tile> GetAbilityPath(Unit unit, Tile destination)
+        {
+            Tile origin = GetTile(unit.BoardX, unit.BoardY);
+
+            return DijkstraSearch(origin, destination, false);
         }
 
         #endregion
@@ -388,8 +395,9 @@
 
         /// <summary>
         /// The Dikstra Seach algorithm that returns a list of tiles representing the most efficient path from an origin to a destination.
+        /// Interactive argument determines whether the ability is affected by movement cost, traversable, etc.
         /// </summary>
-        private List<Tile> DijkstraSearch(Tile origin, Tile destination)
+        private List<Tile> DijkstraSearch(Tile origin, Tile destination, bool interactive = true)
         {
             //Initialisation
             DijkstraNode originNode, destinationNode;
@@ -425,13 +433,23 @@
             {
                 List<Tile> adjacentTiles = GetTiles(AdjacentTileMethods.Select(method => method(currentTile.BoardPosition)).ToList());
                 List<DijkstraNode> adjacentNodes = distance.Where(node => adjacentTiles.Contains(node.tile)).ToList();
-                List<DijkstraNode> unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
+                List<DijkstraNode> unvisitedAdjacentNodes;
+
+                if (interactive)
+                {
+                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
+                }
+                else
+                {
+                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited).ToList();
+                }
 
                 DijkstraNode currentNode = distance.Single(node => node.tile == currentTile);
 
                 foreach (DijkstraNode adjacentNode in unvisitedAdjacentNodes)
                 {
-                    int cost = currentNode.cost + adjacentNode.tile.MovementCost;
+                    int tileCost = interactive ? adjacentNode.tile.MovementCost : 1;
+                    int cost = currentNode.cost + tileCost;
                     
                     if (cost < adjacentNode.cost)
                     {

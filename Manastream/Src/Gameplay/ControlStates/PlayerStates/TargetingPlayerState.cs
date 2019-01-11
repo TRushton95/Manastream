@@ -40,8 +40,7 @@
         #endregion
 
         #region Properties
-
-        //DEBUG - Change this to selected ability once created, and take template from there
+        
         public Ability SelectedAbility
         {
             get;
