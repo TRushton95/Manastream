@@ -46,9 +46,9 @@
         /// </summary>
         public override PlayerState ProcessInput(Board board, Point mouse)
         {
-            path = null;
-
             base.ProcessInput(board, mouse);
+
+            path = null;
 
             if (MouseInfo.LeftMousePressed)
             {

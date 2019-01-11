@@ -18,6 +18,7 @@
         {
             return new Ability(
                 "Frostbolt",
+                3,
                 TargetType.Enemy,
                 new SingleTargetTemplate(),
                 new List<BaseEffect>()
@@ -30,6 +31,7 @@
         {
             return new Ability(
                 "Lunge",
+                1,
                 TargetType.Enemy,
                 new SingleTargetTemplate(),
                 new List<BaseEffect>()

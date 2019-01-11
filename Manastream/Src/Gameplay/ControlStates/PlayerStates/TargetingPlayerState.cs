@@ -21,7 +21,8 @@
     {
         #region Fields
 
-        private List<Tile> templateAffectedTiles;
+        private List<Tile> templateAffectedTiles, abilityPath;
+        private bool validCast = false;
 
         #endregion
 
@@ -57,18 +58,24 @@
         {
             base.ProcessInput(board, mouse);
 
+            abilityPath = null;
+            templateAffectedTiles = new List<Tile>();
+            validCast = false;
+
             if (MouseInfo.RightMousedPressed)
             {
                 return new SelectedPlayerState(SelectedUnit);
             }
 
-            templateAffectedTiles = new List<Tile>();
-
             if (HighlightedTile != null)
             {
+                abilityPath = board.GetAbilityPath(SelectedUnit, HighlightedTile);
+
                 List<Point> tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedAbility.Template);
                 templateAffectedTiles = board.GetTiles(tileCoords);
             }
+
+            validCast = ValidateCastConditions();
 
             if (MouseInfo.LeftMousePressed)
             {
@@ -85,13 +92,26 @@
         {
             base.Draw(spriteBatch);
 
+            Texture2D filter = validCast ? Textures.GreenTileFilter : Textures.RedTileFilter;
+
             if (templateAffectedTiles.Count > 0)
             {
                 foreach (Tile tile in templateAffectedTiles)
                 {
-                    spriteBatch.Draw(Textures.RedTileFilter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
+                    spriteBatch.Draw(filter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether the ability meets the conditions to be cast.
+        /// </summary>
+        private bool ValidateCastConditions()
+        {
+            bool isInRange = abilityPath.Count <= SelectedAbility.Range;
+            bool isValidTarget = TargetValidationService.Validate(HighlightedTile, SelectedAbility.TargetType, SelectedUnit);
+
+            return isInRange && isValidTarget;
         }
 
         #endregion

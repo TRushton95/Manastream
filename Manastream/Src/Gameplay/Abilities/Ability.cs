@@ -23,9 +23,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Ability"/> class.
         /// </summary>
-        public Ability(string name, TargetType targetType, Template template, List<BaseEffect> effects)
+        public Ability(string name, int range, TargetType targetType, Template template, List<BaseEffect> effects)
         {
             this.Name = name;
+            this.Range = range;
             this.TargetType = targetType;
             this.Template = template;
             this.Effects = effects;
@@ -36,6 +37,11 @@
         #region Properties
 
         public string Name
+        {
+            get;
+        }
+
+        public int Range
         {
             get;
         }
