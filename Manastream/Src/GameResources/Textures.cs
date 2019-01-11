@@ -26,8 +26,8 @@
 
         //Tiles
         private static Texture2D tileHighlight, unitSelect;
-        private static Texture2D emptyTile, groundTile, waterTile;
         private static Texture2D greenTileFilter, redTileFilter, moveArrow;
+        private static Texture2D emptyTile, groundTile, waterTile, forestTile;
 
         //Units
         private static Texture2D wizard, knight;
@@ -42,6 +42,7 @@
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
         public Texture2D WaterTile => waterTile;
+        public Texture2D ForestTile => forestTile;
         public Texture2D GreenTileFilter => greenTileFilter;
         public Texture2D RedTileFilter => redTileFilter;
         public Texture2D MoveArrow => moveArrow;
@@ -81,12 +82,13 @@
         {
             tileHighlight = LoadTileTexture(content, "TileHighlight");
             unitSelect = LoadTileTexture(content, "UnitSelect");
-            emptyTile = LoadTileTexture(content, "EmptyTile");
-            groundTile = LoadTileTexture(content, "GroundTile");
-            waterTile = LoadTileTexture(content, "WaterTile");
             redTileFilter = LoadTileTexture(content, "RedTileFilter");
             greenTileFilter = LoadTileTexture(content, "GreenTileFilter");
             moveArrow = LoadTileTexture(content, "MoveArrow");
+            emptyTile = LoadTileTexture(content, "EmptyTile");
+            groundTile = LoadTileTexture(content, "GroundTile");
+            waterTile = LoadTileTexture(content, "WaterTile");
+            forestTile = LoadTileTexture(content, "ForestTile");
         }
 
         /// <summary>

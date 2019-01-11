@@ -7,6 +7,7 @@
     {
         Empty,
         Ground,
-        Water
+        Water,
+        Forest
     }
 }

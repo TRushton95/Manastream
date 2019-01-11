@@ -184,7 +184,7 @@
                     //DEBUG - default board will be all empty once map creation is added
                     if (IsOdd(y) && IsOdd(x))
                     {
-                        result[x, y] = new WaterTile(x, y, canvasX, canvasY);
+                        result[x, y] = new ForestTile(x, y, canvasX, canvasY);
                     }
                     else
                     {

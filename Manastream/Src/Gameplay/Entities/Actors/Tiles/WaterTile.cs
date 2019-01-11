@@ -3,7 +3,6 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Enums;
-    using Microsoft.Xna.Framework.Graphics;
 
     #endregion
 

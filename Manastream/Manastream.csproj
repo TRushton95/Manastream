@@ -65,6 +65,7 @@
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\TargetingPlayerState.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\GameActor.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\EmptyTile.cs" />
+    <Compile Include="Src\Gameplay\Entities\Actors\Tiles\ForestTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\GroundTile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\Tile.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\WaterTile.cs" />
@@ -93,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Tiles\EmptyTile.png" />
+    <Content Include="Content\Tiles\ForestTile.png" />
     <Content Include="Content\Tiles\GreenTileFilter.png" />
     <Content Include="Content\Tiles\GroundTile.png" />
     <Content Include="Content\Tiles\MoveArrow.png" />
