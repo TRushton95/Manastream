@@ -10,10 +10,22 @@
 
     #endregion
 
+    /// <summary>
+    /// The ability factory class for constructing preset abilities.
+    /// </summary>
     public static class AbilityFactory
     {
+        #region Constants
+
+        private const int Melee = 1;
+
+        #endregion
+
         #region Methods
 
+        /// <summary>
+        /// The Frostbolt ability.
+        /// </summary>
         public static Ability Frostbolt()
         {
             return new Ability(
@@ -29,9 +41,12 @@
 
         public static Ability Lunge()
         {
+            /// <summary>
+            /// The Lunge ability.
+            /// </summary>
             return new Ability(
                 "Lunge",
-                1,
+                Melee,
                 TargetType.Enemy,
                 new SingleTargetTemplate(),
                 new List<BaseEffect>()

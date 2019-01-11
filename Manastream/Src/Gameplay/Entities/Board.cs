@@ -310,6 +310,10 @@
             return DijkstraSearch(origin, destination);
         }
 
+        /// <summary>
+        /// Gets a list of tiles representing the path of an ability from the unit to the destination.
+        /// An ability path differs from a unit path in that it is unaffected by tile movement costs and impassable terrain.
+        /// </summary>
         public List<Tile> GetAbilityPath(Unit unit, Tile destination)
         {
             Tile origin = GetTile(unit.BoardX, unit.BoardY);
