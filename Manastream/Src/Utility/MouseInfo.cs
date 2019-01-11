@@ -67,7 +67,7 @@
         /// <summary>
         /// Checks if the right mouse button has just been pressed.
         /// </summary>
-        public static bool RightMousedPressed => currentMouseState.RightButton == ButtonState.Pressed &&
+        public static bool RightMousePressed => currentMouseState.RightButton == ButtonState.Pressed &&
                                                     previousMouseState.RightButton == ButtonState.Released;
 
         /// <summary>

@@ -62,7 +62,7 @@
             templateAffectedTiles = new List<Tile>();
             validCast = false;
 
-            if (MouseInfo.RightMousedPressed)
+            if (MouseInfo.RightMousePressed)
             {
                 return new SelectedPlayerState(SelectedUnit);
             }

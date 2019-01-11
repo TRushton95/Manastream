@@ -50,7 +50,7 @@
 
             path = null;
 
-            if (MouseInfo.RightMousedPressed)
+            if (MouseInfo.RightMousePressed)
             {
                 if (HighlightedTile?.Occupant == null)
                 {
