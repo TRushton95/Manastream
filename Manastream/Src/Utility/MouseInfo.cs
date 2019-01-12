@@ -115,11 +115,6 @@
         public static int ScrollWheelValue => currentMouseState.ScrollWheelValue;
 
         /// <summary>
-        /// Checks if the scroll wheel value has change since the previous input state.
-        /// </summary>
-        public static bool ScrollWheelChanged => currentMouseState.ScrollWheelValue != previousMouseState.ScrollWheelValue;
-
-        /// <summary>
         /// Gets the amount that the scroll wheel value has changed since the previous input state.
         /// </summary>
         public static int ScrollWheelChange => currentMouseState.ScrollWheelValue - previousMouseState.ScrollWheelValue;
