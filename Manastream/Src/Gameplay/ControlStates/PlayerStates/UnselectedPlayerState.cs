@@ -37,7 +37,7 @@
 
             if (MouseInfo.LeftMousePressed)
             {
-                if (HighlightedUnit != null)
+                if (HighlightedUnit != null && HighlightedUnit.Team == team)
                 {
                     return new SelectedPlayerState(team, HighlightedUnit);
                 }

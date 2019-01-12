@@ -57,7 +57,7 @@
                     return new UnselectedPlayerState(team);
                 }
 
-                if (HighlightedTile?.Occupant != SelectedUnit)
+                if (HighlightedTile?.Occupant != SelectedUnit && HighlightedTile.Occupant.Team == team)
                 {
                     return new SelectedPlayerState(team, HighlightedTile.Occupant);
                 }
