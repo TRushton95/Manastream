@@ -11,6 +11,7 @@
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
     using System.Collections.Generic;
 
     #endregion
@@ -26,6 +27,7 @@
         private Camera camera;
         private PlayerState playerState;
         private Board board;
+        private int team, teamCount;
 
         #endregion
 
@@ -38,6 +40,8 @@
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
+            team = 1;
+            teamCount = 2;
             playerState = new UnselectedPlayerState(1);
             
             board = new Board();
@@ -77,6 +81,12 @@
             Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
             playerState = playerState.ProcessInput(board, transformedMouse);
             board.Update(gameTime);
+
+            //DEBUG - Temporary until KeyboardInfo is added
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) && MouseInfo.RightMousePressed)
+            {
+                NextTurn();
+            }
         }
 
         /// <summary>
@@ -92,6 +102,20 @@
             gameSpriteBatch.End();
 
             base.DrawState(uiSpriteBatch);
+        }
+
+        private void NextTurn()
+        {
+            team++;
+
+            if (team > teamCount)
+            {
+                team = 1;
+            }
+
+            playerState = new UnselectedPlayerState(team);
+
+            System.Console.WriteLine($"Team: {team}");
         }
     }
 }

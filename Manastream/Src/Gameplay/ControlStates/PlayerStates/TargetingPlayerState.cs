@@ -21,8 +21,8 @@
     {
         #region Fields
 
+        private bool validCast;
         private List<Tile> templateAffectedTiles, abilityPath;
-        private bool validCast = false;
 
         #endregion
 
