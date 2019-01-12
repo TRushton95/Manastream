@@ -76,7 +76,7 @@
             //DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                return new TargetingPlayerState(team, SelectedUnit.Abilities[0], SelectedUnit);
+                return new TargetingPlayerState(team, SelectedUnit, SelectedUnit.Abilities[0]);
             }
 
             return this;

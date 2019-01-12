@@ -31,7 +31,7 @@
         /// <summary>
         /// Creates a new instance of the <see cref="TargetingPlayerState"/> class.
         /// </summary>
-        public TargetingPlayerState(int team, Ability selectedAbility, Unit selectedUnit)
+        public TargetingPlayerState(int team, Unit selectedUnit, Ability selectedAbility)
             : base(team, selectedUnit)
         {
             this.SelectedAbility = selectedAbility;
