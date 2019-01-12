@@ -120,6 +120,7 @@
 
             playerState = new UnselectedPlayerState(team);
             board.RefreshTeamEnergy(team);
+            board.ActivateTeamTicks(team);
 
             System.Console.WriteLine($"Team: {team}");
         }
