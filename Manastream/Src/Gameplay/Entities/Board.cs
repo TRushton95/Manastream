@@ -447,7 +447,7 @@
                 }
                 else
                 {
-                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable).ToList();
+                    unvisitedAdjacentNodes = adjacentNodes.Where(node => !node.visited && node.tile.Traversable && node.tile.Occupant == null).ToList();
                 }
 
                 DijkstraNode currentNode = distance.Single(node => node.tile == currentTile);
