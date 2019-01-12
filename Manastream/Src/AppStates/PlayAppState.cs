@@ -27,7 +27,8 @@
         private Camera camera;
         private PlayerState playerState;
         private Board board;
-        private int team, teamCount;
+        private int team;
+        private readonly int teamCount;
 
         #endregion
 
