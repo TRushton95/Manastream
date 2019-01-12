@@ -105,6 +105,10 @@
             base.DrawState(uiSpriteBatch);
         }
 
+        /// <summary>
+        /// Hands control over to the next player.
+        /// </summary>
+        /// <remarks>DEBUG - This will be invoked as a handler once the user interface is built.</remarks>
         private void NextTurn()
         {
             team++;
@@ -115,6 +119,7 @@
             }
 
             playerState = new UnselectedPlayerState(team);
+            board.RefreshTeamEnergy(team);
 
             System.Console.WriteLine($"Team: {team}");
         }

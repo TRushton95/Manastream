@@ -106,6 +106,24 @@
 
         #endregion
 
+        #region Unit Controls
+
+        /// <summary>
+        /// Restores the energy for all units on a given team.
+        /// </summary>
+        public void RefreshTeamEnergy(int team)
+        {
+            foreach (Unit unit in units)
+            {
+                if (unit.Team == team)
+                {
+                    unit.CurrentEnergy = unit.MaxEnergy;
+                }
+            }
+        }
+
+        #endregion
+
         #region Map Controls
 
         /// <summary>
