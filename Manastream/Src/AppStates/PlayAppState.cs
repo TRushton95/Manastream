@@ -25,6 +25,7 @@
 
         private SpriteBatch gameSpriteBatch;
         private Camera camera;
+        private Matrix cameraMatrix;
         private PlayerState playerState;
         private Board board;
         private int team;
@@ -78,9 +79,9 @@
         public override void Update(GameTime gameTime)
         {
             camera.Update();
-
-            Matrix matrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
-            Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(matrix)).ToPoint();
+            cameraMatrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
+            
+            Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(cameraMatrix)).ToPoint();
             playerState = playerState.ProcessInput(board, transformedMouse);
             board.Update(gameTime);
 
@@ -98,9 +99,7 @@
         /// </summary>
         public override void DrawState(SpriteBatch uiSpriteBatch)
         {
-            Matrix matrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
-
-            gameSpriteBatch.Begin(transformMatrix: matrix);
+            gameSpriteBatch.Begin(transformMatrix: cameraMatrix);
             board.Draw(gameSpriteBatch);
             playerState.Draw(gameSpriteBatch);
             gameSpriteBatch.End();
