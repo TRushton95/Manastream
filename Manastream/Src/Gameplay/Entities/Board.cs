@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.Entities
 {
+    using Manastream.Src.Gameplay.Abilities.Ticks;
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors;
@@ -115,9 +116,30 @@
         {
             foreach (Unit unit in units)
             {
-                if (unit.Team == team)
+                if (unit.Team != team)
                 {
-                    unit.CurrentEnergy = unit.MaxEnergy;
+                    continue;
+                }
+                
+                unit.CurrentEnergy = unit.MaxEnergy;
+            }
+        }
+
+        /// <summary>
+        /// Activates the ticks for all units on a given team.
+        /// </summary>
+        public void ActivateTeamTicks(int team)
+        {
+            foreach (Unit unit in units)
+            {
+                if (unit.Team != team)
+                {
+                    continue;
+                }
+
+                foreach (BaseTick tick in unit.Ticks)
+                {
+                    tick.Activate(unit);
                 }
             }
         }
