@@ -1,8 +1,8 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
-    using Manastream.Src.Gameplay.Entities;
     #region Usings
 
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Microsoft.Xna.Framework;
@@ -15,13 +15,20 @@
     /// </summary>
     public abstract class PlayerState : ControlState
     {
+        #region Fields
+
+        protected readonly int team;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="PlayerState"/> class.
         /// </summary>
-        public PlayerState(Unit selectedUnit)
+        public PlayerState(int team, Unit selectedUnit)
         {
+            this.team = team;
             this.SelectedUnit = selectedUnit;
         }
 

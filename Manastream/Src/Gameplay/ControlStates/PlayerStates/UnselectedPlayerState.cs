@@ -19,8 +19,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="UnselectedPlayerState"/> class.
         /// </summary>
-        public UnselectedPlayerState()
-            : base(null)
+        public UnselectedPlayerState(int team)
+            : base(team, null)
         {
         }
 
@@ -39,7 +39,7 @@
             {
                 if (HighlightedUnit != null)
                 {
-                    return new SelectedPlayerState(HighlightedUnit);
+                    return new SelectedPlayerState(team, HighlightedUnit);
                 }
             }
 

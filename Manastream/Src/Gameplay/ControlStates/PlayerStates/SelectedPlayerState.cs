@@ -32,8 +32,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="SelectedPlayerState"/> class.
         /// </summary>
-        public SelectedPlayerState(Unit selectedUnit)
-            : base(selectedUnit)
+        public SelectedPlayerState(int team, Unit selectedUnit)
+            : base(team, selectedUnit)
         {
         }
 
@@ -54,12 +54,12 @@
             {
                 if (HighlightedTile?.Occupant == null)
                 {
-                    return new UnselectedPlayerState();
+                    return new UnselectedPlayerState(team);
                 }
 
                 if (HighlightedTile?.Occupant != SelectedUnit)
                 {
-                    return new SelectedPlayerState(HighlightedTile.Occupant);
+                    return new SelectedPlayerState(team, HighlightedTile.Occupant);
                 }
             }
             
@@ -76,7 +76,7 @@
             //DEBUG
             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
-                return new TargetingPlayerState(SelectedUnit.Abilities[0], SelectedUnit);
+                return new TargetingPlayerState(team, SelectedUnit.Abilities[0], SelectedUnit);
             }
 
             return this;

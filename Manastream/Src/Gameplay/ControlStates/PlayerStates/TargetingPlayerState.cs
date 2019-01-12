@@ -31,8 +31,8 @@
         /// <summary>
         /// Creates a new instance of the <see cref="TargetingPlayerState"/> class.
         /// </summary>
-        public TargetingPlayerState(Ability selectedAbility, Unit selectedUnit)
-            : base(selectedUnit)
+        public TargetingPlayerState(int team, Ability selectedAbility, Unit selectedUnit)
+            : base(team, selectedUnit)
         {
             this.SelectedAbility = selectedAbility;
             this.templateAffectedTiles = new List<Tile>();
@@ -64,7 +64,7 @@
 
             if (MouseInfo.RightMousePressed)
             {
-                return new SelectedPlayerState(SelectedUnit);
+                return new SelectedPlayerState(team, SelectedUnit);
             }
 
             if (HighlightedTile != null)

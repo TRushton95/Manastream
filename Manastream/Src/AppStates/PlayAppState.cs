@@ -38,7 +38,7 @@
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
-            playerState = new UnselectedPlayerState();
+            playerState = new UnselectedPlayerState(1);
             
             board = new Board();
 
