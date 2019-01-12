@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.Entities
 {
+    using Manastream.Src.Utility;
     #region Usings
 
     using Microsoft.Xna.Framework;
@@ -19,8 +20,9 @@
         #endregion
 
         #region Fields
-        
+
         private int canvasX, canvasY;
+        private float scale;
 
         #endregion
 
@@ -34,6 +36,7 @@
             this.canvasX = canvasX;
             this.canvasY = canvasY;
             this.Speed = speed;
+            this.scale = 1f;
             this.Enabled = enabled;
         }
 
@@ -80,6 +83,8 @@
             {
                 canvasX += Speed;
             }
+
+            UpdateScale();
         }
 
         /// <summary>
@@ -106,6 +111,33 @@
         public Matrix GetTranslationMatrix()
         {
             return Matrix.CreateTranslation(-canvasX, -canvasY, 0);
+        }
+
+        public Matrix GetScaleMatrix()
+        {
+            return Matrix.CreateScale(scale);
+        }
+
+        /// <summary>
+        /// Updates the scale.
+        /// </summary>
+        private void UpdateScale()
+        {
+            int scrollWheelChange = MouseInfo.ScrollWheelChange;
+
+            if (scrollWheelChange != 0)
+            {
+                scale += (float)(scrollWheelChange / 120 * 0.1);
+            }
+
+            if (scale > 1)
+            {
+                scale = 1;
+            }
+            else if (scale < 0.5f)
+            {
+                scale = 0.5f;
+            }
         }
 
         #endregion

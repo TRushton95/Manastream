@@ -79,7 +79,8 @@
         {
             camera.Update();
 
-            Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(camera.GetTranslationMatrix())).ToPoint();
+            Matrix matrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
+            Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(matrix)).ToPoint();
             playerState = playerState.ProcessInput(board, transformedMouse);
             board.Update(gameTime);
 
@@ -97,7 +98,9 @@
         /// </summary>
         public override void DrawState(SpriteBatch uiSpriteBatch)
         {
-            gameSpriteBatch.Begin(transformMatrix: camera.GetTranslationMatrix());
+            Matrix matrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
+
+            gameSpriteBatch.Begin(transformMatrix: matrix);
             board.Draw(gameSpriteBatch);
             playerState.Draw(gameSpriteBatch);
             gameSpriteBatch.End();
