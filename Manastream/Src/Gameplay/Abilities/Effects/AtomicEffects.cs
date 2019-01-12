@@ -26,6 +26,19 @@
             }
         }
 
+        /// <summary>
+        /// Heals the target unit.
+        /// </summary>
+        public static void Heal(Unit target, int value)
+        {
+            target.CurrentHealth += value;
+
+            if (target.CurrentHealth > target.MaxHealth)
+            {
+                target.CurrentHealth = target.MaxHealth;
+            }
+        }
+
         #endregion
     }
 }
