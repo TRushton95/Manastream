@@ -17,7 +17,7 @@
     {
         #region Fields
 
-        protected readonly int team;
+        protected readonly Player player;
 
         #endregion
 
@@ -26,9 +26,9 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="PlayerState"/> class.
         /// </summary>
-        public PlayerState(int team, Unit selectedUnit)
+        public PlayerState(Player player, Unit selectedUnit)
         {
-            this.team = team;
+            this.player = player;
             this.SelectedUnit = selectedUnit;
         }
 
@@ -79,7 +79,7 @@
 
             if (HighlightedTile != null && HighlightedTile.Occupant != null)
             {
-                Texture2D highlight = HighlightedTile.Occupant.Team == team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
+                Texture2D highlight = HighlightedTile.Occupant.Team == player.Team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
 
                 spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition, Color.White);
             }

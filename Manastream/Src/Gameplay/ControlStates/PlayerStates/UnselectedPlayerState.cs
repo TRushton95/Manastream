@@ -19,8 +19,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="UnselectedPlayerState"/> class.
         /// </summary>
-        public UnselectedPlayerState(int team)
-            : base(team, null)
+        public UnselectedPlayerState(Player player)
+            : base(player, null)
         {
         }
 
@@ -37,9 +37,9 @@
 
             if (MouseInfo.LeftMousePressed)
             {
-                if (HighlightedUnit != null && HighlightedUnit.Team == team)
+                if (HighlightedUnit != null && HighlightedUnit.Team == player.Team)
                 {
-                    return new SelectedPlayerState(team, HighlightedUnit);
+                    return new SelectedPlayerState(player, HighlightedUnit);
                 }
             }
 

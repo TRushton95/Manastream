@@ -28,7 +28,8 @@
         private Matrix cameraMatrix;
         private PlayerState playerState;
         private Board board;
-        private int team;
+        private Dictionary<int, Player> players;
+        private int currentTeam;
         private readonly int teamCount;
 
         #endregion
@@ -42,10 +43,16 @@
         {
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
-            team = 1;
             teamCount = 2;
-            playerState = new UnselectedPlayerState(1);
-            
+            currentTeam = 1;
+            players = new Dictionary<int, Player>();
+
+            for (int i = 1; i <= teamCount; i++)
+            {
+                players.Add(i, new Player(i));
+            }
+
+            playerState = new UnselectedPlayerState(players[currentTeam]);
             board = new Board();
 
             //DEBUG
@@ -114,18 +121,18 @@
         /// <remarks>DEBUG - This will be invoked as a handler once the user interface is built.</remarks>
         private void NextTurn()
         {
-            team++;
+            currentTeam++;
 
-            if (team > teamCount)
+            if (currentTeam > teamCount)
             {
-                team = 1;
+                currentTeam = 1;
             }
 
-            playerState = new UnselectedPlayerState(team);
-            board.RefreshTeamEnergy(team);
-            board.ActivateTeamTicks(team);
+            playerState = new UnselectedPlayerState(players[currentTeam]);
+            board.RefreshTeamEnergy(currentTeam);
+            board.ActivateTeamTicks(currentTeam);
 
-            System.Console.WriteLine($"Team: {team}");
+            System.Console.WriteLine($"Team: {currentTeam}");
         }
     }
 }
