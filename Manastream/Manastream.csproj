@@ -75,6 +75,7 @@
     <Compile Include="Src\Gameplay\Entities\Actors\Unit.cs" />
     <Compile Include="Src\Gameplay\Entities\Board.cs" />
     <Compile Include="Src\Gameplay\Entities\Camera.cs" />
+    <Compile Include="Src\Gameplay\Entities\Actors\Generator.cs" />
     <Compile Include="Src\Gameplay\Enums\TargetType.cs" />
     <Compile Include="Src\Gameplay\Enums\TemplateType.cs" />
     <Compile Include="Src\Gameplay\Enums\TileType.cs" />
