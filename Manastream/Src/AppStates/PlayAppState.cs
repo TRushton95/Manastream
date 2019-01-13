@@ -61,7 +61,7 @@
             board.Generate();
 
             Unit wizard = new Unit(
-                1, 10, 3,
+                10, 3, players[1],
                 new List<Ability>()
                 {
                     AbilityFactory.Frostbolt()
@@ -69,7 +69,7 @@
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
 
             Unit knight = new Unit(
-                2, 20, 3,
+                20, 3, players[2],
                 new List<Ability>()
                 {
                     AbilityFactory.Lunge()
@@ -101,10 +101,10 @@
 
                 if (tile.Generator != null && tile.Generator.Active)
                 {
-                    players[unit.Team].CurrentMana += 1;
+                    players[unit.Owner.Team].CurrentMana += 1;
                     tile.Generator.Active = false;
 
-                    System.Console.WriteLine($"Mana: {players[unit.Team].CurrentMana}");
+                    System.Console.WriteLine($"Mana: {players[unit.Owner.Team].CurrentMana}");
                 }
             }
 

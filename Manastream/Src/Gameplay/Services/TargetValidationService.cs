@@ -105,7 +105,7 @@
         {
             Unit occupant = targetTile.Occupant;
 
-            if (occupant != null && occupant.Team != caster.Team)
+            if (occupant != null && occupant.Owner.Team != caster.Owner.Team)
             {
                 return true;
             }
@@ -120,7 +120,7 @@
         {
             Unit occupant = targetTile.Occupant;
 
-            if (occupant != null && occupant.Team == caster.Team)
+            if (occupant != null && occupant.Owner.Team == caster.Owner.Team)
             {
                 return true;
             }

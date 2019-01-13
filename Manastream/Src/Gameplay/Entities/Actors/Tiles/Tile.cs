@@ -72,6 +72,8 @@
             set;
         }
 
+        public bool HasActiveGenerator => Generator != null && Generator.Active;
+
         #endregion
     }
 }

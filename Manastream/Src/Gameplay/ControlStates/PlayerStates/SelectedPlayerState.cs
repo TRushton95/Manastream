@@ -57,7 +57,7 @@
                     return new UnselectedPlayerState(player);
                 }
 
-                if (HighlightedTile?.Occupant != SelectedUnit && HighlightedTile.Occupant.Team == player.Team)
+                if (HighlightedTile?.Occupant != SelectedUnit && HighlightedTile.Occupant.Owner.Team == player.Team)
                 {
                     return new SelectedPlayerState(player, HighlightedTile.Occupant);
                 }
@@ -69,7 +69,10 @@
 
                 if (MouseInfo.LeftMousePressed)
                 {
-                    board.TryMoveUnit(SelectedUnit, HighlightedTile.BoardX, HighlightedTile.BoardY);
+                    foreach (Tile pathSegment in path)
+                    {
+                        board.TryMoveUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
+                    }
                 }
             }
 

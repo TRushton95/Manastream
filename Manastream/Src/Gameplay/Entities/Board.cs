@@ -131,7 +131,7 @@
         {
             foreach (Unit unit in units)
             {
-                if (unit.Team != team)
+                if (unit.Owner.Team != team)
                 {
                     continue;
                 }
@@ -147,7 +147,7 @@
         {
             foreach (Unit unit in units)
             {
-                if (unit.Team != team)
+                if (unit.Owner.Team != team)
                 {
                     continue;
                 }
@@ -232,8 +232,6 @@
         /// </summary>
         public bool TryMoveUnit(Unit unit, int x, int y)
         {
-            bool result = false;
-
             Tile origin = GetTile(unit.BoardX, unit.BoardY);
             Tile destination = GetTile(x, y);
             List<Tile> path = DijkstraSearch(origin, destination);
@@ -247,21 +245,28 @@
 
             int energyCost = path.Sum(Tile => Tile.MovementCost);
 
-            if (unit.CurrentEnergy >= energyCost)
-            {
-                if (TryRelocateUnit(unit, destination))
-                {
-                    unit.CurrentEnergy -= energyCost;
-                    Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
-                    result = true;
-                }
-            }
-            else
+            if (unit.CurrentEnergy < energyCost)
             {
                 Console.WriteLine("Not enough energy!");
+                return false;
             }
 
-            return result;
+            if (!TryRelocateUnit(unit, destination))
+            {
+                Console.WriteLine("Unit relocation failed!");
+                return false;
+            }
+            
+            unit.CurrentEnergy -= energyCost;
+            Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
+
+            if (destination.HasActiveGenerator)
+            {
+                unit.Owner.CurrentMana++;
+                destination.Generator.Active = false;
+            }
+
+            return true;
         }
 
         #endregion

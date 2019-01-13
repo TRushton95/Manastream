@@ -79,7 +79,7 @@
 
             if (HighlightedTile != null && HighlightedTile.Occupant != null)
             {
-                Texture2D highlight = HighlightedTile.Occupant.Team == player.Team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
+                Texture2D highlight = HighlightedTile.Occupant.Owner.Team == player.Team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
 
                 spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition, Color.White);
             }
