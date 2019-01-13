@@ -30,7 +30,7 @@
         private static Texture2D emptyTile, groundTile, waterTile, forestTile;
 
         //Units
-        private static Texture2D wizard, knight;
+        private static Texture2D wizard, knight, generator;
 
         #endregion
 
@@ -52,6 +52,7 @@
         //Units
         public Texture2D Wizard => wizard;
         public Texture2D Knight => knight;
+        public Texture2D Generator => generator;
 
         #endregion
 
@@ -102,6 +103,7 @@
         {
             wizard = LoadUnitTexture(content, "Wizard");
             knight = LoadUnitTexture(content, "Knight");
+            generator = LoadUnitTexture(content, "Generator");
         }
 
         #endregion
