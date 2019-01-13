@@ -97,22 +97,6 @@
             {
                 generator.Update(gameTime);
             }
-
-            //DEBUG - Temporary for testing animation switches until turns are introduced.
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                foreach (Generator g in generators)
-                {
-                    g.Active = true;
-                }
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                foreach (Generator g in generators)
-                {
-                    g.Active = false;
-                }
-            }
         }
 
         /// <summary>
@@ -171,6 +155,26 @@
                 foreach (BaseTick tick in unit.Ticks)
                 {
                     tick.Activate(unit);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Decrement the timers on the generators and reset consumed generators.
+        /// </summary>
+        public void ProgressGenerators()
+        {
+            foreach (Generator generator in generators)
+            {
+                if (generator.Timer > 0)
+                {
+                    generator.Timer--;
+                }
+
+                if (generator.Timer == 0 && !generator.Active)
+                {
+                    generator.ResetTimer();
+                    generator.Active = true;
                 }
             }
         }

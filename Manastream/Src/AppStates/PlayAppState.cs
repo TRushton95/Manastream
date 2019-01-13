@@ -30,7 +30,7 @@
         private PlayerState playerState;
         private Board board;
         private Dictionary<int, Player> players;
-        private int currentTeam;
+        private int currentTeam, turn;
         private readonly int teamCount;
 
         #endregion
@@ -45,6 +45,7 @@
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
             teamCount = 2;
+            turn = 1;
             currentTeam = 1;
             players = new Dictionary<int, Player>();
 
@@ -140,13 +141,15 @@
             if (currentTeam > teamCount)
             {
                 currentTeam = 1;
+                turn++;
+                board.ProgressGenerators();
+
+                System.Console.WriteLine($"Turn: {turn}");
             }
 
             playerState = new UnselectedPlayerState(players[currentTeam]);
             board.RefreshTeamEnergy(currentTeam);
             board.ActivateTeamTicks(currentTeam);
-
-            System.Console.WriteLine($"Team: {currentTeam}");
         }
     }
 }

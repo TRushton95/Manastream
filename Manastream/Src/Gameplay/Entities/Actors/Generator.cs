@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Graphics;
+    using System;
     using System.Collections.Generic;
 
     #endregion
@@ -16,6 +17,8 @@
         #region Constants
 
         public const int Diameter = 75;
+        private int LowerTimerBound = 2;
+        private int UpperTimerBound = 2;
 
         #endregion
 
@@ -51,6 +54,12 @@
 
         #region Properties
 
+        public int Timer
+        {
+            get;
+            set;
+        }
+
         public bool Active
         {
             get
@@ -71,6 +80,18 @@
 
                 active = value;
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void ResetTimer()
+        {
+            Random rand = new Random();
+            Timer = rand.Next(LowerTimerBound, UpperTimerBound);
+
+            Console.WriteLine($"Generator Timer: {Timer}");
         }
 
         #endregion
