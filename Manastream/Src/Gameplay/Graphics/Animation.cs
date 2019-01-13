@@ -55,14 +55,14 @@
 
             currentAnimationTime += gameTime.ElapsedGameTime.Milliseconds;
 
-            if (currentAnimationTime > animationDuration)
+            if (currentAnimationTime >= animationDuration)
             {
                 currentAnimationTime = currentAnimationTime % animationDuration;
             }
 
             frameIndex = currentAnimationTime / frameDuration;
 
-            spriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteHeight, spriteHeight);
+            spriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteWidth, spriteHeight);
         }
 
 
