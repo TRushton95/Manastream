@@ -1,8 +1,8 @@
 ﻿namespace Manastream.Src.Gameplay.Entities
 {
-    using Manastream.Src.Gameplay.Abilities.Ticks;
     #region Usings
 
+    using Manastream.Src.Gameplay.Abilities.Ticks;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
@@ -36,6 +36,7 @@
 
         private int width, height;
         private List<Unit> units;
+        private List<Generator> generators;
         private Textures Textures = Resources.GetInstance().Textures;
 
         #endregion
@@ -51,6 +52,7 @@
             this.height = DefaultHeight;
             this.Tiles = new Tile[0, 0];
             this.units = new List<Unit>();
+            this.generators = new List<Generator>();
         }
 
         #endregion
@@ -97,6 +99,11 @@
             foreach (Tile tile in Tiles)
             {
                 tile.Draw(gameSpriteBatch);
+            }
+
+            foreach (Generator generator in generators)
+            {
+                generator.Draw(gameSpriteBatch);
             }
 
             foreach (Unit unit in units)
@@ -147,6 +154,31 @@
         #endregion
 
         #region Map Controls
+
+        /// <summary>
+        /// Atempts to spawn a generator at the specified location and add it to the collection.
+        /// </summary>
+        public bool TrySpawnGenerator(int x, int y)
+        {
+            bool result = false;
+
+            Tile destination = GetTile(x, y);
+            
+            if (destination.Generator == null)
+            {
+                Generator generator = new Generator();
+                generator.BoardX = x;
+                generator.BoardY = y;
+                generator.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Generator.Diameter / 2);
+                generator.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Generator.Diameter / 2);
+
+                destination.Generator = generator;
+                generators.Add(generator);
+                result = true;
+            }
+
+            return result;
+        }
 
         /// <summary>
         /// Attempt to spawn a unit at the specified location on the board and add it to the collection.

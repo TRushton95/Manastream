@@ -62,6 +62,12 @@
             set;
         }
 
+        public Generator Generator
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 }
