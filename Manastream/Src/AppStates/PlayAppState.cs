@@ -67,7 +67,7 @@
                 },
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Knight));
 
-            Unit generator = new Unit(0, 0, 0, null, new Animation(75, 75, 150, 4, Resources.Textures.Generator));
+            Unit generator = new Unit(0, 0, 0, null, Animation.SingleFrameAnimation(75, 75, Resources.Textures.Generator));
 
             board.TrySpawnUnit(wizard, 2, 5);
             board.TrySpawnUnit(knight, 8, 5);

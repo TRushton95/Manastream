@@ -107,6 +107,7 @@
     <Content Include="Content\Tiles\UnitSelect.png" />
     <Content Include="Content\Tiles\TileHighlight.png" />
     <Content Include="Content\Tiles\WaterTIle.png" />
+    <Content Include="Content\Units\ActiveGenerator.png" />
     <Content Include="Content\Units\Generator.png" />
     <Content Include="Content\Units\Knight.png" />
     <Content Include="Content\Units\Wizard.png" />
