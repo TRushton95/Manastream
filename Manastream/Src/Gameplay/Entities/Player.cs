@@ -7,7 +7,7 @@
         public Player(int team)
         {
             this.Team = team;
-            this.CurrentMana = MaxMana;
+            this.CurrentMana = 0;
         }
 
         public int Team

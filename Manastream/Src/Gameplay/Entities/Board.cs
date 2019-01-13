@@ -65,6 +65,8 @@
             private set;
         }
 
+        public List<Unit> Units => units;
+
         public static GetAdjacentTile[] AdjacentTileMethods => new GetAdjacentTile[6] {
                 BottomRight,
                 BottomLeft,
@@ -171,6 +173,7 @@
                 generator.BoardY = y;
                 generator.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Generator.Diameter / 2);
                 generator.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Generator.Diameter / 2);
+                generator.Active = true;
 
                 destination.Generator = generator;
                 generators.Add(generator);
