@@ -25,7 +25,7 @@
         private bool initialised = false;
 
         //Tiles
-        private static Texture2D tileHighlight, unitSelect;
+        private static Texture2D tileHighlight, allyTileHighlight, enemyTileHighlight, unitSelect;
         private static Texture2D greenTileFilter, redTileFilter, moveArrow;
         private static Texture2D emptyTile, groundTile, waterTile, forestTile;
 
@@ -38,6 +38,8 @@
 
         //Tiles
         public Texture2D TileHighlight => tileHighlight;
+        public Texture2D AllyTileHighlight => allyTileHighlight;
+        public Texture2D EnemyTileHighlight => enemyTileHighlight;
         public Texture2D UnitSelect => unitSelect;
         public Texture2D EmptyTile => emptyTile;
         public Texture2D GroundTile => groundTile;
@@ -81,6 +83,8 @@
         private void InitialiseTiles(ContentManager content)
         {
             tileHighlight = LoadTileTexture(content, "TileHighlight");
+            allyTileHighlight = LoadTileTexture(content, "AllyTileHighlight");
+            enemyTileHighlight = LoadTileTexture(content, "EnemyTileHighlight");
             unitSelect = LoadTileTexture(content, "UnitSelect");
             redTileFilter = LoadTileTexture(content, "RedTileFilter");
             greenTileFilter = LoadTileTexture(content, "GreenTileFilter");

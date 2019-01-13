@@ -96,7 +96,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Tiles\AllyTileHighlight.png" />
     <Content Include="Content\Tiles\EmptyTile.png" />
+    <Content Include="Content\Tiles\EnemyTileHighlight.png" />
     <Content Include="Content\Tiles\ForestTile.png" />
     <Content Include="Content\Tiles\GreenTileFilter.png" />
     <Content Include="Content\Tiles\GroundTile.png" />

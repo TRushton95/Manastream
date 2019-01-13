@@ -77,9 +77,16 @@
         {
             base.Draw(spriteBatch);
 
+            if (HighlightedTile != null && HighlightedTile.Occupant != null)
+            {
+                Texture2D highlight = HighlightedTile.Occupant.Team == team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
+
+                spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition, Color.White);
+            }
+
             if (SelectedUnitTile != null)
             {
-                spriteBatch.Draw(Textures.UnitSelect, new Vector2(SelectedUnitTile.CanvasX, SelectedUnitTile.CanvasY), Color.White);
+                spriteBatch.Draw(Textures.UnitSelect, SelectedUnitTile.CanvasPosition, Color.White);
             }
         }
 
