@@ -29,7 +29,7 @@
         /// </summary>
         //DEBUG  - Currently only passing a texture and manually building non-moving animation.
         public Tile(int boardX, int boardY, int canvasX, int canvasY, TileType tileType, int movementCost, bool traversable, Texture2D texture)
-            : base(boardX, boardY, canvasX, canvasY, new Animation(101, 101, 0, 1, texture))
+            : base(boardX, boardY, canvasX, canvasY, Animation.SingleFrameAnimation(101, 101, texture))
         {
             this.TileType = tileType;
             this.MovementCost = movementCost;

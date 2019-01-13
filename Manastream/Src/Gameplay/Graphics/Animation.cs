@@ -65,6 +65,13 @@
             spriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteWidth, spriteHeight);
         }
 
+        /// <summary>
+        /// A helper method for returning an animation with a single frame.
+        /// </summary>
+        public static Animation SingleFrameAnimation(int width, int height, Texture2D texture)
+        {
+            return new Animation(width, height, 0, 1, texture);
+        }
 
         /// <summary>
         /// Draws the current sprite.
