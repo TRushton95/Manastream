@@ -20,13 +20,13 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="GameActor"/> class.
         /// </summary>
-        public GameActor(int boardX, int boardY, int canvasX, int canvasY, Animation animation)
+        public GameActor(int boardX, int boardY, int canvasX, int canvasY)
         {
             this.BoardX = boardX;
             this.BoardY = boardY;
             this.CanvasX = canvasX;
             this.CanvasY = canvasY;
-            this.Animation = animation;
+            this.Animations = new Dictionary<int, Animation>();
             this.AnimationIndex = 0;
         }
 
@@ -70,9 +70,10 @@
             set;
         }
 
-        public Animation Animation
+        public Dictionary<int, Animation> Animations
         {
             get;
+            protected set;
         }
 
         public Point BoardPosition => new Point(BoardX, BoardY);
@@ -99,7 +100,13 @@
         /// </summary>
         public void Update(GameTime gameTime)
         {
-            Animation.Update(gameTime);
+            Animation animation;
+            Animations.TryGetValue(AnimationIndex, out animation);
+
+            if (animation != null)
+            {
+                animation.Update(gameTime);
+            }
         }
 
         /// <summary>
@@ -107,7 +114,13 @@
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch, CanvasX, CanvasY);
+            Animation animation;
+            Animations.TryGetValue(AnimationIndex, out animation);
+
+            if (animation != null)
+            {
+                animation.Draw(spriteBatch, CanvasX, CanvasY);
+            }
         }
 
         #endregion

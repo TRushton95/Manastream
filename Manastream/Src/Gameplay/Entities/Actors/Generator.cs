@@ -4,6 +4,7 @@
 
     using Manastream.Src.Gameplay.Entities.Actor;
     using Manastream.Src.Gameplay.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -18,14 +19,32 @@
 
         #endregion
 
+        #region Fields
+
+        private bool active;
+        private enum AnimationTypes
+        {
+            Default,
+            Active
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="Generator"/> class.
         /// </summary>
         public Generator()
-            : base(0, 0, 0, 0, Animation.SingleFrameAnimation(75, 75, Textures.Generator))
+            : base(0, 0, 0, 0)
         {
+            active = false;
+
+            this.Animations = new Dictionary<int, Animation>()
+            {
+                { (int)AnimationTypes.Default, Animation.SingleFrameAnimation(75, 75, Textures.Generator) },
+                { (int)AnimationTypes.Active, new Animation(75, 75, 100, 4, Textures.ActiveGenerator) }
+            };
         }
 
         #endregion
@@ -34,8 +53,24 @@
 
         public bool Active
         {
-            get;
-            set;
+            get
+            {
+                return active;
+            }
+
+            set
+            {
+                if (value == true)
+                {
+                    AnimationIndex = (int)AnimationTypes.Active;
+                }
+                else
+                {
+                    AnimationIndex = (int)AnimationTypes.Default;
+                }
+
+                active = value;
+            }
         }
 
         #endregion

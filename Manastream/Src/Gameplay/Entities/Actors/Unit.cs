@@ -27,7 +27,7 @@
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
         public Unit(int team, int maxHealth, int maxEnergy, List<Ability> abilities, Animation animation)
-            : base(0, 0, 0, 0, animation)
+            : base(0, 0, 0, 0)
         {
             this.Team = team;
             this.MaxHealth = maxHealth;
@@ -37,6 +37,11 @@
 
             this.Abilities = abilities;
             this.Ticks = new List<BaseTick>();
+
+            this.Animations = new Dictionary<int, Animation>()
+            {
+                { 0, animation }
+            };
         }
 
         #endregion

@@ -8,6 +8,7 @@
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -90,6 +91,27 @@
             foreach (Unit unit in units)
             {
                 unit.Update(gameTime);
+            }
+
+            foreach (Generator generator in generators)
+            {
+                generator.Update(gameTime);
+            }
+
+            //DEBUG - Temporary for testing animation switches until turns are introduced.
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                foreach (Generator g in generators)
+                {
+                    g.Active = true;
+                }
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                foreach (Generator g in generators)
+                {
+                    g.Active = false;
+                }
             }
         }
 
