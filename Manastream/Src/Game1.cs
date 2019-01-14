@@ -97,7 +97,9 @@
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            spriteBatch.Begin();
             appState.DrawState(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

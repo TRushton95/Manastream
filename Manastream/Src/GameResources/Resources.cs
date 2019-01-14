@@ -14,7 +14,6 @@
         #region Fields
 
         private static Resources resources;
-        private Textures textures;
 
         #endregion
 
@@ -27,12 +26,12 @@
         /// </summary>
         public Resources()
         {
-            this.textures = new Textures();
+            this.Textures = new Textures();
         }
 
         #endregion
 
-        public Textures Textures => textures;
+        public Textures Textures { get; }
 
         public GraphicsDevice GraphicsDevice
         {

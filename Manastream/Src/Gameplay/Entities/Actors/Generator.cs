@@ -86,6 +86,9 @@
 
         #region Methods
 
+        /// <summary>
+        /// Resets the timer.
+        /// </summary>
         public void ResetTimer()
         {
             Random rand = new Random();

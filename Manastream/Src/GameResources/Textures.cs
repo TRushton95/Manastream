@@ -17,6 +17,7 @@
 
         private string TilePathName = "Tiles";
         private string UnitPathName = "Units";
+        private string FontPathName = "Fonts";
 
         #endregion
 
@@ -31,6 +32,9 @@
 
         //Units
         private static Texture2D wizard, knight, generator, activeGenerator;
+
+        //Fonts
+        private static SpriteFont debug;
 
         #endregion
 
@@ -55,6 +59,9 @@
         public Texture2D Generator => generator;
         public Texture2D ActiveGenerator => activeGenerator;
 
+        //Debug
+        public SpriteFont Debug => debug;
+
         #endregion
 
         #region Methods
@@ -71,6 +78,7 @@
 
             InitialiseTiles(content);
             InitialiseUnits(content);
+            InitialiseFonts(content);
 
             initialised = true;
         }
@@ -108,6 +116,11 @@
             activeGenerator = LoadUnitTexture(content, "ActiveGenerator");
         }
 
+        private void InitialiseFonts(ContentManager content)
+        {
+            debug = LoadFontTexture(content, "Debug");
+        }
+
         #endregion
 
         #region Section Loading
@@ -126,6 +139,14 @@
         private Texture2D LoadUnitTexture(ContentManager content, string unitTextureName)
         {
             return content.Load<Texture2D>(Path.Combine(UnitPathName, unitTextureName));
+        }
+
+        /// <summary>
+        /// Loads a font.
+        /// </summary>
+        private SpriteFont LoadFontTexture(ContentManager content, string fontName)
+        {
+            return content.Load<SpriteFont>(Path.Combine(FontPathName, fontName));
         }
 
         #endregion
