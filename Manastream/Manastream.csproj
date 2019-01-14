@@ -65,6 +65,7 @@
     <Compile Include="Src\Gameplay\Abilities\Ticks\DamageTick.cs" />
     <Compile Include="Src\Gameplay\Abilities\Ticks\HealingTick.cs" />
     <Compile Include="Src\Gameplay\ControlStates\ControlState.cs" />
+    <Compile Include="Src\Gameplay\ControlStates\PlayerStates\PowerPlayerState.cs" />
     <Compile Include="Src\Gameplay\ControlStates\PlayerStates\TargetingPlayerState.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\GameActor.cs" />
     <Compile Include="Src\Gameplay\Entities\Actors\Tiles\EmptyTile.cs" />

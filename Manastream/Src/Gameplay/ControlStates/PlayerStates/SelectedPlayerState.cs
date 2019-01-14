@@ -46,7 +46,12 @@
         /// </summary>
         public override PlayerState ProcessInput(Board board, Point mouse)
         {
-            base.ProcessInput(board, mouse);
+            PlayerState result = base.ProcessInput(board, mouse);
+
+            if (result != null)
+            {
+                return result;
+            }
 
             path = null;
 
@@ -69,6 +74,7 @@
 
                 if (MouseInfo.LeftMousePressed)
                 {
+                    //TO-DO Should this attempt to move to all out of range paths?
                     foreach (Tile pathSegment in path)
                     {
                         board.TryMoveUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);

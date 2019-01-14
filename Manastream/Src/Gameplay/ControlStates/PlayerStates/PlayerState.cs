@@ -7,6 +7,7 @@
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     #endregion
 
@@ -42,6 +43,11 @@
         public override PlayerState ProcessInput(Board board, Point mouse)
         {
             base.ProcessInput(board, mouse);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                return new PowerPlayerState(player, player.GetAbility(0));
+            }
 
             if (SelectedUnit != null)
             {

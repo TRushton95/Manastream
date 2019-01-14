@@ -18,10 +18,11 @@
         #region Constants
 
         private const int Melee = 1;
+        private const int Global = 999;
 
         #endregion
 
-        #region Methods
+        #region Unit Abilities
 
         /// <summary>
         /// The Frostbolt ability.
@@ -52,6 +53,26 @@
                 new List<BaseEffect>()
                 {
                     new InstantDamageEffect(5, TargetType.Enemy)
+                });
+        }
+
+        #endregion
+
+        #region Mana Powers
+
+        /// <summary>
+        /// The Lightning Strike power.
+        /// </summary>
+        public static Ability LightningStrike()
+        {
+            return new Ability(
+                "Lightning Strike",
+                Global,
+                TargetType.Enemy,
+                new SingleTargetTemplate(),
+                new List<BaseEffect>()
+                {
+                    new InstantDamageEffect(20, TargetType.Enemy)
                 });
         }
 

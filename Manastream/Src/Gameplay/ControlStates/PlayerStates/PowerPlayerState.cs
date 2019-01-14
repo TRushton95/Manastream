@@ -4,7 +4,6 @@
 
     using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Entities;
-    using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Services;
     using Manastream.Src.Utility;
@@ -15,24 +14,24 @@
     #endregion
 
     /// <summary>
-    /// The targeting player state class that represents the player interactions when a unit and an ability is selected.
+    /// The power player state that represents the interactions when a player has selected a power.
     /// </summary>
-    public class TargetingPlayerState : PlayerState
+    public class PowerPlayerState : PlayerState
     {
         #region Fields
 
         private bool validCast;
-        private List<Tile> templateAffectedTiles, abilityPath;
+        private List<Tile> templateAffectedTiles;
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Creates a new instance of the <see cref="TargetingPlayerState"/> class.
+        /// Initialises a new instance of the <see cref="PowerPlayerState"/> class.
         /// </summary>
-        public TargetingPlayerState(Player player, Unit selectedUnit, Ability selectedAbility)
-            : base(player, selectedUnit)
+        public PowerPlayerState(Player player, Ability selectedAbility)
+            : base(player, null)
         {
             this.SelectedAbility = selectedAbility;
             this.templateAffectedTiles = new List<Tile>();
@@ -41,7 +40,7 @@
         #endregion
 
         #region Properties
-        
+
         public Ability SelectedAbility
         {
             get;
@@ -56,35 +55,27 @@
         /// </summary>
         public override PlayerState ProcessInput(Board board, Point mouse)
         {
-            PlayerState result = base.ProcessInput(board, mouse);
-
-            if (result != null)
-            {
-                return result;
-            }
-
-            abilityPath = null;
+            base.ProcessInput(board, mouse);
+            
             templateAffectedTiles = new List<Tile>();
             validCast = false;
 
             if (MouseInfo.RightMousePressed)
             {
-                return new SelectedPlayerState(player, SelectedUnit);
+                return new UnselectedPlayerState(player);
             }
 
             if (HighlightedTile != null)
             {
-                abilityPath = board.GetAbilityPath(SelectedUnit, HighlightedTile);
-
                 List<Point> tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedAbility.Template);
                 templateAffectedTiles = board.GetTiles(tileCoords);
             }
 
-            validCast = ValidateCastConditions();
+            validCast = TargetValidationService.Validate(HighlightedTile, SelectedAbility.TargetType, player.PowerCaster);
 
             if (MouseInfo.LeftMousePressed)
             {
-                SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
+                SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, player.PowerCaster);
             }
 
             return this;
@@ -106,17 +97,6 @@
                     spriteBatch.Draw(filter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
                 }
             }
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the ability meets the conditions to be cast.
-        /// </summary>
-        private bool ValidateCastConditions()
-        {
-            bool isInRange = abilityPath.Count <= SelectedAbility.Range;
-            bool isValidTarget = TargetValidationService.Validate(HighlightedTile, SelectedAbility.TargetType, SelectedUnit);
-
-            return isInRange && isValidTarget;
         }
 
         #endregion
