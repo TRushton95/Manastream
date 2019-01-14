@@ -96,9 +96,16 @@
         {
             camera.Update();
             cameraMatrix = Matrix.Multiply(camera.GetScaleMatrix(), camera.GetTranslationMatrix());
-            
             Point transformedMouse = Vector2.Transform(MouseInfo.Position.ToVector2(), Matrix.Invert(cameraMatrix)).ToPoint();
-            playerState = playerState.ProcessInput(board, transformedMouse);
+
+            PlayerState newPlayerState = playerState.ProcessInput(board, transformedMouse);
+            if (newPlayerState != playerState)
+            {
+                playerState.OnLeave();
+                playerState = newPlayerState;
+                playerState.OnEnter();
+            }
+
             board.Update(gameTime);
 
             foreach (Unit unit in board.Units)

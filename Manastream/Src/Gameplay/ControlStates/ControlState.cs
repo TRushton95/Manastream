@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.Gameplay.ControlStates
+namespace Manastream.Src.Gameplay.ControlStates
 {
     #region Usings
 
@@ -57,7 +57,10 @@
 
             return null;
         }
-        
+
+        public abstract void OnEnter();
+
+        public abstract void OnLeave();
         /// <summary>
         /// Draws the state.
         /// </summary>
