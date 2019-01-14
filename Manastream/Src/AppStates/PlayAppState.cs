@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Abilities.Factories;
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
@@ -9,6 +10,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Graphics;
+    using Manastream.Src.UserInterface;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -32,6 +34,8 @@
         private Dictionary<int, Player> players;
         private int currentTeam, turn;
         private readonly int teamCount;
+
+        private DebugGameUI ui;
 
         #endregion
 
@@ -79,6 +83,8 @@
             board.TrySpawnUnit(wizard, 2, 5);
             board.TrySpawnUnit(knight, 8, 5);
             board.TrySpawnGenerator(0, 5);
+
+            ui = new DebugGameUI();
         }
 
         #endregion
@@ -127,7 +133,7 @@
             playerState.Draw(gameSpriteBatch);
             gameSpriteBatch.End();
 
-            base.DrawState(uiSpriteBatch);
+            ui.Draw(uiSpriteBatch);
         }
 
         /// <summary>
@@ -144,12 +150,14 @@
                 turn++;
                 board.ProgressGenerators();
 
-                System.Console.WriteLine($"Turn: {turn}");
+                eventManager.Notify(new NewTurnEvent(turn));
             }
 
             playerState = new UnselectedPlayerState(players[currentTeam]);
             board.RefreshTeamEnergy(currentTeam);
             board.ActivateTeamTicks(currentTeam);
+            
+            eventManager.Notify(new NewPlayerTurnEvent(currentTeam));
         }
     }
 }

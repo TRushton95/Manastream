@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -11,7 +12,7 @@
     /// <summary>
     /// The appstate class.
     /// </summary>
-    public abstract class AppState
+    public abstract class AppState : Listener
     {
         #region Properties
 
@@ -26,12 +27,7 @@
         /// <summary>
         /// Draws the appstate.
         /// </summary>
-        public virtual void DrawState(SpriteBatch uiSpriteBatch)
-        {
-            uiSpriteBatch.Begin();
-            
-            uiSpriteBatch.End();
-        }
+        public abstract void DrawState(SpriteBatch uiSpriteBatch);
 
         #endregion
     }

@@ -6,6 +6,16 @@
     public class EventTypes
     {
         /// <summary>
+        /// The debug events
+        /// </summary>
+        public class Debug
+        {
+            public const string NewTurn = "DBG_NEW_TURN";
+
+            public const string NewPlayerTurn = "DBG_NEW_PLAYER_TURN";
+        }
+
+        /// <summary>
         /// The mouse events
         /// </summary>
         public class Mouse
