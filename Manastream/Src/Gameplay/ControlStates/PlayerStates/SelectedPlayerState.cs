@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
+    using Manastream.Src.EventSystem.Events.Debug;
     #region Usings
 
     using Manastream.Src.Gameplay.Entities;
@@ -89,6 +90,22 @@
             }
 
             return this;
+        }
+
+        /// <summary>
+        /// Logic to do when entering the selected player state.
+        /// </summary>
+        public override void OnEnter()
+        {
+            eventManager.Notify(new SelectUnitEvent(SelectedUnit));
+        }
+
+        /// <summary>
+        /// Logic to do when entering the selected player state.
+        /// </summary>
+        public override void OnLeave()
+        {
+            eventManager.Notify(new SelectUnitEvent(null));
         }
 
         /// <summary>

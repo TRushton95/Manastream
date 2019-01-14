@@ -13,6 +13,10 @@
             public const string NewTurn = "DBG_NEW_TURN";
 
             public const string NewPlayerTurn = "DBG_NEW_PLAYER_TURN";
+
+            public const string HighlightUnit = "DBG_HIGHLIGHT_UNIT";
+
+            public const string SelectUnit = "DBG_SELECT_UNIT";
         }
 
         /// <summary>

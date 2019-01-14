@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Src\AppStates\AppState.cs" />
     <Compile Include="Src\AppStates\PlayAppState.cs" />
+    <Compile Include="Src\EventSystem\Events\Debug\HighlightUnitEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewPlayerTurnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Debug\SelectUnitEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Event.cs" />
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewTurnEvent.cs" />

@@ -1,5 +1,7 @@
-namespace Manastream.Src.Gameplay.ControlStates
+﻿namespace Manastream.Src.Gameplay.ControlStates
 {
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events.Debug;
     #region Usings
 
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
@@ -15,7 +17,7 @@ namespace Manastream.Src.Gameplay.ControlStates
     /// <summary>
     /// The control state interface that defines a contract of how the player interacts with the board
     /// </summary>
-    public abstract class ControlState
+    public abstract class ControlState : Listener
     {
         #region Fields
 
@@ -37,6 +39,12 @@ namespace Manastream.Src.Gameplay.ControlStates
             set;
         }
 
+        protected Unit PreviousHighlightedUnit
+        {
+            get;
+            set;
+        }
+
         protected Textures Textures => textures;
 
         #endregion
@@ -50,17 +58,31 @@ namespace Manastream.Src.Gameplay.ControlStates
         {
             HighlightedTile = board.GetTileAtCanvasPosition(mouse.X, mouse.Y);
 
+            PreviousHighlightedUnit = HighlightedUnit;
+
             if (HighlightedTile != null)
             {
                 HighlightedUnit = HighlightedTile.Occupant;
             }
 
+            if (PreviousHighlightedUnit != HighlightedUnit)
+            {
+                eventManager.Notify(new HighlightUnitEvent(HighlightedUnit));
+            }
+
             return null;
         }
 
-        public abstract void OnEnter();
+        /// <summary>
+        /// Logic to do when entering the control state.
+        /// </summary>
+        public virtual void OnEnter() { }
 
-        public abstract void OnLeave();
+        /// <summary>
+        /// Logic to do when leaving the control state.
+        /// </summary>
+        public virtual void OnLeave() { }
+        
         /// <summary>
         /// Draws the state.
         /// </summary>
