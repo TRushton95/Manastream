@@ -26,9 +26,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Unit"/> class.
         /// </summary>
-        public Unit(int maxHealth, int maxEnergy, Player owner, List<Ability> abilities, Animation animation)
+        public Unit(string name, int maxHealth, int maxEnergy, Player owner, List<Ability> abilities, Animation animation)
             : base(0, 0, 0, 0)
         {
+            this.Name = name;
             this.MaxHealth = maxHealth;
             this.CurrentHealth = maxHealth;
             this.MaxEnergy = maxEnergy;
@@ -47,6 +48,12 @@
         #endregion
 
         #region Properties
+
+        public string Name
+        {
+            get;
+            set;
+        }
 
         public int MaxHealth
         {

@@ -87,9 +87,9 @@
 
             if (HighlightedUnit != null)
             {
-                string highlightedUnitProfileMessage = string.Format(UnitProfileMessage, HighlightedUnit.Owner,
-                        HighlightedUnit.MaxHealth, HighlightedUnit.CurrentHealth,
-                        HighlightedUnit.MaxEnergy, HighlightedUnit.CurrentEnergy);
+                string highlightedUnitProfileMessage = string.Format(UnitProfileMessage, HighlightedUnit.Name,
+                        HighlightedUnit.CurrentHealth, HighlightedUnit.MaxHealth,
+                        HighlightedUnit.CurrentEnergy, HighlightedUnit.MaxEnergy);
 
                 spriteBatch.DrawString(debugFont, highlightedUnitProfileMessage,
                     new Vector2(0, window.Height - debugFont.MeasureString(highlightedUnitProfileMessage).Y), Color.Black);
@@ -97,9 +97,9 @@
 
             if (SelectedUnit != null)
             {
-                string selectedUnitProfileMessage = string.Format(UnitProfileMessage, SelectedUnit.Owner,
-                        SelectedUnit.MaxHealth, SelectedUnit.CurrentHealth,
-                        SelectedUnit.MaxEnergy, SelectedUnit.CurrentEnergy);
+                string selectedUnitProfileMessage = string.Format(UnitProfileMessage, SelectedUnit.Name,
+                        SelectedUnit.CurrentHealth, SelectedUnit.MaxHealth,
+                        SelectedUnit.CurrentEnergy, SelectedUnit.MaxEnergy);
 
                 spriteBatch.DrawString(debugFont, selectedUnitProfileMessage,
                     new Vector2(window.Width - debugFont.MeasureString(selectedUnitProfileMessage).X, window.Height - debugFont.MeasureString(selectedUnitProfileMessage).Y), Color.Black);

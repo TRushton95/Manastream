@@ -14,12 +14,6 @@
     /// </summary>
     public class Player
     {
-        #region Fields
-
-        private static readonly int MaxMana = 3;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -30,7 +24,7 @@
             this.Team = team;
             this.CurrentMana = 0;
             this.PowerCaster = new Unit(
-                0, 0, this,
+                $"Player {team}", 0, 0, this,
                 new List<Ability>()
                 {
                     AbilityFactory.LightningStrike()

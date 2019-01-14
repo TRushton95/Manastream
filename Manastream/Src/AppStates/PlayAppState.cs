@@ -65,7 +65,7 @@
             board.Generate();
 
             Unit wizard = new Unit(
-                10, 3, players[1],
+                "Wizard", 10, 3, players[1],
                 new List<Ability>()
                 {
                     AbilityFactory.Frostbolt()
@@ -73,7 +73,7 @@
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
 
             Unit knight = new Unit(
-                20, 3, players[2],
+                "Knight", 20, 3, players[2],
                 new List<Ability>()
                 {
                     AbilityFactory.Lunge()
