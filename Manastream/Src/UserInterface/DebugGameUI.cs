@@ -80,10 +80,10 @@
             Rectangle window = resources.GraphicsDevice.Viewport.Bounds;
             SpriteFont debugFont = resources.Textures.Debug;
 
-            spriteBatch.DrawString(debugFont, string.Format(TurnMessage, Turn), new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(debugFont, string.Format(PlayerTurnMessage, Player), new Vector2(0, 0), Color.Black);
 
-            float playerTurnMessageLength = debugFont.MeasureString(string.Format(PlayerTurnMessage, Player)).X;
-            spriteBatch.DrawString(debugFont, string.Format(PlayerTurnMessage, Player), new Vector2(window.Right - playerTurnMessageLength, 0), Color.Black);
+            float turnMessageLength = debugFont.MeasureString(string.Format(TurnMessage, Turn)).X;
+            spriteBatch.DrawString(debugFont, string.Format(TurnMessage, Turn), new Vector2(window.Right - turnMessageLength, 0), Color.Black);
 
             if (HighlightedUnit != null)
             {
