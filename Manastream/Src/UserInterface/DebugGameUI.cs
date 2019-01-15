@@ -104,6 +104,9 @@
             }
         }
 
+        /// <summary>
+        /// Initialises the event handlers.
+        /// </summary>
         private void InitialiseEventHandlers()
         {
             AddEventHandler(EventTypes.Debug.NewTurn, OnNewTurn);
@@ -125,6 +128,9 @@
             Turn = args.Turn;
         }
 
+        /// <summary>
+        /// The handler for a new player turn event.
+        /// </summary>
         public void OnNewPlayerTurn(Event e)
         {
             NewPlayerTurnEvent args = (NewPlayerTurnEvent)e;
@@ -132,12 +138,18 @@
             
         }
 
+        /// <summary>
+        /// The handler for a highlight unit event.
+        /// </summary>
         public void OnHighlightUnit(Event e)
         {
             HighlightUnitEvent args = (HighlightUnitEvent)e;
             HighlightedUnit = args.HighlightedUnit;
         }
 
+        /// <summary>
+        /// The handler for a select unit event.
+        /// </summary>
         public void OnSelectUnit(Event e)
         {
             SelectUnitEvent args = (SelectUnitEvent)e;
