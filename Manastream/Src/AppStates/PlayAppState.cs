@@ -34,7 +34,6 @@
         private Dictionary<int, Player> players;
         private int currentTeam, turn;
         private readonly int teamCount;
-
         private DebugGameUI ui;
 
         #endregion
@@ -57,30 +56,8 @@
             }
 
             board = new Board();
-
-            //DEBUG
             board.Generate();
-
-            Unit wizard = new Unit(
-                "Wizard", 10, 3, players[1],
-                new List<Ability>()
-                {
-                    AbilityFactory.Frostbolt()
-                },
-                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
-
-            Unit knight = new Unit(
-                "Knight", 20, 3, players[2],
-                new List<Ability>()
-                {
-                    AbilityFactory.Lunge()
-                },
-                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Knight));
-            
-            board.TrySpawnUnit(wizard, 2, 5);
-            board.TrySpawnUnit(knight, 8, 5);
-            board.TrySpawnGenerator(0, 5);
-            //DEBUG
+            SpawnTestUnits();
 
             ui = new DebugGameUI();
 
@@ -142,6 +119,32 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
+        }
+
+        /// <summary>
+        /// Spawns the test units for debugging.
+        /// </summary>
+        private void SpawnTestUnits()
+        {
+            Unit wizard = new Unit(
+                "Wizard", 10, 3, players[1],
+                new List<Ability>()
+                {
+                    AbilityFactory.Frostbolt()
+                },
+                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
+
+            Unit knight = new Unit(
+                "Knight", 20, 3, players[2],
+                new List<Ability>()
+                {
+                    AbilityFactory.Lunge()
+                },
+                new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Knight));
+
+            board.TrySpawnUnit(wizard, 2, 5);
+            board.TrySpawnUnit(knight, 8, 5);
+            board.TrySpawnGenerator(0, 5);
         }
 
         /// <summary>
