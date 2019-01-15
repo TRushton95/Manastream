@@ -5,6 +5,7 @@
     using Manastream.Src.EventSystem;
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Debug;
+    using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
@@ -34,9 +35,6 @@
         /// </summary>
         public DebugGameUI()
         {
-            this.Turn = 1;
-            this.Player = 1;
-
             this.InitialiseEventHandlers();
         }
 
@@ -50,7 +48,7 @@
             set;
         }
 
-        public int Player
+        public Player Player
         {
             get;
             set;
@@ -80,7 +78,7 @@
             Rectangle window = resources.GraphicsDevice.Viewport.Bounds;
             SpriteFont debugFont = resources.Textures.Debug;
 
-            spriteBatch.DrawString(debugFont, string.Format(PlayerTurnMessage, Player), new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(debugFont, string.Format(PlayerTurnMessage, Player.Team), new Vector2(0, 0), Color.Black);
 
             float turnMessageLength = debugFont.MeasureString(string.Format(TurnMessage, Turn)).X;
             spriteBatch.DrawString(debugFont, string.Format(TurnMessage, Turn), new Vector2(window.Right - turnMessageLength, 0), Color.Black);

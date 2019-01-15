@@ -49,8 +49,6 @@
             gameSpriteBatch = new SpriteBatch(Resources.GraphicsDevice);
             camera = new Camera(0, 0);
             teamCount = 2;
-            turn = 1;
-            currentTeam = 1;
             players = new Dictionary<int, Player>();
 
             for (int i = 1; i <= teamCount; i++)
@@ -58,7 +56,6 @@
                 players.Add(i, new Player(i));
             }
 
-            playerState = new UnselectedPlayerState(players[currentTeam]);
             board = new Board();
 
             //DEBUG
@@ -83,8 +80,12 @@
             board.TrySpawnUnit(wizard, 2, 5);
             board.TrySpawnUnit(knight, 8, 5);
             board.TrySpawnGenerator(0, 5);
+            //DEBUG
 
             ui = new DebugGameUI();
+
+            InitialiseTurns();
+            playerState = new UnselectedPlayerState(players[currentTeam]);
         }
 
         #endregion
@@ -144,6 +145,18 @@
         }
 
         /// <summary>
+        /// Initialises the turn variables.
+        /// </summary>
+        private void InitialiseTurns()
+        {
+            turn = 1;
+            currentTeam = 1;
+
+            eventManager.Notify(new NewTurnEvent(turn));
+            eventManager.Notify(new NewPlayerTurnEvent(players[currentTeam]));
+        }
+
+        /// <summary>
         /// Hands control over to the next player.
         /// </summary>
         /// <remarks>DEBUG - This will be invoked as a handler once the user interface is built.</remarks>
@@ -164,7 +177,7 @@
             board.RefreshTeamEnergy(currentTeam);
             board.ActivateTeamTicks(currentTeam);
             
-            eventManager.Notify(new NewPlayerTurnEvent(currentTeam));
+            eventManager.Notify(new NewPlayerTurnEvent(players[currentTeam]));
         }
     }
 }
