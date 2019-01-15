@@ -42,6 +42,7 @@
             : base(0, 0, 0, 0)
         {
             active = false;
+            ResetTimer();
 
             this.Animations = new Dictionary<int, Animation>()
             {

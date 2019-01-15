@@ -23,8 +23,8 @@
         private Resources resources => Resources.GetInstance();
 
         private const string TurnMessage = "Turn: {0}";
-        private const string PlayerTurnMessage = "Player: {0}";
-        private const string UnitProfileMessage = "{0}\nHealth: {1}/{2}\nEnergy{3}/{4}";
+        private const string PlayerProfile = "Player: {0}\nMana: {1}";
+        private const string UnitProfile = "{0}\nHealth: {1}/{2}\nEnergy: {3}/{4}";
 
         #endregion
 
@@ -78,14 +78,14 @@
             Rectangle window = resources.GraphicsDevice.Viewport.Bounds;
             SpriteFont debugFont = resources.Textures.Debug;
 
-            spriteBatch.DrawString(debugFont, string.Format(PlayerTurnMessage, Player.Team), new Vector2(0, 0), Color.Black);
+            spriteBatch.DrawString(debugFont, string.Format(PlayerProfile, Player.Team, Player.CurrentMana), new Vector2(0, 0), Color.Black);
 
             float turnMessageLength = debugFont.MeasureString(string.Format(TurnMessage, Turn)).X;
             spriteBatch.DrawString(debugFont, string.Format(TurnMessage, Turn), new Vector2(window.Right - turnMessageLength, 0), Color.Black);
 
             if (HighlightedUnit != null)
             {
-                string highlightedUnitProfileMessage = string.Format(UnitProfileMessage, HighlightedUnit.Name,
+                string highlightedUnitProfileMessage = string.Format(UnitProfile, HighlightedUnit.Name,
                         HighlightedUnit.CurrentHealth, HighlightedUnit.MaxHealth,
                         HighlightedUnit.CurrentEnergy, HighlightedUnit.MaxEnergy);
 
@@ -95,7 +95,7 @@
 
             if (SelectedUnit != null)
             {
-                string selectedUnitProfileMessage = string.Format(UnitProfileMessage, SelectedUnit.Name,
+                string selectedUnitProfileMessage = string.Format(UnitProfile, SelectedUnit.Name,
                         SelectedUnit.CurrentHealth, SelectedUnit.MaxHealth,
                         SelectedUnit.CurrentEnergy, SelectedUnit.MaxEnergy);
 
