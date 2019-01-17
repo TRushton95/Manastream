@@ -17,6 +17,8 @@
             public const string HighlightUnit = "DBG_HIGHLIGHT_UNIT";
 
             public const string SelectUnit = "DBG_SELECT_UNIT";
+
+            public const string UserAlert = "DBG_USER_ALERT";
         }
 
         /// <summary>

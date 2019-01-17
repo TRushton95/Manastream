@@ -85,8 +85,8 @@ namespace Manastream.Src.EventSystem
 
         /// <summary>
         /// Deregister an event listener from a given event type.
+        /// <para>If no listeners remain for a given event type, remove the empty list entry.</para>
         /// </summary>
-        /// <remarks>If no listeners remain for a given event type, remove the empty list entry.</remarks>
         public void RemoveEventListener(string eventType, Listener listener)
         {
             List<Listener> eventListeners;

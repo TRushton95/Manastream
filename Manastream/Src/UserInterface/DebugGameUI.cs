@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.UserInterface
+namespace Manastream.Src.UserInterface
 {
     #region Usings
 
@@ -132,6 +132,7 @@
             AddEventHandler(EventTypes.Debug.NewPlayerTurn, OnNewPlayerTurn);
             AddEventHandler(EventTypes.Debug.HighlightUnit, OnHighlightUnit);
             AddEventHandler(EventTypes.Debug.SelectUnit, OnSelectUnit);
+            AddEventHandler(EventTypes.Debug.UserAlert, OnUserAlert);
         }
 
         /// <summary>
@@ -145,6 +146,7 @@
             }
 
             alertMessage = message;
+            showAlert = true;
             alertTimer.Start();
         }
 
@@ -195,6 +197,15 @@
         {
             SelectUnitEvent args = (SelectUnitEvent)e;
             SelectedUnit = args.SelectedUnit;
+        }
+
+        /// <summary>
+        /// The handler for a user alert event.
+        /// </summary>
+        public void OnUserAlert(Event e)
+        {
+            UserAlertEvent args = (UserAlertEvent)e;
+            DisplayAlert(args.Message);
         }
 
         #endregion
