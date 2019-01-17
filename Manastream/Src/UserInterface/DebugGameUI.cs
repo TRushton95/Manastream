@@ -10,6 +10,7 @@
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Timers;
 
     #endregion
 
@@ -18,13 +19,21 @@
     /// </summary>
     public class DebugGameUI : Listener
     {
-        #region Fields
+        #region Constants
 
-        private Resources resources => Resources.GetInstance();
-
+        private const int AlertDuration = 3000;
         private const string TurnMessage = "Turn: {0}";
         private const string PlayerProfile = "Player: {0}\nMana: {1}";
         private const string UnitProfile = "{0}\nHealth: {1}/{2}\nEnergy: {3}/{4}";
+
+        #endregion
+
+        #region Fields
+
+        private Resources resources => Resources.GetInstance();
+        private Timer alertTimer;
+        private string alertMessage;
+        private bool showAlert;
 
         #endregion
 
@@ -35,6 +44,10 @@
         /// </summary>
         public DebugGameUI()
         {
+            alertTimer = new Timer(AlertDuration);
+            alertTimer.Elapsed += OnAlertTimerExpire;
+            alertTimer.AutoReset = false;
+
             this.InitialiseEventHandlers();
         }
 
@@ -102,6 +115,12 @@
                 spriteBatch.DrawString(debugFont, selectedUnitProfileMessage,
                     new Vector2(window.Width - debugFont.MeasureString(selectedUnitProfileMessage).X, window.Height - debugFont.MeasureString(selectedUnitProfileMessage).Y), Color.Black);
             }
+
+            if (showAlert)
+            {
+                Vector2 alertDimensions = debugFont.MeasureString(alertMessage);
+                spriteBatch.DrawString(debugFont, alertMessage, new Vector2((window.Width / 2) - (alertDimensions.X / 2), 100), Color.Red);
+            }
         }
 
         /// <summary>
@@ -113,6 +132,28 @@
             AddEventHandler(EventTypes.Debug.NewPlayerTurn, OnNewPlayerTurn);
             AddEventHandler(EventTypes.Debug.HighlightUnit, OnHighlightUnit);
             AddEventHandler(EventTypes.Debug.SelectUnit, OnSelectUnit);
+        }
+
+        /// <summary>
+        /// Changes the alert message and begins the alert timer.
+        /// </summary>
+        private void DisplayAlert(string message)
+        {
+            if (alertTimer.Enabled)
+            {
+                alertTimer.Stop();
+            }
+
+            alertMessage = message;
+            alertTimer.Start();
+        }
+
+        /// <summary>
+        /// The callback handler for the alert timer.
+        /// </summary>
+        private void OnAlertTimerExpire(object source, ElapsedEventArgs e)
+        {
+            showAlert = false;
         }
 
         #endregion
