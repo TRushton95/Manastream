@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
@@ -84,7 +85,12 @@
 
             if (MouseInfo.LeftMousePressed)
             {
-                SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
+                bool successfulCast = SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
+
+                if (!successfulCast)
+                {
+                    eventManager.Notify(new UserAlertEvent("You cannot cast that there!"));
+                }
             }
 
             return this;

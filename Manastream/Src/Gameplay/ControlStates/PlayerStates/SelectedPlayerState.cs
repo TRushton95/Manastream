@@ -1,8 +1,8 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
-    using Manastream.Src.EventSystem.Events.Debug;
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
