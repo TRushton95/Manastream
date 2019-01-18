@@ -75,10 +75,22 @@
 
                 if (MouseInfo.LeftMousePressed)
                 {
-                    //TO-DO Should this attempt to move to all out of range paths?
                     foreach (Tile pathSegment in path)
                     {
-                        board.TryMoveUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
+                        if (SelectedUnit.CurrentEnergy < pathSegment.MovementCost)
+                        {
+                            eventManager.Notify(new UserAlertEvent("Not enough energy to move there!"));
+                            break;
+                        }
+
+                        board.TryRelocateUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
+                        SelectedUnit.CurrentEnergy -= pathSegment.MovementCost;
+
+                        if (pathSegment.HasActiveGenerator)
+                        {
+                            pathSegment.Generator.Active = false;
+                            player.CurrentMana++;
+                        }
                     }
                 }
             }

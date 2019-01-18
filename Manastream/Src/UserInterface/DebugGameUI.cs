@@ -21,7 +21,7 @@ namespace Manastream.Src.UserInterface
     {
         #region Constants
 
-        private const int AlertDuration = 3000;
+        private const int AlertDuration = 1500;
         private const string TurnMessage = "Turn: {0}";
         private const string PlayerProfile = "Player: {0}\nMana: {1}";
         private const string UnitProfile = "{0}\nHealth: {1}/{2}\nEnergy: {3}/{4}";

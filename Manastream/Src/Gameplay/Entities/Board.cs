@@ -162,6 +162,7 @@
         /// <summary>
         /// Decrement the timers on the generators and reset consumed generators.
         /// </summary>
+        /// TO-DO this logic is wrong - wait 1 turn, collect the mana and it has 1 duration and immediately resets next turn.
         public void ProgressGenerators()
         {
             foreach (Generator generator in generators)
@@ -215,9 +216,8 @@
         public bool TrySpawnUnit(Unit unit, int x, int y)
         {
             bool result = false;
-
-            Tile destination = GetTile(x, y);
-            result = TryRelocateUnit(unit, destination);
+            
+            result = TryRelocateUnit(unit, x, y);
             
             if (result == true)
             {
@@ -228,45 +228,35 @@
         }
 
         /// <summary>
-        /// Attempt to move a unit to the specified location on the board.
+        /// Attempt to relocate a unit to the new tile.
         /// </summary>
-        public bool TryMoveUnit(Unit unit, int x, int y)
+        public bool TryRelocateUnit(Unit unit, int x, int y)
         {
-            Tile origin = GetTile(unit.BoardX, unit.BoardY);
             Tile destination = GetTile(x, y);
-            List<Tile> path = DijkstraSearch(origin, destination);
 
-            if (path.Count == 0)
+            if (!destination.Traversable || destination.Occupant != null)
             {
-                Console.WriteLine("Cannot move there!");
-
+                Console.WriteLine("Cannot place a unit there!");
                 return false;
             }
 
-            int energyCost = path.Sum(Tile => Tile.MovementCost);
+            bool result = false;
 
-            if (unit.CurrentEnergy < energyCost)
+            if (destination != null && destination.Occupant == null)
             {
-                Console.WriteLine("Not enough energy!");
-                return false;
+                Tile origin = GetTile(unit.BoardX, unit.BoardY);
+                origin.Occupant = null;
+                destination.Occupant = unit;
+
+                unit.BoardX = destination.BoardX;
+                unit.BoardY = destination.BoardY;
+                unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                unit.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+
+                result = true;
             }
 
-            if (!TryRelocateUnit(unit, destination))
-            {
-                Console.WriteLine("Unit relocation failed!");
-                return false;
-            }
-            
-            unit.CurrentEnergy -= energyCost;
-            Console.WriteLine($"{unit.CurrentEnergy}/{unit.MaxEnergy}");
-
-            if (destination.HasActiveGenerator)
-            {
-                unit.Owner.CurrentMana++;
-                destination.Generator.Active = false;
-            }
-
-            return true;
+            return result;
         }
 
         #endregion
@@ -595,36 +585,6 @@
             path.RemoveAt(0);
 
             return path;
-        }
-
-        /// <summary>
-        /// Attempt to move a unit to the new destination tile.
-        /// </summary>
-        private bool TryRelocateUnit(Unit unit, Tile destination)
-        {
-            if (!destination.Traversable || destination.Occupant != null)
-            {
-                Console.WriteLine("Cannot place a unit there!");
-                return false;
-            }
-
-            bool result = false;
-
-            if (destination != null && destination.Occupant == null)
-            {
-                Tile origin = GetTile(unit.BoardX, unit.BoardY);
-                origin.Occupant = null;
-                destination.Occupant = unit;
-
-                unit.BoardX = destination.BoardX;
-                unit.BoardY = destination.BoardY;
-                unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-                unit.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-
-                result = true;
-            }
-
-            return result;
         }
 
         /// <summary>

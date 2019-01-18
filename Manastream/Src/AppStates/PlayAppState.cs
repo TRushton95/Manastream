@@ -86,6 +86,7 @@
 
             board.Update(gameTime);
 
+            /*
             foreach (Unit unit in board.Units)
             {
                 Tile tile = board.GetTile(unit.BoardX, unit.BoardY);
@@ -98,6 +99,7 @@
                     System.Console.WriteLine($"Mana: {players[unit.Owner.Team].CurrentMana}");
                 }
             }
+            */
 
             //DEBUG - Temporary until KeyboardInfo is added
             if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) && MouseInfo.RightMousePressed)
