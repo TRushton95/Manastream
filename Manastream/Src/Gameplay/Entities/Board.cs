@@ -162,17 +162,18 @@
         /// <summary>
         /// Decrement the timers on the generators and reset consumed generators.
         /// </summary>
-        /// TO-DO this logic is wrong - wait 1 turn, collect the mana and it has 1 duration and immediately resets next turn.
         public void ProgressGenerators()
         {
             foreach (Generator generator in generators)
             {
-                if (generator.Timer > 0)
+                if (generator.Active || generator.Timer == 0)
                 {
-                    generator.Timer--;
+                    continue;
                 }
 
-                if (generator.Timer == 0 && !generator.Active)
+                generator.Timer--;
+
+                if (generator.Timer == 0)
                 {
                     generator.ResetTimer();
                     generator.Active = true;
