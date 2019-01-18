@@ -75,23 +75,7 @@
 
                 if (MouseInfo.LeftMousePressed)
                 {
-                    foreach (Tile pathSegment in path)
-                    {
-                        if (SelectedUnit.CurrentEnergy < pathSegment.MovementCost)
-                        {
-                            eventManager.Notify(new UserAlertEvent("Not enough energy to move there!"));
-                            break;
-                        }
-
-                        board.TryRelocateUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
-                        SelectedUnit.CurrentEnergy -= pathSegment.MovementCost;
-
-                        if (pathSegment.HasActiveGenerator)
-                        {
-                            pathSegment.Generator.Active = false;
-                            player.CurrentMana++;
-                        }
-                    }
+                    TryMoveAlongPath(board);
                 }
             }
 
@@ -144,6 +128,44 @@
                     spriteBatch.Draw(filter, tile.CanvasPosition, Color.White);
                 }
             }
+        }
+
+        /// <summary>
+        /// Moves the selected unit along the path.
+        /// </summary>
+        private bool TryMoveAlongPath(Board board)
+        {
+            if (HighlightedTile?.Occupant == SelectedUnit) //Already on tile
+            {
+                return false;
+            }
+
+            if (path.Count == 0)
+            {
+                eventManager.Notify(new UserAlertEvent("You cannot move there!"));
+
+                return false;
+            }
+
+            foreach (Tile pathSegment in path)
+            {
+                if (SelectedUnit.CurrentEnergy < pathSegment.MovementCost)
+                {
+                    eventManager.Notify(new UserAlertEvent("Not enough energy to move there!"));
+                    break;
+                }
+
+                board.TryRelocateUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
+                SelectedUnit.CurrentEnergy -= pathSegment.MovementCost;
+
+                if (pathSegment.HasActiveGenerator)
+                {
+                    pathSegment.Generator.Active = false;
+                    player.CurrentMana++;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
