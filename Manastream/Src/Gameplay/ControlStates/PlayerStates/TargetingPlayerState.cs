@@ -85,9 +85,11 @@
 
             if (MouseInfo.LeftMousePressed)
             {
-                bool successfulCast = SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, SelectedUnit);
-
-                if (!successfulCast)
+                if (validCast)
+                {
+                    SelectedAbility.Execute(HighlightedTile, templateAffectedTiles, SelectedUnit);
+                }
+                else
                 {
                     eventManager.Notify(new UserAlertEvent("You cannot cast that there!"));
                 }

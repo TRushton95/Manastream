@@ -75,7 +75,7 @@
 
             if (MouseInfo.LeftMousePressed)
             {
-                SelectedAbility.TryExecute(HighlightedTile, templateAffectedTiles, player.PowerCaster);
+                SelectedAbility.Execute(HighlightedTile, templateAffectedTiles, player.PowerCaster);
             }
 
             return this;

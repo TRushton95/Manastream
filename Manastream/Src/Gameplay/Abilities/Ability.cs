@@ -66,18 +66,10 @@
         #region Methods
 
         /// <summary>
-        /// Attempt to execute the ability on the target tile and return a value indicating whether it was successful.
+        /// Execute the ability on the target tile and return a value indicating whether it was successful.
         /// </summary>
-        public bool TryExecute(Tile targetTile, List<Tile> affectedTiles, Unit caster)
+        public bool Execute(Tile targetTile, List<Tile> affectedTiles, Unit caster)
         {
-            if (!ValidateTarget(targetTile, caster))
-            {
-                //DEBUG
-                Console.WriteLine("Cannot execute ability on that target");
-
-                return false;
-            }
-
             foreach (Tile tile in affectedTiles)
             {
                 foreach (BaseEffect effect in Effects)
@@ -90,14 +82,6 @@
             Console.WriteLine("Ability executed");
 
             return true;
-        }
-
-        /// <summary>
-        /// Returns a value indicating whether the tile is a valid target based on the target type.
-        /// </summary>
-        private bool ValidateTarget(Tile targetTile, Unit caster)
-        {
-            return TargetValidationService.Validate(targetTile, TargetType, caster);
         }
 
         #endregion
