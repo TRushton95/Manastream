@@ -22,7 +22,7 @@
     {
         #region Fields
 
-        private bool validCast;
+        private bool validTarget;
         private List<Tile> templateAffectedTiles, abilityPath;
 
         #endregion
@@ -66,7 +66,7 @@
 
             abilityPath = null;
             templateAffectedTiles = new List<Tile>();
-            validCast = false;
+            validTarget = false;
 
             if (MouseInfo.RightMousePressed)
             {
@@ -81,17 +81,21 @@
                 templateAffectedTiles = board.GetTiles(tileCoords);
             }
 
-            validCast = ValidateCastConditions();
+            validTarget = IsValidTarget();
 
             if (MouseInfo.LeftMousePressed)
             {
-                if (validCast)
+                if (!IsValidTarget())
                 {
-                    SelectedAbility.Execute(HighlightedTile, templateAffectedTiles, SelectedUnit);
+                    eventManager.Notify(new UserAlertEvent("You cannot cast that there!"));
+                }
+                else if (!IsTargetInRange())
+                {
+                    eventManager.Notify(new UserAlertEvent("Target is not in range!"));
                 }
                 else
                 {
-                    eventManager.Notify(new UserAlertEvent("You cannot cast that there!"));
+                    SelectedAbility.Execute(HighlightedTile, templateAffectedTiles, SelectedUnit);
                 }
             }
 
@@ -105,7 +109,7 @@
         {
             base.Draw(spriteBatch);
 
-            Texture2D filter = validCast ? Textures.GreenTileFilter : Textures.RedTileFilter;
+            Texture2D filter = validTarget ? Textures.GreenTileFilter : Textures.RedTileFilter;
 
             if (templateAffectedTiles.Count > 0)
             {
@@ -117,14 +121,20 @@
         }
 
         /// <summary>
-        /// Returns a value indicating whether the ability meets the conditions to be cast.
+        /// Returns a value indicating whether the target is valid.
         /// </summary>
-        private bool ValidateCastConditions()
+        private bool IsValidTarget()
         {
-            bool isInRange = abilityPath.Count <= SelectedAbility.Range;
-            bool isValidTarget = TargetValidationService.Validate(HighlightedTile, SelectedAbility.TargetType, SelectedUnit);
+            return TargetValidationService.Validate(HighlightedTile, SelectedAbility.TargetType, SelectedUnit);
+        }
 
-            return isInRange && isValidTarget;
+        /// <summary>
+        /// Returns a value indicating whether the target is in range.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsTargetInRange()
+        {
+            return abilityPath.Count <= SelectedAbility.Range;
         }
 
         #endregion
