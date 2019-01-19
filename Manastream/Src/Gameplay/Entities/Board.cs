@@ -88,9 +88,15 @@
                 tile.Update(gameTime);
             }
 
-            foreach (Unit unit in units)
+            for (int i = 0; i < units.Count; i++)
             {
+                Unit unit = units[i];
                 unit.Update(gameTime);
+
+                if (unit.CurrentHealth <= 0)
+                {
+                    TryDespawnUnit(unit);
+                }
             }
 
             foreach (Generator generator in generators)
@@ -226,6 +232,23 @@
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Attempt to despawn a unit and remove it from the collection.
+        /// </summary>
+        public bool TryDespawnUnit(Unit unit)
+        {
+            if (!units.Contains(unit))
+            {
+                return false;
+            }
+
+            Tile unitTile = GetTile(unit.BoardX, unit.BoardY);
+            unitTile.Occupant = null;
+            units.Remove(unit);
+
+            return true;
         }
 
         /// <summary>
