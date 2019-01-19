@@ -10,7 +10,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Graphics;
-    using Manastream.Src.UserInterface;
+    using Manastream.Src.UI;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

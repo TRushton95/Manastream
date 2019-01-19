@@ -1,4 +1,4 @@
-namespace Manastream.Src.UserInterface
+namespace Manastream.Src.UI
 {
     #region Usings
 

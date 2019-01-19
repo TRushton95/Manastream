@@ -94,7 +94,7 @@
     <Compile Include="Src\Gameplay\Services\TemplateService.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
-    <Compile Include="Src\UserInterface\DebugGameUI.cs" />
+    <Compile Include="Src\UI\DebugGameUI.cs" />
     <Compile Include="Src\Utility\MouseInfo.cs" />
   </ItemGroup>
   <ItemGroup>
