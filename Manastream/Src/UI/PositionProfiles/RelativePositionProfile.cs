@@ -58,7 +58,7 @@
         #region Methods
 
         /// <summary>
-        /// Gets the position of the component relative to it's parent.
+        /// Gets the position of the component relative to its parent.
         /// </summary>
         public Vector2 GetPosition(Rectangle bounds, Rectangle parentBounds)
         {

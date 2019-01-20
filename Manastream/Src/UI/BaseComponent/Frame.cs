@@ -8,6 +8,9 @@
 
     #endregion
 
+    /// <summary>
+    /// The frame class that represents a simple rectangular frame.
+    /// </summary>
     public class Frame : BaseComponent
     {
         #region Fields
@@ -18,6 +21,9 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Frame"/> class.
+        /// </summary>
         public Frame(int width, int height, IPositionProfile positionProfile, Color colour)
             : base(width, height, positionProfile)
         {
@@ -37,11 +43,17 @@
 
         #region Methods
 
+        /// <summary>
+        /// Draws the frame.
+        /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, GetCoordinates(), Color.White);
         }
 
+        /// <summary>
+        /// Initialises the frame.
+        /// </summary>
         public override void Initialise(Rectangle parent)
         {
             base.Initialise(parent);
@@ -49,6 +61,9 @@
             texture = BuildTexture(Color.Red);
         }
 
+        /// <summary>
+        /// Builds the texture in a specified colour.
+        /// </summary>
         private Texture2D BuildTexture(Color colour)
         {
             Texture2D result = new Texture2D(Resources.GraphicsDevice, Width, Height);

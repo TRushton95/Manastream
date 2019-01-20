@@ -9,6 +9,9 @@
 
     #endregion
 
+    /// <summary>
+    /// The base component class that represents a UI component.
+    /// </summary>
     public abstract class BaseComponent
     {
         #region Fields
@@ -19,6 +22,9 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="BaseComponent"/> class.
+        /// </summary>
         public BaseComponent(int width, int height, IPositionProfile positionProfile)
         {
             this.Width = width;
@@ -51,8 +57,14 @@
 
         #region Methods
 
+        /// <summary>
+        /// Draws the UI component.
+        /// </summary>
         public abstract void Draw(SpriteBatch spriteBatch);
 
+        /// <summary>
+        /// Initialises the UI component.
+        /// </summary>
         public virtual void Initialise(Rectangle parent)
         {
             InitialiseCoordinates(parent);
@@ -68,6 +80,9 @@
             return new Vector2(posX, posY);
         }
 
+        /// <summary>
+        /// Initialises the coordinates of the UI component based on its parent's location
+        /// </summary>
         private void InitialiseCoordinates(Rectangle parent)
         {
             Vector2 coords = PositionProfile.GetPosition(GetBounds(), parent);
