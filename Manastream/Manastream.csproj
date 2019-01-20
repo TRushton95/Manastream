@@ -94,7 +94,13 @@
     <Compile Include="Src\Gameplay\Services\TemplateService.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
+    <Compile Include="Src\UI\BaseComponent\BaseComponent.cs" />
+    <Compile Include="Src\UI\BaseComponent\Frame.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
+    <Compile Include="Src\UI\Enums\HorizontalAlign.cs" />
+    <Compile Include="Src\UI\Enums\VerticalAlign.cs" />
+    <Compile Include="Src\UI\PositionProfiles\IPositionProfile.cs" />
+    <Compile Include="Src\UI\PositionProfiles\RelativePositionProfile.cs" />
     <Compile Include="Src\Utility\MouseInfo.cs" />
   </ItemGroup>
   <ItemGroup>

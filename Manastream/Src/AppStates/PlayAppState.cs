@@ -11,6 +11,9 @@
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
+    using Manastream.Src.UI.BaseComponent;
+    using Manastream.Src.UI.Enums;
+    using Manastream.Src.UI.PositionProfiles;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -35,6 +38,7 @@
         private int currentTeam, turn;
         private readonly int teamCount;
         private DebugGameUI ui;
+        private Frame frame;
 
         #endregion
 
@@ -63,6 +67,9 @@
 
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
+
+            frame = new Frame(200, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), Color.Red);
+            frame.Initialise(new Rectangle(0, 0, Resources.GraphicsDevice.Viewport.Width, Resources.GraphicsDevice.Viewport.Height));
         }
 
         #endregion
@@ -86,21 +93,6 @@
 
             board.Update(gameTime);
 
-            /*
-            foreach (Unit unit in board.Units)
-            {
-                Tile tile = board.GetTile(unit.BoardX, unit.BoardY);
-
-                if (tile.Generator != null && tile.Generator.Active)
-                {
-                    players[unit.Owner.Team].CurrentMana += 1;
-                    tile.Generator.Active = false;
-
-                    System.Console.WriteLine($"Mana: {players[unit.Owner.Team].CurrentMana}");
-                }
-            }
-            */
-
             //DEBUG - Temporary until KeyboardInfo is added
             if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) && MouseInfo.RightMousePressed)
             {
@@ -121,6 +113,7 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
+            frame.Draw(uiSpriteBatch);
         }
 
         /// <summary>

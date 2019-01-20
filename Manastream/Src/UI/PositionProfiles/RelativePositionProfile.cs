@@ -67,7 +67,7 @@
             switch (HorizontalAlign)
             {
                 case HorizontalAlign.Center:
-                    resultX += (parentBounds.Width / 2) - (parentBounds.Width / 2);
+                    resultX += (parentBounds.Width / 2) - (bounds.Width / 2);
                     break;
 
                 case HorizontalAlign.Right:
