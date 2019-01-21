@@ -8,12 +8,12 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Event"/> class.
         /// </summary>
-        public Event(string eventType)
+        public Event(EventType eventType)
         {
             this.EventType = eventType;
         }
         
-        public string EventType
+        public EventType EventType
         {
             get;
         }

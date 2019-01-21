@@ -1,9 +1,17 @@
-﻿using Manastream.Src.EventSystem.Events;
-using System.Collections.Generic;
-
-namespace Manastream.Src.EventSystem
+﻿namespace Manastream.Src.EventSystem
 {
+    #region Usings
+
+    using Manastream.Src.EventSystem.Events;
+    using System.Collections.Generic;
+
+    #endregion
+
+    #region Delegates
+
     public delegate void EventHandler(Event e);
+
+    #endregion
 
     /// <summary>
     /// The event manager that routes event messages to and from the <see cref="Listener"/> class.
@@ -13,7 +21,8 @@ namespace Manastream.Src.EventSystem
         #region Fields
 
         private static EventManager eventManager;
-        private SortedDictionary<string, List<Listener>> eventListenerLookup;
+        private SortedDictionary<int, List<Listener>> eventListenerLookup;
+        private int nextEventId = 0;
 
         #endregion
 
@@ -24,7 +33,7 @@ namespace Manastream.Src.EventSystem
         /// </summary>
         public EventManager()
         {
-            eventListenerLookup = new SortedDictionary<string, List<Listener>>();
+            eventListenerLookup = new SortedDictionary<int, List<Listener>>();
         }
 
         #endregion
@@ -50,7 +59,7 @@ namespace Manastream.Src.EventSystem
         public void Notify(Event e)
         {
             List<Listener> eventListeners;
-            bool eventTypeFound = eventListenerLookup.TryGetValue(e.EventType, out eventListeners);
+            bool eventTypeFound = eventListenerLookup.TryGetValue(e.EventType.Id, out eventListeners);
 
             if (!eventTypeFound)
             {
@@ -66,15 +75,20 @@ namespace Manastream.Src.EventSystem
         /// <summary>
         /// Register a new listener for a given event type.
         /// </summary>
-        public void AddEventListener(string eventType, Listener listener)
+        public void AddEventListener(EventType eventType, Listener listener)
         {
+            if (eventType.Id == -1)
+            {
+                eventType.Id = nextEventId++;
+            }
+
             List<Listener> eventListeners;
-            bool eventTypeFound = eventListenerLookup.TryGetValue(eventType, out eventListeners);
+            bool eventTypeFound = eventListenerLookup.TryGetValue(eventType.Id, out eventListeners);
 
             if (!eventTypeFound)
             {
                 eventListeners = new List<Listener>();
-                eventListenerLookup.Add(eventType, eventListeners);
+                eventListenerLookup.Add(eventType.Id, eventListeners);
             }
 
             if (!eventListeners.Contains(listener))
@@ -87,10 +101,10 @@ namespace Manastream.Src.EventSystem
         /// Deregister an event listener from a given event type.
         /// <para>If no listeners remain for a given event type, remove the empty list entry.</para>
         /// </summary>
-        public void RemoveEventListener(string eventType, Listener listener)
+        public void RemoveEventListener(EventType eventType, Listener listener)
         {
             List<Listener> eventListeners;
-            bool eventTypeFound = eventListenerLookup.TryGetValue(eventType, out eventListeners);
+            bool eventTypeFound = eventListenerLookup.TryGetValue(eventType.Id, out eventListeners);
 
             if (!eventTypeFound)
             {
@@ -101,7 +115,7 @@ namespace Manastream.Src.EventSystem
 
             if (eventListeners.Count == 0)
             {
-                eventListenerLookup.Remove(eventType);
+                eventListenerLookup.Remove(eventType.Id);
             }
         }
 

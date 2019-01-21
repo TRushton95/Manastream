@@ -50,6 +50,7 @@
     <Compile Include="Src\EventSystem\Events\Event.cs" />
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewTurnEvent.cs" />
+    <Compile Include="Src\EventSystem\EventType.cs" />
     <Compile Include="Src\EventSystem\EventTypes.cs" />
     <Compile Include="Src\EventSystem\Listener.cs" />
     <Compile Include="Src\Game1.cs" />

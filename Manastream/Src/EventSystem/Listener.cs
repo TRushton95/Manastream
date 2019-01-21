@@ -36,10 +36,11 @@
 
         /// <summary>
         /// Invoke the relevant event handlers on a received event.
+        /// TO-DO: Using string name comparison for events in Listeners, ids get set int <see cref="EventManager"/> but not here.
         /// </summary>
         public void OnEventReceived(Event e)
         {
-            string eventType = e.EventType;
+            string eventType = e.EventType.Name;
 
             if (string.IsNullOrWhiteSpace(eventType))
             {
@@ -63,15 +64,15 @@
         /// <summary>
         /// Add a new event handler to handle a given event type.
         /// </summary>
-        public void AddEventHandler(string eventType, EventHandler eventHandlerToAdd)
+        public void AddEventHandler(EventType eventType, EventHandler eventHandlerToAdd)
         {
             List<EventHandler> eventHandlers;
-            bool eventTypeFound = eventHandlerLookup.TryGetValue(eventType, out eventHandlers);
+            bool eventTypeFound = eventHandlerLookup.TryGetValue(eventType.Name, out eventHandlers);
 
             if (!eventTypeFound)
             {
                 eventHandlers = new List<EventHandler>();
-                eventHandlerLookup.Add(eventType, eventHandlers);
+                eventHandlerLookup.Add(eventType.Name, eventHandlers);
             }
 
             eventHandlers.Add(eventHandlerToAdd);
@@ -82,10 +83,10 @@
         /// <summary>
         /// Remove an event handler.
         /// </summary>
-        public void RemoveEventHandler(string eventType, EventHandler eventHandlerToRemove)
+        public void RemoveEventHandler(EventType eventType, EventHandler eventHandlerToRemove)
         {
             List<EventHandler> eventHandlers;
-            bool eventTypeFound = eventHandlerLookup.TryGetValue(eventType, out eventHandlers);
+            bool eventTypeFound = eventHandlerLookup.TryGetValue(eventType.Name, out eventHandlers);
 
             if (!eventTypeFound)
             {
