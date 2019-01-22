@@ -25,8 +25,10 @@
         /// Initialises a new instance of the <see cref="Frame"/> class.
         /// </summary>
         public Frame(int width, int height, IPositionProfile positionProfile, Color colour)
-            : base(width, height, positionProfile)
+            : base(positionProfile)
         {
+            this.Width = width;
+            this.Height = height;
             this.Colour = colour;
         }
 
@@ -56,8 +58,7 @@
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
-            base.Initialise(parent);
-
+            InitialiseCoordinates(parent);
             texture = BuildTexture(Color.Red);
         }
 

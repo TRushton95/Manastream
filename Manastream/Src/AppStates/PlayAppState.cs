@@ -39,6 +39,7 @@
         private readonly int teamCount;
         private DebugGameUI ui;
         private Frame frame;
+        private FontGraphics fontGraphics;
 
         #endregion
 
@@ -70,6 +71,10 @@
 
             frame = new Frame(200, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), Color.Red);
             frame.Initialise(new Rectangle(0, 0, Resources.GraphicsDevice.Viewport.Width, Resources.GraphicsDevice.Viewport.Height));
+
+            fontGraphics = new FontGraphics("Manastream text!",
+                200, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Resources.Textures.Debug);
+            fontGraphics.Initialise(new Rectangle(0, 0, Resources.GraphicsDevice.Viewport.Width, Resources.GraphicsDevice.Viewport.Height));
         }
 
         #endregion
@@ -114,6 +119,7 @@
 
             ui.Draw(uiSpriteBatch);
             frame.Draw(uiSpriteBatch);
+            fontGraphics.Draw(uiSpriteBatch);
         }
 
         /// <summary>

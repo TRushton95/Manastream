@@ -25,10 +25,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="BaseComponent"/> class.
         /// </summary>
-        public BaseComponent(int width, int height, IPositionProfile positionProfile)
+        public BaseComponent(IPositionProfile positionProfile)
         {
-            this.Width = width;
-            this.Height = height;
             this.PositionProfile = positionProfile;
         }
 
@@ -39,11 +37,13 @@
         public int Width
         {
             get;
+            protected set;
         }
 
         public int Height
         {
             get;
+            protected set;
         }
 
         public IPositionProfile PositionProfile
@@ -65,10 +65,7 @@
         /// <summary>
         /// Initialises the UI component.
         /// </summary>
-        public virtual void Initialise(Rectangle parent)
-        {
-            InitialiseCoordinates(parent);
-        }
+        public abstract void Initialise(Rectangle parent);
 
         /// <summary>
         /// Gets the boundaries of the component.
@@ -89,7 +86,7 @@
         /// <summary>
         /// Initialises the coordinates of the UI component based on its parent's location
         /// </summary>
-        private void InitialiseCoordinates(Rectangle parent)
+        protected void InitialiseCoordinates(Rectangle parent)
         {
             Vector2 coords = PositionProfile.GetPosition(GetBounds(), parent);
 
