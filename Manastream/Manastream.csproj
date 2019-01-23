@@ -98,6 +98,7 @@
     <Compile Include="Src\UI\BaseComponent\BaseComponent.cs" />
     <Compile Include="Src\UI\BaseComponent\FontGraphics.cs" />
     <Compile Include="Src\UI\BaseComponent\Frame.cs" />
+    <Compile Include="Src\UI\BaseComponent\ImageGraphics.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
     <Compile Include="Src\UI\Enums\TextFormat.cs" />
     <Compile Include="Src\UI\Enums\HorizontalAlign.cs" />
