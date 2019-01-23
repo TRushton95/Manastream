@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.UI.BaseComponent
+﻿namespace Manastream.Src.UI.Components.Basic
 {
     #region Usings
 

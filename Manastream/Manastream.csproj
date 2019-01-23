@@ -95,10 +95,10 @@
     <Compile Include="Src\Gameplay\Services\TemplateService.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
-    <Compile Include="Src\UI\BaseComponent\BaseComponent.cs" />
-    <Compile Include="Src\UI\BaseComponent\FontGraphics.cs" />
-    <Compile Include="Src\UI\BaseComponent\Frame.cs" />
-    <Compile Include="Src\UI\BaseComponent\ImageGraphics.cs" />
+    <Compile Include="Src\UI\Components\Basic\BaseComponent.cs" />
+    <Compile Include="Src\UI\Components\Basic\FontGraphics.cs" />
+    <Compile Include="Src\UI\Components\Basic\Frame.cs" />
+    <Compile Include="Src\UI\Components\Basic\ImageGraphics.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
     <Compile Include="Src\UI\Enums\TextFormat.cs" />
     <Compile Include="Src\UI\Enums\HorizontalAlign.cs" />
