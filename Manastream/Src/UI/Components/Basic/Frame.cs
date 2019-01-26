@@ -5,6 +5,7 @@
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -30,6 +31,7 @@
             this.Width = width;
             this.Height = height;
             this.Colour = colour;
+            this.Components = new List<BaseComponent>();
         }
 
         #endregion
@@ -37,6 +39,11 @@
         #region Properties
 
         public Color Colour
+        {
+            get;
+        }
+
+        public List<BaseComponent> Components
         {
             get;
         }
@@ -51,6 +58,11 @@
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, GetCoordinates(), Color.White);
+
+            foreach (BaseComponent component in Components)
+            {
+                component.Draw(spriteBatch);
+            }
         }
 
         /// <summary>
@@ -59,7 +71,12 @@
         public override void Initialise(Rectangle parent)
         {
             InitialiseCoordinates(parent);
-            texture = BuildTexture(Color.Red);
+            texture = BuildTexture(Colour);
+
+            foreach (BaseComponent component in Components)
+            {
+                component.Initialise(GetBounds());
+            }
         }
 
         /// <summary>

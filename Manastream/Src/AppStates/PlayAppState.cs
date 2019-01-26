@@ -10,7 +10,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
-    using Manastream.Src.UI.Components.Basic;
+    using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Manastream.Src.Utility;
@@ -37,8 +37,7 @@
         private int currentTeam, turn;
         private readonly int teamCount;
         private DebugGameUI ui;
-        private Frame frame;
-        private FontGraphics fontGraphics;
+        private Button button;
 
         #endregion
 
@@ -68,12 +67,8 @@
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
-            frame = new Frame(200, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), Color.Red);
-            frame.Initialise(new Rectangle(0, 0, Resources.GraphicsDevice.Viewport.Width, Resources.GraphicsDevice.Viewport.Height));
-
-            fontGraphics = new FontGraphics("Manastream text!",
-                200, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Resources.Textures.Debug);
-            fontGraphics.Initialise(new Rectangle(0, 0, Resources.GraphicsDevice.Viewport.Width, Resources.GraphicsDevice.Viewport.Height));
+            button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), 0);
+            button.Initialise(Resources.GraphicsDevice.Viewport.Bounds);
         }
 
         #endregion
@@ -117,8 +112,7 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
-            frame.Draw(uiSpriteBatch);
-            fontGraphics.Draw(uiSpriteBatch);
+            button.Draw(uiSpriteBatch);
         }
 
         /// <summary>

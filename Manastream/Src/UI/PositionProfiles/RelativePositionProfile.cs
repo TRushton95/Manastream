@@ -20,7 +20,7 @@
         public RelativePositionProfile(HorizontalAlign horizontalAlign, VerticalAlign verticalAlign, int offsetX, int offsetY)
         {
             this.HorizontalAlign = horizontalAlign;
-            this.VerticalAlign = VerticalAlign;
+            this.VerticalAlign = verticalAlign;
             this.OffsetX = offsetX;
             this.OffsetY = offsetY;
         }
