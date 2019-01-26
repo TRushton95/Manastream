@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using System.Collections.Generic;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;

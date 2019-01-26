@@ -10,6 +10,7 @@
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
+    using Manastream.Src.UI.Components;
     using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
@@ -36,7 +37,7 @@
         private Dictionary<int, Player> players;
         private int currentTeam, turn;
         private readonly int teamCount;
-        private DebugGameUI ui;
+        private UserInterface ui;
         private Button button;
 
         #endregion
@@ -62,13 +63,14 @@
             board.Generate();
             SpawnTestUnits();
 
-            ui = new DebugGameUI();
-
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
             button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), 0);
-            button.Initialise(Resources.GraphicsDevice.Viewport.Bounds);
+
+            ui = new UserInterface();
+            ui.Components.Add(button);
+            ui.Initialise();
         }
 
         #endregion
@@ -112,7 +114,6 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
-            button.Draw(uiSpriteBatch);
         }
 
         /// <summary>

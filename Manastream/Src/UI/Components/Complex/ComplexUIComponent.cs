@@ -4,6 +4,7 @@
 
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.PositionProfiles;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -34,10 +35,16 @@
             set;
         }
 
-        public bool Visible
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets a lsit of the descendant components.
+        /// </summary>
+        public virtual List<ComplexUIComponent> GetDescendants()
         {
-            get;
-            set;
+            return new List<ComplexUIComponent>() { this };
         }
 
         #endregion
