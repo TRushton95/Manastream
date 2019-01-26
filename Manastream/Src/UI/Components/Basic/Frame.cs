@@ -53,7 +53,7 @@
         #region Methods
 
         /// <summary>
-        /// Draws the frame.
+        /// Draws the UI component.
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -66,7 +66,7 @@
         }
 
         /// <summary>
-        /// Initialises the frame.
+        /// Initialises the UI component.
         /// </summary>
         public override void Initialise(Rectangle parent)
         {

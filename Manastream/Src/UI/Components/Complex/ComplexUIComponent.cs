@@ -7,10 +7,16 @@
 
     #endregion
 
+    /// <summary>
+    /// The complex ui component class that represents a usable component, built out of base UI components.
+    /// </summary>
     public abstract class ComplexUIComponent : UIComponent
     {
         #region Constructors
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="ComplexUIComponent"/> class.
+        /// </summary>
         public ComplexUIComponent(int width, int height, IPositionProfile positionProfile)
             : base(positionProfile)
         {
