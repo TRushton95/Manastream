@@ -7,11 +7,11 @@
 
     #endregion
 
-    public abstract class BaseComplexComponent : BaseComponent
+    public abstract class ComplexUIComponent : UIComponent
     {
         #region Constructors
 
-        public BaseComplexComponent(int width, int height, IPositionProfile positionProfile)
+        public ComplexUIComponent(int width, int height, IPositionProfile positionProfile)
             : base(positionProfile)
         {
             this.Width = width;

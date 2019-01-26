@@ -95,11 +95,11 @@
     <Compile Include="Src\Gameplay\Services\TemplateService.cs" />
     <Compile Include="Src\GameResources\Resources.cs" />
     <Compile Include="Src\GameResources\Textures.cs" />
-    <Compile Include="Src\UI\Components\Basic\BaseComponent.cs" />
+    <Compile Include="Src\UI\Components\Basic\UIComponent.cs" />
     <Compile Include="Src\UI\Components\Basic\FontGraphics.cs" />
     <Compile Include="Src\UI\Components\Basic\Frame.cs" />
     <Compile Include="Src\UI\Components\Basic\ImageGraphics.cs" />
-    <Compile Include="Src\UI\Components\Complex\BaseComplexComponent.cs" />
+    <Compile Include="Src\UI\Components\Complex\ComplexUIComponent.cs" />
     <Compile Include="Src\UI\Components\Complex\Button.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
     <Compile Include="Src\UI\Enums\TextFormat.cs" />

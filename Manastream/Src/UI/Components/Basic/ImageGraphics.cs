@@ -11,7 +11,7 @@
     /// <summary>
     /// The image graphics class that displays a texture.
     /// </summary>
-    public class ImageGraphics : BaseComponent
+    public class ImageGraphics : UIComponent
     {
         #region Fields
 

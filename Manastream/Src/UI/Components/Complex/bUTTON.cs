@@ -10,7 +10,7 @@
 
     #endregion
 
-    public class Button : BaseComplexComponent
+    public class Button : ComplexUIComponent
     {
         private Frame frame;
         private readonly string text;
