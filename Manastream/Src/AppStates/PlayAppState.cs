@@ -65,7 +65,7 @@
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
-            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), 0,
+            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10),
                 Color.Red, Color.Black, Color.Pink, Color.Black);
 
             ui = new UserInterface();

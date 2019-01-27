@@ -32,7 +32,6 @@
             int height,
             string text,
             IPositionProfile positionProfile,
-            int priority,
             Color defaultBackgroundColour,
             Color defaultTextColour,
             Color hoverBackgroundColour,
