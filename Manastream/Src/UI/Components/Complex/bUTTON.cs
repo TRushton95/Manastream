@@ -17,7 +17,7 @@
     {
         #region Fields
 
-        private Frame frame;
+        private Frame defaultFrame, hoverFrame;
         private readonly string text;
 
         #endregion
@@ -29,10 +29,15 @@
             int height,
             string text,
             IPositionProfile positionProfile,
-            int priority)
+            int priority,
+            Color defaultBackgroundColour,
+            Color defaultTextColour,
+            Color hoverBackgroundColour,
+            Color hoverTextColour)
             : base(width, height, positionProfile)
         {
             this.text = text;
+            BuildComponents(defaultBackgroundColour, defaultTextColour, hoverBackgroundColour, hoverTextColour);
         }
 
         #endregion
@@ -44,7 +49,14 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            frame.Draw(spriteBatch);
+            if (Hovered)
+            {
+                hoverFrame.Draw(spriteBatch);
+            }
+            else
+            {
+                defaultFrame.Draw(spriteBatch);
+            }
         }
 
         /// <summary>
@@ -53,19 +65,27 @@
         public override void Initialise(Rectangle parent)
         {
             InitialiseCoordinates(parent);
-            BuildComponents();
+            InitialiseComponents();
         }
 
         /// <summary>
         /// Builds and initialises the consituent UI components.
         /// </summary>
-        private void BuildComponents()
+        private void BuildComponents(Color defaultBackgroundColour, Color defaultTextColour, Color hoverBackgroundColour, Color hoverTextColour)
         {
-            FontGraphics fontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, Resources.Textures.Debug);
-            frame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), Color.White);
-            frame.Components.Add(fontGraphics);
+            FontGraphics defaultFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, defaultTextColour, Resources.Textures.Debug);
+            defaultFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), defaultBackgroundColour);
+            defaultFrame.Components.Add(defaultFontGraphics);
 
-            frame.Initialise(GetBounds());
+            FontGraphics hoverFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, hoverTextColour, Resources.Textures.Debug);
+            hoverFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), hoverBackgroundColour);
+            hoverFrame.Components.Add(hoverFontGraphics);
+        }
+
+        private void InitialiseComponents()
+        {
+            defaultFrame.Initialise(GetBounds());
+            hoverFrame.Initialise(GetBounds());
         }
 
         #endregion

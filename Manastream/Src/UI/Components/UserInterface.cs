@@ -113,8 +113,6 @@
             {
                 HoveredComponent.Hovered = true;
             }
-
-            Console.WriteLine($"Hovered Component: {HoveredComponent}");
         }
 
         /// <summary>

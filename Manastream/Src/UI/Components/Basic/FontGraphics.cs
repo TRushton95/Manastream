@@ -22,6 +22,7 @@
         private float scale;
         private int maxWidth;
         private TextFormat fontFlow;
+        private Color colour;
 
         #endregion
 
@@ -30,13 +31,14 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="FontGraphics"/> class.
         /// </summary>
-        public FontGraphics(string text, int maxWidth, IPositionProfile positionProfile, TextFormat fontFlow, SpriteFont font)
+        public FontGraphics(string text, int maxWidth, IPositionProfile positionProfile, TextFormat fontFlow, Color colour, SpriteFont font)
             : base(positionProfile)
         {
             this.text = text;
             this.displayText = text;
             this.maxWidth = maxWidth;
             this.fontFlow = fontFlow;
+            this.colour = colour;
             this.font = font;
             this.scale = 1;
         }
@@ -50,7 +52,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, displayText, GetCoordinates(), Color.Black, 0, default(Vector2), scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, displayText, GetCoordinates(), colour, 0, default(Vector2), scale, SpriteEffects.None, 0);
         }
 
         /// <summary>
