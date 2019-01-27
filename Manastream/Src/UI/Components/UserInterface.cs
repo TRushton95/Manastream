@@ -4,9 +4,12 @@
 
     using Manastream.Src.GameResources;
     using Manastream.Src.UI.Components.Complex;
+    using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     #endregion
 
@@ -40,6 +43,18 @@
             get;
         }
 
+        public ComplexUIComponent PrevHoveredComponent
+        {
+            get;
+            private set;
+        }
+
+        public ComplexUIComponent HoveredComponent
+        {
+            get;
+            private set;
+        }
+
         #endregion
 
         #region Methods
@@ -68,9 +83,46 @@
         }
 
         /// <summary>
-        /// Gets all the components in the tree.
+        /// Updates the highest priority hovered component.
         /// </summary>
-        public List<ComplexUIComponent> GetAllComponents()
+        public void UpdateHoveredComponent()
+        {
+            List<ComplexUIComponent> hoveredComponents = GetAllComponents().Where(c => c.GetBounds().Contains(MouseInfo.Position)).ToList();
+
+            ComplexUIComponent nextHoveredComponent = null;
+
+            if (hoveredComponents.Count > 0)
+            {
+                nextHoveredComponent = hoveredComponents.First(); // TO-DO Select highest priority component
+            }
+
+            PrevHoveredComponent = HoveredComponent;
+            HoveredComponent = nextHoveredComponent;
+
+            if (HoveredComponent == PrevHoveredComponent)
+            {
+                return;
+            }
+
+            if (PrevHoveredComponent != null)
+            {
+                PrevHoveredComponent.Hovered = false;
+            }
+
+            if (HoveredComponent != null)
+            {
+                HoveredComponent.Hovered = true;
+            }
+
+            Console.WriteLine($"Hovered Component: {HoveredComponent}");
+        }
+
+        /// <summary>
+        /// Gets all the components in the tree.
+        /// TO-DO The AllComponents list should be stored in a property and updated when a component update notification is received - avoids
+        /// rebuilding the list every time it is required.
+        /// </summary>
+        private List<ComplexUIComponent> GetAllComponents()
         {
             List<ComplexUIComponent> results = new List<ComplexUIComponent>();
 

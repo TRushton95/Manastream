@@ -70,7 +70,7 @@
         /// <summary>
         /// Gets the boundaries of the component.
         /// </summary>
-        protected Rectangle GetBounds()
+        public Rectangle GetBounds()
         {
             return new Rectangle(posX, posY, Width, Height);
         }
@@ -78,7 +78,7 @@
         /// <summary>
         /// Gets the coordinates of the component.
         /// </summary>
-        protected Vector2 GetCoordinates()
+        public Vector2 GetCoordinates()
         {
             return new Vector2(posX, posY);
         }

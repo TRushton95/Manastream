@@ -38,7 +38,6 @@
         private int currentTeam, turn;
         private readonly int teamCount;
         private UserInterface ui;
-        private Button button;
 
         #endregion
 
@@ -66,7 +65,7 @@
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
-            button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), 0);
+            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), 0);
 
             ui = new UserInterface();
             ui.Components.Add(button);
@@ -99,6 +98,8 @@
             {
                 NextTurn();
             }
+            
+            ui.UpdateHoveredComponent();
         }
 
         /// <summary>
