@@ -40,5 +40,13 @@
 
             public EventType RightMouseDragged = new EventType("MS_RIGHT_MOUSE_DRAGGED");
         }
+
+        /// <summary>
+        /// The game events.
+        /// </summary>
+        public class Game
+        {
+            public static EventType EndTurn = new EventType("GM_END_TURN");
+        }
     }
 }

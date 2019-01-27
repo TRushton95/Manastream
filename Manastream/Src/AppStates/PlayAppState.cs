@@ -1,5 +1,7 @@
 ﻿namespace Manastream.Src.AppStates
 {
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events;
     #region Usings
 
     using Manastream.Src.EventSystem.Events.Debug;
@@ -12,6 +14,7 @@
     using Manastream.Src.UI;
     using Manastream.Src.UI.Components;
     using Manastream.Src.UI.Components.Complex;
+    using Manastream.Src.UI.Definitions;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Manastream.Src.Utility;
@@ -38,6 +41,7 @@
         private int currentTeam, turn;
         private readonly int teamCount;
         private UserInterface ui;
+        private DebugGameUI debugUI;
 
         #endregion
 
@@ -61,19 +65,22 @@
             board = new Board();
             board.Generate();
             SpawnTestUnits();
+            debugUI = new DebugGameUI();
 
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
-            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10),
-                Color.Red, Color.Black, Color.Pink, Color.Black);
-
             ui = new UserInterface();
-            ui.Components.Add(button);
+            ui.Components = PlayDefinition.BuildUI();
             ui.Initialise();
+
+            InitialiseEventHandlers();
+
         }
 
         #endregion
+
+        #region Methods
 
         /// <summary>
         /// Updates the app state.
@@ -93,14 +100,13 @@
             }
 
             board.Update(gameTime);
-
-            //DEBUG - Temporary until KeyboardInfo is added
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) && MouseInfo.RightMousePressed)
-            {
-                NextTurn();
-            }
             
             ui.UpdateHoveredComponent();
+
+            if (MouseInfo.LeftMousePressed && ui.HoveredComponent != null)
+            {
+                ui.HoveredComponent.Click();
+            }
         }
 
         /// <summary>
@@ -116,6 +122,7 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
+            debugUI.Draw(uiSpriteBatch);
         }
 
         /// <summary>
@@ -179,5 +186,27 @@
             
             eventManager.Notify(new NewPlayerTurnEvent(players[currentTeam]));
         }
+
+        /// <summary>
+        /// Initialises the event handlers.
+        /// </summary>
+        private void InitialiseEventHandlers()
+        {
+            AddEventHandler(EventTypes.Game.EndTurn, OnEndTurn);
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        /// <summary>
+        /// The handler for an end turn event.
+        /// </summary>
+        private void OnEndTurn(Event e)
+        {
+            NextTurn();
+        }
+
+        #endregion
     }
 }

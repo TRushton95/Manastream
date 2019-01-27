@@ -2,8 +2,11 @@
 {
     #region Usings
 
-    using Manastream.Src.UI.Components.Basic;
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.GameResources;
     using Manastream.Src.UI.PositionProfiles;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
     using System.Collections.Generic;
 
     #endregion
@@ -11,29 +14,54 @@
     /// <summary>
     /// The complex ui component class that represents a usable component, built out of base UI components.
     /// </summary>
-    public abstract class ComplexUIComponent : UIComponent
+    public abstract class ComplexUIComponent : Listener
     {
+        #region Fields
+
+        protected int posX, posY;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="ComplexUIComponent"/> class.
         /// </summary>
         public ComplexUIComponent(int width, int height, IPositionProfile positionProfile)
-            : base(positionProfile)
         {
             this.Width = width;
             this.Height = height;
+            this.PositionProfile = positionProfile;
         }
 
         #endregion
 
-        #region Methods
-        
+        #region Properties
+
+        public int Width
+        {
+            get;
+            protected set;
+        }
+
+        public int Height
+        {
+            get;
+            protected set;
+        }
+
+        public IPositionProfile PositionProfile
+        {
+            get;
+        }
+
         public bool Hovered
         {
             get;
             private set;
         }
+
+        protected Resources Resources => Resources.GetInstance();
 
         #endregion
 
@@ -66,6 +94,14 @@
         }
 
         /// <summary>
+        /// Executes the on click handler.
+        /// </summary>
+        public void Click()
+        {
+            OnClick();
+        }
+
+        /// <summary>
         /// On hover handler.
         /// </summary>
         protected virtual void OnHover() { }
@@ -74,6 +110,48 @@
         /// On hover leave handler.
         /// </summary>
         protected virtual void OnHoverLeave() { }
+
+        /// <summary>
+        /// On click handler.
+        /// </summary>
+        protected virtual void OnClick() { }
+
+        /// <summary>
+        /// Draws the UI component.
+        /// </summary>
+        public abstract void Draw(SpriteBatch spriteBatch);
+
+        /// <summary>
+        /// Initialises the UI component.
+        /// </summary>
+        public abstract void Initialise(Rectangle parent);
+
+        /// <summary>
+        /// Gets the boundaries of the component.
+        /// </summary>
+        public Rectangle GetBounds()
+        {
+            return new Rectangle(posX, posY, Width, Height);
+        }
+
+        /// <summary>
+        /// Gets the coordinates of the component.
+        /// </summary>
+        public Vector2 GetCoordinates()
+        {
+            return new Vector2(posX, posY);
+        }
+
+        /// <summary>
+        /// Initialises the coordinates of the UI component based on its parent's location
+        /// </summary>
+        protected void InitialiseCoordinates(Rectangle parent)
+        {
+            Vector2 coords = PositionProfile.GetPosition(GetBounds(), parent);
+
+            posX = (int)coords.X;
+            posY = (int)coords.Y;
+        }
 
         #endregion
     }

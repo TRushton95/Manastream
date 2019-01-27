@@ -1,12 +1,14 @@
 ﻿namespace Manastream.Src.UI.Components.Complex
 {
+    using Manastream.Src.EventSystem.Events;
     #region Usings
-    
+
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using System;
 
     #endregion
 
@@ -44,6 +46,16 @@
 
         #endregion
 
+        #region Properties
+
+        public Event OnClickEvent
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -77,6 +89,14 @@
         protected override void OnHoverLeave()
         {
             frame = defaultFrame;
+        }
+
+        /// <summary>
+        /// On click handler.
+        /// </summary>
+        protected override void OnClick()
+        {
+            eventManager.Notify(OnClickEvent);
         }
 
         /// <summary>

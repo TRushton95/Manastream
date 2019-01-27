@@ -41,6 +41,7 @@
         public List<ComplexUIComponent> Components
         {
             get;
+            set;
         }
 
         public ComplexUIComponent PrevHoveredComponent

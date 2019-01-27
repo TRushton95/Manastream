@@ -50,6 +50,7 @@
     <Compile Include="Src\EventSystem\Events\Event.cs" />
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewTurnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Game\EndTurnEvent.cs" />
     <Compile Include="Src\EventSystem\EventType.cs" />
     <Compile Include="Src\EventSystem\EventTypes.cs" />
     <Compile Include="Src\EventSystem\Listener.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Src\UI\Components\Complex\Button.cs" />
     <Compile Include="Src\UI\Components\UserInterface.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
+    <Compile Include="Src\UI\Definitions\PlayDefinition.cs" />
     <Compile Include="Src\UI\Enums\TextFormat.cs" />
     <Compile Include="Src\UI\Enums\HorizontalAlign.cs" />
     <Compile Include="Src\UI\Enums\VerticalAlign.cs" />
