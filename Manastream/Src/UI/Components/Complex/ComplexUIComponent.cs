@@ -32,7 +32,7 @@
         public bool Hovered
         {
             get;
-            set;
+            private set;
         }
 
         #endregion
@@ -46,6 +46,34 @@
         {
             return new List<ComplexUIComponent>() { this };
         }
+
+        /// <summary>
+        /// Sets the component to hovered and executes the on hover handler.
+        /// </summary>
+        public void Hover()
+        {
+            Hovered = true;
+            OnHover();
+        }
+
+        /// <summary>
+        /// Sets the component to not hovered and executes the on hover leave handler.
+        /// </summary>
+        public void HoverLeave()
+        {
+            Hovered = false;
+            OnHoverLeave();
+        }
+
+        /// <summary>
+        /// On hover handler.
+        /// </summary>
+        protected virtual void OnHover() { }
+
+        /// <summary>
+        /// On hover leave handler.
+        /// </summary>
+        protected virtual void OnHoverLeave() { }
 
         #endregion
     }

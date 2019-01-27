@@ -106,12 +106,12 @@
 
             if (PrevHoveredComponent != null)
             {
-                PrevHoveredComponent.Hovered = false;
+                PrevHoveredComponent.HoverLeave();
             }
 
             if (HoveredComponent != null)
             {
-                HoveredComponent.Hovered = true;
+                HoveredComponent.Hover();
             }
         }
 

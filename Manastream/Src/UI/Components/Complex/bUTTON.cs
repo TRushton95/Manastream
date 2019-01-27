@@ -17,13 +17,16 @@
     {
         #region Fields
 
-        private Frame defaultFrame, hoverFrame;
+        private Frame frame, defaultFrame, hoverFrame;
         private readonly string text;
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="Button"/> class.
+        /// </summary>
         public Button(
             int width,
             int height,
@@ -49,14 +52,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (Hovered)
-            {
-                hoverFrame.Draw(spriteBatch);
-            }
-            else
-            {
-                defaultFrame.Draw(spriteBatch);
-            }
+            frame.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -69,7 +65,23 @@
         }
 
         /// <summary>
-        /// Builds and initialises the consituent UI components.
+        /// On hover handler.
+        /// </summary>
+        protected override void OnHover()
+        {
+            frame = hoverFrame;
+        }
+
+        /// <summary>
+        /// On hover leave handler.
+        /// </summary>
+        protected override void OnHoverLeave()
+        {
+            frame = defaultFrame;
+        }
+
+        /// <summary>
+        /// Builds the components.
         /// </summary>
         private void BuildComponents(Color defaultBackgroundColour, Color defaultTextColour, Color hoverBackgroundColour, Color hoverTextColour)
         {
@@ -80,8 +92,13 @@
             FontGraphics hoverFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, hoverTextColour, Resources.Textures.Debug);
             hoverFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), hoverBackgroundColour);
             hoverFrame.Components.Add(hoverFontGraphics);
+
+            frame = defaultFrame;
         }
 
+        /// <summary>
+        /// Initialises the components.
+        /// </summary>
         private void InitialiseComponents()
         {
             defaultFrame.Initialise(GetBounds());
