@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Game;
     using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Enums;
@@ -19,10 +20,15 @@
 
             Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10),
                 Color.Red, Color.Black, Color.Pink, Color.Black);
-            button.OnClickEvent = new EndTurnEvent();
+            button.OnClickEvent = GetEndTurnEvent;
             result.Add(button);
 
             return result;
+        }
+
+        private static Event GetEndTurnEvent()
+        {
+            return new EndTurnEvent();
         }
     }
 }

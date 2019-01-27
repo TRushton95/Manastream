@@ -1,14 +1,19 @@
 ﻿namespace Manastream.Src.UI.Components.Complex
 {
-    using Manastream.Src.EventSystem.Events;
     #region Usings
 
+    using Manastream.Src.EventSystem.Events;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
+
+    #endregion
+
+    #region Delegates
+
+    public delegate Event OnClickEvent();
 
     #endregion
 
@@ -48,7 +53,7 @@
 
         #region Properties
 
-        public Event OnClickEvent
+        public OnClickEvent OnClickEvent
         {
             get;
             set;
@@ -96,7 +101,7 @@
         /// </summary>
         protected override void OnClick()
         {
-            eventManager.Notify(OnClickEvent);
+            eventManager.Notify(OnClickEvent());
         }
 
         /// <summary>
