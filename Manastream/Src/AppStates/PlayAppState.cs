@@ -1,9 +1,9 @@
 ﻿namespace Manastream.Src.AppStates
 {
-    using Manastream.Src.EventSystem;
-    using Manastream.Src.EventSystem.Events;
     #region Usings
 
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Abilities.Factories;
@@ -13,14 +13,10 @@
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
     using Manastream.Src.UI.Components;
-    using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Definitions;
-    using Manastream.Src.UI.Enums;
-    using Manastream.Src.UI.PositionProfiles;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
     using System.Collections.Generic;
 
     #endregion
@@ -75,7 +71,6 @@
             ui.Initialise();
 
             InitialiseEventHandlers();
-
         }
 
         #endregion
@@ -122,7 +117,7 @@
             gameSpriteBatch.End();
 
             ui.Draw(uiSpriteBatch);
-            debugUI.Draw(uiSpriteBatch);
+            //debugUI.Draw(uiSpriteBatch);
         }
 
         /// <summary>

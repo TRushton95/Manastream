@@ -105,7 +105,7 @@
         }
 
         /// <summary>
-        /// Builds the components.
+        /// Builds the constituant components.
         /// </summary>
         private void BuildComponents(Color defaultBackgroundColour, Color defaultTextColour, Color hoverBackgroundColour, Color hoverTextColour)
         {
@@ -121,7 +121,7 @@
         }
 
         /// <summary>
-        /// Initialises the components.
+        /// Initialises the constituant components.
         /// </summary>
         private void InitialiseComponents()
         {

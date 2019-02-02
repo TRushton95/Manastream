@@ -102,12 +102,14 @@
     <Compile Include="Src\UI\Components\Basic\ImageGraphics.cs" />
     <Compile Include="Src\UI\Components\Complex\ComplexUIComponent.cs" />
     <Compile Include="Src\UI\Components\Complex\Button.cs" />
+    <Compile Include="Src\UI\Components\Complex\Profile.cs" />
     <Compile Include="Src\UI\Components\UserInterface.cs" />
     <Compile Include="Src\UI\DebugGameUI.cs" />
     <Compile Include="Src\UI\Definitions\PlayDefinition.cs" />
     <Compile Include="Src\UI\Enums\TextFormat.cs" />
     <Compile Include="Src\UI\Enums\HorizontalAlign.cs" />
     <Compile Include="Src\UI\Enums\VerticalAlign.cs" />
+    <Compile Include="Src\UI\Factories\PositionProfileFactory.cs" />
     <Compile Include="Src\UI\PositionProfiles\AbsolutePositionProfile.cs" />
     <Compile Include="Src\UI\PositionProfiles\IPositionProfile.cs" />
     <Compile Include="Src\UI\PositionProfiles\RelativePositionProfile.cs" />
