@@ -102,27 +102,27 @@
             FontGraphics nameFontGraphics = new FontGraphics(unit.Name, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
             frame.Components.Add(nameFontGraphics);
 
-            if (unit.CurrentHealth > 0)
-            {
-                FontGraphics healthFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentHealth, unit.MaxHealth), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-                Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), Color.Black);
-                Frame health = new Frame((int)(Width * ((double)unit.CurrentHealth / unit.MaxHealth)), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.Green);
+            //Health bar
+            Color healthColour = unit.CurrentHealth == 0 ? Color.Transparent : Color.Green;
 
-                healthFrame.Components.Add(health);
-                healthFrame.Components.Add(healthFontGraphics);
-                frame.Components.Add(healthFrame);
-            }
+            FontGraphics healthFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentHealth, unit.MaxHealth), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+            Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), Color.Black);
+            Frame health = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), healthColour);
 
-            if (unit.CurrentEnergy > 0)
-            {
-                FontGraphics energyFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentEnergy, unit.MaxEnergy), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-                Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), Color.Black);
-                Frame energy = new Frame((int)(Width * ((double)unit.CurrentEnergy / unit.MaxEnergy)), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.RoyalBlue);
+            healthFrame.Components.Add(health);
+            healthFrame.Components.Add(healthFontGraphics);
+            frame.Components.Add(healthFrame);
 
-                energyFrame.Components.Add(energy);
-                energyFrame.Components.Add(energyFontGraphics);
-                frame.Components.Add(energyFrame);
-            }
+            //Energy bar
+            Color energyColour = unit.CurrentEnergy == 0 ? Color.Transparent : Color.RoyalBlue;
+
+            FontGraphics energyFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentEnergy, unit.MaxEnergy), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+            Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), Color.Black);
+            Frame energy = new Frame(ZeroAdjustedWidth(unit.CurrentEnergy, unit.MaxEnergy), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), energyColour);
+
+            energyFrame.Components.Add(energy);
+            energyFrame.Components.Add(energyFontGraphics);
+            frame.Components.Add(energyFrame);
         }
 
         /// <summary>
@@ -131,6 +131,15 @@
         private void InitialiseComponents()
         {
             frame.Initialise(GetBounds());
+        }
+
+        /// <summary>
+        /// Gets the width of a resource frame, returning the max width if the value is 0.
+        /// </summary>
+        private int ZeroAdjustedWidth(double current, double max)
+        {
+            int resourceWidth = (int)(Width * (current / max));
+            return resourceWidth > 0 ? resourceWidth : Width;
         }
 
         #endregion
