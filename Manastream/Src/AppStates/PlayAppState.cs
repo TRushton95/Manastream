@@ -66,8 +66,7 @@
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
 
-            ui = new UserInterface();
-            ui.Components = PlayDefinition.BuildUI();
+            ui = PlayDefinition.BuildUI();
             ui.Initialise();
 
             InitialiseEventHandlers();
