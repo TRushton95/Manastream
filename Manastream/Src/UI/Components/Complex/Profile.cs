@@ -41,13 +41,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Profile"/> class.
         /// </summary>
-        public Profile(Unit unit, IPositionProfile positionProfile)
+        public Profile(IPositionProfile positionProfile)
             : base(ProfileWidth, ProfileHeight, positionProfile)
         {
-            this.unit = unit;
-            this.AddEventHandler(EventTypes.Debug.SelectUnit, OnSelectUnit);
-
-            BuildComponents();
+            Hide();
         }
 
         #endregion
@@ -59,7 +56,7 @@
         /// </summary>
         public override void Update()
         {
-            if (!Visible)
+            if (unit == null)
             {
                 return;
             }
@@ -130,6 +127,11 @@
         /// </summary>
         private void InitialiseComponents()
         {
+            if (frame == null)
+            {
+                return;
+            }
+
             frame.Initialise(GetBounds());
         }
 

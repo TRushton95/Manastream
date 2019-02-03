@@ -25,7 +25,8 @@
             button.OnClickEvent = CreateEndTurnEvent;
             result.Add(button);
 
-            Profile profile = new Profile(new Gameplay.Entities.Actors.Unit("test unit", 10, 10, null, null, null), new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Top, 0, 0));
+            Profile profile = new Profile(new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Top, 0, 0));
+            profile.AddEventHandler(EventTypes.Debug.SelectUnit, profile.OnSelectUnit);
             result.Add(profile);
 
             return result;
