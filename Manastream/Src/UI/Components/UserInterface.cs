@@ -2,12 +2,12 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem;
     using Manastream.Src.GameResources;
     using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -16,7 +16,7 @@
     /// <summary>
     /// The user interface class that holds the ui components and allows manipulation of them.
     /// </summary>
-    public class UserInterface
+    public class UserInterface : Listener
     {
         #region Fields
 
