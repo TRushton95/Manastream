@@ -116,6 +116,12 @@
         /// </summary>
         protected virtual void OnClick() { }
 
+
+        /// <summary>
+        /// Updates the UI component.
+        /// </summary>
+        public virtual void Update() { }
+
         /// <summary>
         /// Draws the UI component.
         /// </summary>

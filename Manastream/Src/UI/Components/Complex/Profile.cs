@@ -2,12 +2,14 @@
 {
     #region Usings
 
+    using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.Factories;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
 
     #endregion
 
@@ -20,14 +22,15 @@
 
         private const int ProfileWidth = 300;
         private const int ProfileHeight = 150;
+        private const string ResourceText = "{0}/{1}";
 
         #endregion
 
         #region Fields
-
-        private int currentHealth, maxHealth, currentEnergy, maxEnergy;
+        
         private Frame frame;
-        private string nameText, healthText, energyText;
+        private Unit unit;
+        private int prevHealth, prevEnergy;
 
         #endregion
 
@@ -36,17 +39,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Profile"/> class.
         /// </summary>
-        public Profile(string name, int currentHealth, int maxHealth, int currentEnergy, int maxEnergy, IPositionProfile positionProfile)
+        public Profile(Unit unit, IPositionProfile positionProfile)
             : base(ProfileWidth, ProfileHeight, positionProfile)
         {
-            this.nameText = name;
-            this.currentHealth = currentHealth;
-            this.maxHealth = maxHealth;
-            this.currentEnergy = currentEnergy;
-            this.maxEnergy = maxEnergy;
-
-            healthText = $"{currentHealth}/{maxHealth}";
-            energyText = $"{currentEnergy}/{maxEnergy}";
+            this.unit = unit;
 
             BuildComponents();
         }
@@ -54,6 +50,19 @@
         #endregion
 
         #region Methods
+
+        public override void Update()
+        {
+            if (prevHealth != unit.CurrentHealth ||
+                prevEnergy != unit.CurrentEnergy)
+            {
+                BuildComponents();
+                InitialiseComponents();
+            }
+
+            prevHealth = unit.CurrentHealth;
+            prevEnergy = unit.CurrentEnergy;
+        }
 
         /// <summary>
         /// Draws the UI component.
@@ -75,28 +84,34 @@
         /// <summary>
         /// Builds the constituant components.
         /// </summary>
-        public void BuildComponents()
+        private void BuildComponents()
         {
-            FontGraphics nameFontGraphics = new FontGraphics(nameText, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-
-            FontGraphics healthFontGraphics = new FontGraphics(healthText, Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-            Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), Color.Black);
-            Frame health = new Frame(Width / 2, 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.Green);
-            healthFrame.Components.Add(health);
-
-            healthFrame.Components.Add(healthFontGraphics);
-
-            FontGraphics energyFontGraphics = new FontGraphics(energyText, Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-            Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), Color.Black);
-            Frame energy = new Frame((Width / 5) * 2, 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.Yellow);
-            energyFrame.Components.Add(energy);
-
-            energyFrame.Components.Add(energyFontGraphics);
-
             frame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), Color.Black);
+
+            FontGraphics nameFontGraphics = new FontGraphics(unit.Name, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
             frame.Components.Add(nameFontGraphics);
-            frame.Components.Add(healthFrame);
-            frame.Components.Add(energyFrame);
+
+            if (unit.CurrentHealth > 0)
+            {
+                FontGraphics healthFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentHealth, unit.MaxHealth), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+                Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), Color.Black);
+                Frame health = new Frame((int)(Width * ((double)unit.CurrentHealth / unit.MaxHealth)), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.Green);
+
+                healthFrame.Components.Add(health);
+                healthFrame.Components.Add(healthFontGraphics);
+                frame.Components.Add(healthFrame);
+            }
+
+            if (unit.CurrentEnergy > 0)
+            {
+                FontGraphics energyFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentEnergy, unit.MaxEnergy), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+                Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), Color.Black);
+                Frame energy = new Frame((int)(Width * ((double)unit.CurrentEnergy / unit.MaxEnergy)), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), Color.RoyalBlue);
+
+                energyFrame.Components.Add(energy);
+                energyFrame.Components.Add(energyFontGraphics);
+                frame.Components.Add(energyFrame);
+            }
         }
 
         /// <summary>

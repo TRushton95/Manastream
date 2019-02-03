@@ -96,7 +96,7 @@
 
             board.Update(gameTime);
             
-            ui.UpdateHoveredComponent();
+            ui.Update();
 
             if (MouseInfo.LeftMousePressed && ui.HoveredComponent != null)
             {

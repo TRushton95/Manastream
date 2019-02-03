@@ -73,6 +73,19 @@
         }
 
         /// <summary>
+        /// Updates the user interface.
+        /// </summary>
+        public void Update()
+        {
+            foreach (ComplexUIComponent component in Components)
+            {
+                component.Update();
+            }
+
+            UpdateHoveredComponent();
+        }
+
+        /// <summary>
         /// Draws the user interface.
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
@@ -86,7 +99,7 @@
         /// <summary>
         /// Updates the highest priority hovered component.
         /// </summary>
-        public void UpdateHoveredComponent()
+        private void UpdateHoveredComponent()
         {
             List<ComplexUIComponent> hoveredComponents = GetAllComponents().Where(c => c.GetBounds().Contains(MouseInfo.Position)).ToList();
 
