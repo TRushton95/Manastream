@@ -12,7 +12,7 @@
     /// <summary>
     /// The frame class that represents a simple rectangular frame.
     /// </summary>
-    public class Frame : UIComponent
+    public class Frame : BasicUIComponent
     {
         #region Fields
 
@@ -31,7 +31,7 @@
             this.Width = width;
             this.Height = height;
             this.Colour = colour;
-            this.Components = new List<UIComponent>();
+            this.Components = new List<BasicUIComponent>();
         }
 
         #endregion
@@ -43,7 +43,7 @@
             get;
         }
 
-        public List<UIComponent> Components
+        public List<BasicUIComponent> Components
         {
             get;
         }
@@ -59,7 +59,7 @@
         {
             spriteBatch.Draw(texture, GetCoordinates(), Color.White);
 
-            foreach (UIComponent component in Components)
+            foreach (BasicUIComponent component in Components)
             {
                 component.Draw(spriteBatch);
             }
@@ -73,7 +73,7 @@
             InitialiseCoordinates(parent);
             texture = BuildTexture(Colour);
 
-            foreach (UIComponent component in Components)
+            foreach (BasicUIComponent component in Components)
             {
                 component.Initialise(GetBounds());
             }

@@ -18,7 +18,7 @@
     /// <summary>
     /// The profile component that displays a unit's information.
     /// </summary>
-    public class Profile : ComplexUIComponent
+    public class Profile : UIComponent
     {
         #region Constants
 

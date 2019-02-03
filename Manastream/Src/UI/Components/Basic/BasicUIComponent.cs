@@ -12,7 +12,7 @@
     /// <summary>
     /// The base component class that represents a UI component.
     /// </summary>
-    public abstract class UIComponent
+    public abstract class BasicUIComponent
     {
         #region Fields
 
@@ -23,9 +23,9 @@
         #region Constructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="UIComponent"/> class.
+        /// Initialises a new instance of the <see cref="BasicUIComponent"/> class.
         /// </summary>
-        public UIComponent(IPositionProfile positionProfile)
+        public BasicUIComponent(IPositionProfile positionProfile)
         {
             this.PositionProfile = positionProfile;
         }

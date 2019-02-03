@@ -16,9 +16,9 @@
 
     public class PlayDefinition
     {
-        public static List<ComplexUIComponent> BuildUI()
+        public static List<UIComponent> BuildUI()
         {
-            List<ComplexUIComponent> result = new List<ComplexUIComponent>();
+            List<UIComponent> result = new List<UIComponent>();
             
             Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Right, VerticalAlign.Bottom, -10, -10),
                 Color.Red, Color.Black, Color.Pink, Color.Black);

@@ -31,26 +31,26 @@
         /// </summary>
         public UserInterface()
         {
-            this.Components = new List<ComplexUIComponent>();
+            this.Components = new List<UIComponent>();
         }
 
         #endregion
 
         #region Properties
 
-        public List<ComplexUIComponent> Components
+        public List<UIComponent> Components
         {
             get;
             set;
         }
 
-        public ComplexUIComponent PrevHoveredComponent
+        public UIComponent PrevHoveredComponent
         {
             get;
             private set;
         }
 
-        public ComplexUIComponent HoveredComponent
+        public UIComponent HoveredComponent
         {
             get;
             private set;
@@ -65,7 +65,7 @@
         /// </summary>
         public void Initialise()
         {
-            foreach (ComplexUIComponent component in Components)
+            foreach (UIComponent component in Components)
             {
                 Rectangle window = resources.GraphicsDevice.Viewport.Bounds;
                 component.Initialise(window);
@@ -77,7 +77,7 @@
         /// </summary>
         public void Update()
         {
-            foreach (ComplexUIComponent component in Components)
+            foreach (UIComponent component in Components)
             {
                 component.Update();
             }
@@ -90,7 +90,7 @@
         /// </summary>
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (ComplexUIComponent component in Components)
+            foreach (UIComponent component in Components)
             {
                 component.Draw(spriteBatch);
             }
@@ -101,9 +101,9 @@
         /// </summary>
         private void UpdateHoveredComponent()
         {
-            List<ComplexUIComponent> hoveredComponents = GetAllComponents().Where(c => c.GetBounds().Contains(MouseInfo.Position)).ToList();
+            List<UIComponent> hoveredComponents = GetAllComponents().Where(c => c.GetBounds().Contains(MouseInfo.Position)).ToList();
 
-            ComplexUIComponent nextHoveredComponent = null;
+            UIComponent nextHoveredComponent = null;
 
             if (hoveredComponents.Count > 0)
             {
@@ -134,11 +134,11 @@
         /// TO-DO The AllComponents list should be stored in a property and updated when a component update notification is received - avoids
         /// rebuilding the list every time it is required.
         /// </summary>
-        private List<ComplexUIComponent> GetAllComponents()
+        private List<UIComponent> GetAllComponents()
         {
-            List<ComplexUIComponent> results = new List<ComplexUIComponent>();
+            List<UIComponent> results = new List<UIComponent>();
 
-            foreach (ComplexUIComponent component in Components)
+            foreach (UIComponent component in Components)
             {
                 results.AddRange(component.GetDescendants());
             }

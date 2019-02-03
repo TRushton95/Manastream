@@ -13,7 +13,7 @@
     /// <summary>
     /// The font graphics class that displays text within a specified width, either shrinking or wrapping when exceeding the width.
     /// </summary>
-    public class FontGraphics : UIComponent
+    public class FontGraphics : BasicUIComponent
     {
         #region Fields
 

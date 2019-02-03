@@ -20,7 +20,7 @@
     /// <summary>
     /// The button component.
     /// </summary>
-    public class Button : ComplexUIComponent
+    public class Button : UIComponent
     {
         #region Fields
 

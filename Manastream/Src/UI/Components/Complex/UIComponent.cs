@@ -14,7 +14,7 @@
     /// <summary>
     /// The complex ui component class that represents a usable component, built out of base UI components.
     /// </summary>
-    public abstract class ComplexUIComponent : Listener
+    public abstract class UIComponent : Listener
     {
         #region Fields
 
@@ -25,9 +25,9 @@
         #region Constructors
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="ComplexUIComponent"/> class.
+        /// Initialises a new instance of the <see cref="UIComponent"/> class.
         /// </summary>
-        public ComplexUIComponent(int width, int height, IPositionProfile positionProfile)
+        public UIComponent(int width, int height, IPositionProfile positionProfile)
         {
             this.Width = width;
             this.Height = height;
@@ -77,9 +77,9 @@
         /// <summary>
         /// Gets a lsit of the descendant components.
         /// </summary>
-        public virtual List<ComplexUIComponent> GetDescendants()
+        public virtual List<UIComponent> GetDescendants()
         {
-            return new List<ComplexUIComponent>() { this };
+            return new List<UIComponent>() { this };
         }
 
         public void Show()
