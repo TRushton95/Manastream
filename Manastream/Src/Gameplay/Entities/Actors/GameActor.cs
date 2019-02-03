@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.DataStructures;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
@@ -22,8 +23,7 @@
         /// </summary>
         public GameActor(int boardX, int boardY, int canvasX, int canvasY)
         {
-            this.BoardX = boardX;
-            this.BoardY = boardY;
+            this.BoardPosition = new Position(boardX, boardY);
             this.CanvasX = canvasX;
             this.CanvasY = canvasY;
             this.Animations = new Dictionary<int, Animation>();
@@ -35,18 +35,9 @@
         #region Properties
 
         /// <summary>
-        /// The x coordinate on the board.
+        /// The position of the game actor on the board.
         /// </summary>
-        public int BoardX
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The y coordinate on the board.
-        /// </summary>
-        public int BoardY
+        public Position BoardPosition
         {
             get;
             set;
@@ -75,8 +66,6 @@
             get;
             protected set;
         }
-
-        public Point BoardPosition => new Point(BoardX, BoardY);
 
         public Vector2 CanvasPosition => new Vector2(CanvasX, CanvasY);
 

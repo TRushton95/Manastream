@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
+    using Manastream.Src.DataStructures;
     #region Usings
 
     using Manastream.Src.Gameplay.Abilities;
@@ -67,7 +68,7 @@
 
             if (HighlightedTile != null)
             {
-                List<Point> tileCoords = TemplateService.GetAffectedTileCoordinates(new Point(HighlightedTile.BoardX, HighlightedTile.BoardY), SelectedAbility.Template);
+                List<Position> tileCoords = TemplateService.GetAffectedTileCoordinates(HighlightedTile.BoardPosition, SelectedAbility.Template);
                 templateAffectedTiles = board.GetTiles(tileCoords);
             }
 

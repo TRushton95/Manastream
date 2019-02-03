@@ -155,7 +155,7 @@
                     break;
                 }
 
-                board.TryRelocateUnit(SelectedUnit, pathSegment.BoardX, pathSegment.BoardY);
+                board.TryRelocateUnit(SelectedUnit, pathSegment.BoardPosition.X, pathSegment.BoardPosition.Y);
                 SelectedUnit.CurrentEnergy -= pathSegment.MovementCost;
 
                 if (pathSegment.HasActiveGenerator)

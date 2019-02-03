@@ -51,7 +51,7 @@
 
             if (SelectedUnit != null)
             {
-                SelectedUnitTile = board.GetTile(SelectedUnit.BoardX, SelectedUnit.BoardY);
+                SelectedUnitTile = board.GetTile(SelectedUnit.BoardPosition.X, SelectedUnit.BoardPosition.Y);
             }
 
             return null;

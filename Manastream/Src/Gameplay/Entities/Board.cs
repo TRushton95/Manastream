@@ -2,13 +2,13 @@
 {
     #region Usings
 
+    using Manastream.Src.DataStructures;
     using Manastream.Src.Gameplay.Abilities.Ticks;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -17,7 +17,7 @@
 
     #region Delegates
 
-    public delegate Point GetAdjacentTile(Point tile);
+    public delegate Position GetAdjacentTile(Position position);
 
     #endregion
 
@@ -203,8 +203,8 @@
             if (destination.Generator == null)
             {
                 Generator generator = new Generator();
-                generator.BoardX = x;
-                generator.BoardY = y;
+                generator.BoardPosition.X = x;
+                generator.BoardPosition.Y = y;
                 generator.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Generator.Diameter / 2);
                 generator.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Generator.Diameter / 2);
                 generator.Active = true;
@@ -244,7 +244,7 @@
                 return false;
             }
 
-            Tile unitTile = GetTile(unit.BoardX, unit.BoardY);
+            Tile unitTile = GetTile(unit.BoardPosition.X, unit.BoardPosition.Y);
             unitTile.Occupant = null;
             units.Remove(unit);
 
@@ -268,12 +268,12 @@
 
             if (destination != null && destination.Occupant == null)
             {
-                Tile origin = GetTile(unit.BoardX, unit.BoardY);
+                Tile origin = GetTile(unit.BoardPosition.X, unit.BoardPosition.Y);
                 origin.Occupant = null;
                 destination.Occupant = unit;
 
-                unit.BoardX = destination.BoardX;
-                unit.BoardY = destination.BoardY;
+                unit.BoardPosition.X = destination.BoardPosition.X;
+                unit.BoardPosition.Y = destination.BoardPosition.Y;
                 unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
                 unit.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
 
@@ -343,11 +343,11 @@
         /// Gets a list of tiles at the given coordinates.
         /// A tile will not be included if it is out of range.
         /// </summary>
-        public List<Tile> GetTiles(List<Point> coordinates)
+        public List<Tile> GetTiles(List<Position> coordinates)
         {
             List<Tile> result = new List<Tile>();
 
-            foreach (Point point in coordinates)
+            foreach (Position point in coordinates)
             {
                 Tile tile = (GetTile(point.X, point.Y));
 
@@ -427,7 +427,7 @@
         /// </summary>
         public List<Tile> GetUnitPath(Unit unit, Tile destination)
         {
-            Tile origin = GetTile(unit.BoardX, unit.BoardY);
+            Tile origin = GetTile(unit.BoardPosition.X, unit.BoardPosition.Y);
 
             return DijkstraSearch(origin, destination);
         }
@@ -438,7 +438,7 @@
         /// </summary>
         public List<Tile> GetAbilityPath(Unit unit, Tile destination)
         {
-            Tile origin = GetTile(unit.BoardX, unit.BoardY);
+            Tile origin = GetTile(unit.BoardPosition.X, unit.BoardPosition.Y);
 
             return DijkstraSearch(origin, destination, true);
         }
@@ -450,69 +450,69 @@
         /// <summary>
         /// Get the tile coordinates to the top right of a point.
         /// </summary>
-        public static Point TopRight(Point tile)
+        public static Position TopRight(Position tile)
         {
             if (IsOdd(tile.Y))
             {
-                return new Point(tile.X + 1, tile.Y - 1);
+                return new Position(tile.X + 1, tile.Y - 1);
             }
 
-            return new Point(tile.X, tile.Y - 1);
+            return new Position(tile.X, tile.Y - 1);
         }
 
         /// <summary>
         /// Get the tile coordinates to the bottom right of a point.
         /// </summary>
-        public static Point BottomRight(Point tile)
+        public static Position BottomRight(Position tile)
         {
             if (IsOdd(tile.Y))
             {
-                return new Point(tile.X + 1, tile.Y + 1);
+                return new Position(tile.X + 1, tile.Y + 1);
             }
 
-            return new Point(tile.X, tile.Y + 1);
+            return new Position(tile.X, tile.Y + 1);
         }
 
         /// <summary>
         /// Get the tile coordinates to the bottom left of a point.
         /// </summary>
-        public static Point BottomLeft(Point tile)
+        public static Position BottomLeft(Position tile)
         {
             if (IsOdd(tile.Y))
             {
-                return new Point(tile.X, tile.Y + 1);
+                return new Position(tile.X, tile.Y + 1);
             }
 
-            return new Point(tile.X - 1, tile.Y + 1);
+            return new Position(tile.X - 1, tile.Y + 1);
         }
 
         /// <summary>
         /// Get the tile coordinates to the left of a point.
         /// </summary>
-        public static Point Left(Point tile)
+        public static Position Left(Position tile)
         {
-            return new Point(tile.X - 1, tile.Y);
+            return new Position(tile.X - 1, tile.Y);
         }
 
         /// <summary>
         /// Get the tile coordinates to the top left of a point.
         /// </summary>
-        public static Point TopLeft(Point tile)
+        public static Position TopLeft(Position tile)
         {
             if (IsOdd(tile.Y))
             {
-                return new Point(tile.X, tile.Y - 1);
+                return new Position(tile.X, tile.Y - 1);
             }
 
-            return new Point(tile.X - 1, tile.Y - 1);
+            return new Position(tile.X - 1, tile.Y - 1);
         }
 
         /// <summary>
         /// Get the tile coordinates to the right of a point.
         /// </summary>
-        public static Point Right(Point tile)
+        public static Position Right(Position tile)
         {
-            return new Point(tile.X + 1, tile.Y);
+            return new Position(tile.X + 1, tile.Y);
         }
 
         #endregion
