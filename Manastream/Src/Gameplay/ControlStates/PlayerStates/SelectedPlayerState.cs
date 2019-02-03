@@ -116,7 +116,7 @@
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     float rotation = GetArrowRotation(path[i + 1], path[i]);
-                    spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
+                    spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition.ToVector2() + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
                 }
 
                 int totalCost = 0;
@@ -125,7 +125,7 @@
                     totalCost += tile.MovementCost;
                     Texture2D filter = totalCost > SelectedUnit.CurrentEnergy ? Textures.RedTileFilter : Textures.GreenTileFilter;
 
-                    spriteBatch.Draw(filter, tile.CanvasPosition, Color.White);
+                    spriteBatch.Draw(filter, tile.CanvasPosition.ToVector2(), Color.White);
                 }
             }
         }
@@ -180,7 +180,7 @@
 
             float result = 0;
             
-            Vector2 direction = currentTile.CanvasPosition - nextTile.CanvasPosition;
+            Vector2 direction = currentTile.CanvasPosition.ToVector2() - nextTile.CanvasPosition.ToVector2();
             direction.Normalize();
             result = (float)Math.Atan2(direction.Y, direction.X);
 

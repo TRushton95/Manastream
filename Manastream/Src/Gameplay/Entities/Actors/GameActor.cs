@@ -24,8 +24,7 @@
         public GameActor(int boardX, int boardY, int canvasX, int canvasY)
         {
             this.BoardPosition = new Position(boardX, boardY);
-            this.CanvasX = canvasX;
-            this.CanvasY = canvasY;
+            this.CanvasPosition = new Position(canvasX, canvasY);
             this.Animations = new Dictionary<int, Animation>();
             this.AnimationIndex = 0;
         }
@@ -44,18 +43,9 @@
         }
 
         /// <summary>
-        /// The x coordinate of the texture.
+        /// The position of the texture on the canvas.
         /// </summary>
-        public int CanvasX
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The y coordinate of the texture.
-        /// </summary>
-        public int CanvasY
+        public Position CanvasPosition
         {
             get;
             set;
@@ -66,8 +56,6 @@
             get;
             protected set;
         }
-
-        public Vector2 CanvasPosition => new Vector2(CanvasX, CanvasY);
 
         protected int AnimationIndex
         {
@@ -108,7 +96,7 @@
 
             if (animation != null)
             {
-                animation.Draw(spriteBatch, CanvasX, CanvasY);
+                animation.Draw(spriteBatch, CanvasPosition.ToVector2());
             }
         }
 

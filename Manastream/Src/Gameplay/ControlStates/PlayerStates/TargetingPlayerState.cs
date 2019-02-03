@@ -116,7 +116,7 @@
             {
                 foreach (Tile tile in templateAffectedTiles)
                 {
-                    spriteBatch.Draw(filter, new Vector2(tile.CanvasX, tile.CanvasY), Color.White);
+                    spriteBatch.Draw(filter, tile.CanvasPosition.ToVector2(), Color.White);
                 }
             }
         }

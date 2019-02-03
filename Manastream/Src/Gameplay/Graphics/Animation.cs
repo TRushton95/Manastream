@@ -76,9 +76,9 @@
         /// <summary>
         /// Draws the current sprite.
         /// </summary>
-        public void Draw(SpriteBatch spriteBatch, int canvasX, int canvasY)
+        public void Draw(SpriteBatch spriteBatch, Vector2 canvasPosition)
         {
-            spriteBatch.Draw(spritesheet, new Vector2(canvasX, canvasY), spriteSourceRectangle, Color.White);
+            spriteBatch.Draw(spritesheet, canvasPosition, spriteSourceRectangle, Color.White);
         }
 
         #endregion

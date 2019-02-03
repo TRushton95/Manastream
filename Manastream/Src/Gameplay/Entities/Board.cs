@@ -205,8 +205,8 @@
                 Generator generator = new Generator();
                 generator.BoardPosition.X = x;
                 generator.BoardPosition.Y = y;
-                generator.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Generator.Diameter / 2);
-                generator.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Generator.Diameter / 2);
+                generator.CanvasPosition.X = destination.CanvasPosition.X + (Tile.Diameter / 2) - (Generator.Diameter / 2);
+                generator.CanvasPosition.Y = destination.CanvasPosition.Y + (Tile.Diameter / 2) - (Generator.Diameter / 2);
                 generator.Active = true;
 
                 destination.Generator = generator;
@@ -274,8 +274,8 @@
 
                 unit.BoardPosition.X = destination.BoardPosition.X;
                 unit.BoardPosition.Y = destination.BoardPosition.Y;
-                unit.CanvasX = destination.CanvasX + (Tile.Diameter / 2) - (Unit.Diameter / 2);
-                unit.CanvasY = destination.CanvasY + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                unit.CanvasPosition.X = destination.CanvasPosition.X + (Tile.Diameter / 2) - (Unit.Diameter / 2);
+                unit.CanvasPosition.Y = destination.CanvasPosition.Y + (Tile.Diameter / 2) - (Unit.Diameter / 2);
 
                 result = true;
             }

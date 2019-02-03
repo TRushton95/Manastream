@@ -90,7 +90,7 @@
         {
             if (HighlightedTile != null)
             {
-                spriteBatch.Draw(Textures.TileHighlight, new Vector2(HighlightedTile.CanvasX, HighlightedTile.CanvasY), Color.White);
+                spriteBatch.Draw(Textures.TileHighlight, HighlightedTile.CanvasPosition.ToVector2(), Color.White);
             }
         }
 

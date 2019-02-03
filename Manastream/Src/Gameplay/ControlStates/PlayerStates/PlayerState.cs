@@ -87,12 +87,12 @@
             {
                 Texture2D highlight = HighlightedTile.Occupant.Owner.Team == player.Team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
 
-                spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition, Color.White);
+                spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition.ToVector2(), Color.White);
             }
 
             if (SelectedUnitTile != null)
             {
-                spriteBatch.Draw(Textures.UnitSelect, SelectedUnitTile.CanvasPosition, Color.White);
+                spriteBatch.Draw(Textures.UnitSelect, SelectedUnitTile.CanvasPosition.ToVector2(), Color.White);
             }
         }
 
