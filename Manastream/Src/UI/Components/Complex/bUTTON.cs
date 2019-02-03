@@ -64,20 +64,20 @@
         #region Methods
 
         /// <summary>
-        /// Draws the UI component.
-        /// </summary>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            frame.Draw(spriteBatch);
-        }
-
-        /// <summary>
         /// Initialises the UI component.
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
             InitialiseCoordinates(parent);
             InitialiseComponents();
+        }
+
+        /// <summary>
+        /// Draws the UI component.
+        /// </summary>
+        protected override void DrawDetail(SpriteBatch spriteBatch)
+        {
+            frame.Draw(spriteBatch);
         }
 
         /// <summary>

@@ -32,6 +32,7 @@
             this.Width = width;
             this.Height = height;
             this.PositionProfile = positionProfile;
+            this.Visible = true;
         }
 
         #endregion
@@ -55,6 +56,12 @@
             get;
         }
 
+        public bool Visible
+        {
+            get;
+            private set;
+        }
+
         public bool Hovered
         {
             get;
@@ -73,6 +80,16 @@
         public virtual List<ComplexUIComponent> GetDescendants()
         {
             return new List<ComplexUIComponent>() { this };
+        }
+
+        public void Show()
+        {
+            Visible = true;
+        }
+
+        public void Hide()
+        {
+            Visible = false;
         }
 
         /// <summary>
@@ -125,7 +142,13 @@
         /// <summary>
         /// Draws the UI component.
         /// </summary>
-        public abstract void Draw(SpriteBatch spriteBatch);
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            if (Visible)
+            {
+                DrawDetail(spriteBatch);
+            }
+        }
 
         /// <summary>
         /// Initialises the UI component.
@@ -147,6 +170,11 @@
         {
             return new Vector2(posX, posY);
         }
+
+        /// <summary>
+        /// Defines the implementation details of the Draw method.
+        /// </summary>
+        protected abstract void DrawDetail(SpriteBatch spriteBatch);
 
         /// <summary>
         /// Initialises the coordinates of the UI component based on its parent's location

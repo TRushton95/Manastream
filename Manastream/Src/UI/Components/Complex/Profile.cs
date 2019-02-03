@@ -2,6 +2,9 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events;
+    using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
@@ -9,7 +12,6 @@
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
 
     #endregion
 
@@ -43,6 +45,7 @@
             : base(ProfileWidth, ProfileHeight, positionProfile)
         {
             this.unit = unit;
+            this.AddEventHandler(EventTypes.Debug.SelectUnit, OnSelectUnit);
 
             BuildComponents();
         }
@@ -51,8 +54,16 @@
 
         #region Methods
 
+        /// <summary>
+        /// Updates the UI component.
+        /// </summary>
         public override void Update()
         {
+            if (!Visible)
+            {
+                return;
+            }
+
             if (prevHealth != unit.CurrentHealth ||
                 prevEnergy != unit.CurrentEnergy)
             {
@@ -65,20 +76,20 @@
         }
 
         /// <summary>
-        /// Draws the UI component.
-        /// </summary>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            frame.Draw(spriteBatch);
-        }
-
-        /// <summary>
         /// Initialises the UI component.
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
             InitialiseCoordinates(parent);
             InitialiseComponents();
+        }
+
+        /// <summary>
+        /// Defines the implementation details of the Draw method.
+        /// </summary>
+        protected override void DrawDetail(SpriteBatch spriteBatch)
+        {
+            frame.Draw(spriteBatch);
         }
 
         /// <summary>
@@ -120,6 +131,28 @@
         private void InitialiseComponents()
         {
             frame.Initialise(GetBounds());
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        public void OnSelectUnit(Event e)
+        {
+            SelectUnitEvent args = (SelectUnitEvent)e;
+
+            unit = args.SelectedUnit;
+
+            if (unit == null)
+            {
+                Hide();
+            }
+            else
+            {
+                BuildComponents();
+                InitialiseComponents();
+                Show();
+            }
         }
 
         #endregion
