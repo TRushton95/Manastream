@@ -80,7 +80,7 @@
         /// </summary>
         private void BuildComponents()
         {
-            frame = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), 50, PositionProfileFactory.BuildCenteredRelative(), Color.Green);
+            frame = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.BuildCenteredRelative(), Color.SpringGreen);
         }
 
         /// <summary>
