@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.UI.PositionProfiles
 {
+    using Manastream.Src.DataStructures;
     #region Usings
 
     using Microsoft.Xna.Framework;
@@ -16,23 +17,30 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="AbsolutePositionProfile"/> class.
         /// </summary>
-        public AbsolutePositionProfile(int posX, int posY)
+        public AbsolutePositionProfile(Position anchorPoint, int offsetX, int offsetY)
         {
-            this.PosX = posX;
-            this.PosY = posY;
+            this.AnchorPoint = anchorPoint;
+            this.OffsetX = offsetX;
+            this.OffsetY = offsetY;
         }
 
         #endregion
 
         #region Properties
 
-        public int PosX
+        public Position AnchorPoint
         {
             get;
             set;
         }
 
-        public int PosY
+        public int OffsetX
+        {
+            get;
+            set;
+        }
+
+        public int OffsetY
         {
             get;
             set;
@@ -47,7 +55,7 @@
         /// </summary>
         public Vector2 GetPosition(Rectangle bounds, Rectangle parentBounds)
         {
-            return new Vector2(PosX, PosY);
+            return AnchorPoint.ToVector2() - new Vector2(OffsetX, OffsetY);
         }
 
         #endregion
