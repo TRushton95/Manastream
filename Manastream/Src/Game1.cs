@@ -45,8 +45,6 @@
             // TODO: Add your initialization logic here
             resources = Resources.GetInstance();
             resources.GraphicsDevice = GraphicsDevice;
-            
-            DrawingManager.Instance.RegisterSpriteBatch(DrawLayer.UI, spriteBatch);
 
             base.Initialize();
         }
@@ -59,6 +57,7 @@
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            DrawingManager.Instance.RegisterSpriteBatch(DrawLayer.UI, spriteBatch);
 
             //DEBUG
             resources.Textures.Initialise(Content);

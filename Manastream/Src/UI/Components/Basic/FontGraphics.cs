@@ -2,6 +2,8 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Graphics;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
@@ -52,7 +54,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, displayText, GetCoordinates(), colour, 0, default(Vector2), scale, SpriteEffects.None, 0);
+            eventManager.Notify(new StringDrawReadyEvent(displayText, font, GetCoordinates(), scale, colour, DrawLayer.UI));
         }
 
         /// <summary>

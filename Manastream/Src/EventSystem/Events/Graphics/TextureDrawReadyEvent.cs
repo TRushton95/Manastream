@@ -16,14 +16,30 @@
             this.Texture = texture;
             this.Position = position;
             this.SourceRectangle = Rectangle.Empty;
+            this.Rotation = 0;
+            this.RotationOrigin = Vector2.Zero;
             this.DrawLayer = drawLayer;
         }
+
         public TextureDrawReadyEvent(Texture2D texture, Vector2 position, Rectangle sourceRectangle, DrawLayer drawLayer)
             : base(EventTypes.Graphics.TextureDrawReady)
         {
             this.Texture = texture;
             this.Position = position;
             this.SourceRectangle = sourceRectangle;
+            this.Rotation = 0;
+            this.RotationOrigin = Vector2.Zero;
+            this.DrawLayer = drawLayer;
+        }
+
+        public TextureDrawReadyEvent(Texture2D texture, Vector2 position, float rotation, Vector2 rotationOrigin, DrawLayer drawLayer)
+            : base(EventTypes.Graphics.TextureDrawReady)
+        {
+            this.Texture = texture;
+            this.Position = position;
+            this.SourceRectangle = Rectangle.Empty;
+            this.Rotation = rotation;
+            this.RotationOrigin = rotationOrigin;
             this.DrawLayer = drawLayer;
         }
 
@@ -38,6 +54,16 @@
         }
 
         public Rectangle SourceRectangle
+        {
+            get;
+        }
+
+        public float Rotation
+        {
+            get;
+        }
+
+        public Vector2 RotationOrigin
         {
             get;
         }

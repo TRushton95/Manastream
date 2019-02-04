@@ -104,7 +104,7 @@
             SpriteBatch sb;
             spriteBatchLookup.TryGetValue(args.DrawLayer, out sb);
 
-            sb.DrawString(args.Font, args.Text, args.Position, Color.Black);
+            sb.DrawString(args.Font, args.Text, args.Position, args.Colour, 0, Vector2.Zero, args.Scale, SpriteEffects.None, 0);
         }
 
         /// <summary>

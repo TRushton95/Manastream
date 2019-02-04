@@ -2,6 +2,8 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Graphics;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -57,7 +59,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, GetCoordinates(), Color.White);
+            eventManager.Notify(new TextureDrawReadyEvent(texture, GetCoordinates(), DrawLayer.UI));
 
             foreach (BasicUIComponent component in Components)
             {
