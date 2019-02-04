@@ -24,7 +24,7 @@
             this.Team = team;
             this.CurrentMana = 0;
             this.PowerCaster = new Unit(
-                $"Player {team}", 0, 0, this,
+                2, $"Player {team}", 0, 0, this, //TO-DO ID assignment needs working out
                 new List<Ability>()
                 {
                     AbilityFactory.LightningStrike()

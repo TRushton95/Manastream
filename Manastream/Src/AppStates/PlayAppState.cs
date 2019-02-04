@@ -130,7 +130,7 @@
         private void SpawnTestUnits()
         {
             Unit wizard = new Unit(
-                "Wizard", 10, 3, players[1],
+                0, "Wizard", 10, 3, players[1],
                 new List<Ability>()
                 {
                     AbilityFactory.Frostbolt()
@@ -138,7 +138,7 @@
                 new Animation(Unit.Diameter, Unit.Diameter, 1000, 2, Resources.Textures.Wizard));
 
             Unit knight = new Unit(
-                "Knight", 20, 3, players[2],
+                1, "Knight", 20, 3, players[2],
                 new List<Ability>()
                 {
                     AbilityFactory.Lunge()
