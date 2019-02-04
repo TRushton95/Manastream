@@ -84,7 +84,14 @@
             SpriteBatch sb;
             spriteBatchLookup.TryGetValue(args.DrawLayer, out sb);
 
-            sb.Draw(args.Texture, args.Position, Color.White);
+            if (args.SourceRectangle == Rectangle.Empty)
+            {
+                sb.Draw(args.Texture, args.Position, Color.White);
+            }
+            else
+            {
+                sb.Draw(args.Texture, args.Position, args.SourceRectangle, Color.White);
+            }
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿namespace Manastream.Src.Gameplay.Graphics
 {
-    using Manastream.Src.GameResources;
     #region Usings
 
     using Microsoft.Xna.Framework;
@@ -15,9 +14,7 @@
     {
         #region Fields
 
-        private Texture2D spritesheet;
-        private int frames, frameIndex, frameDuration, currentAnimationTime, animationDuration, spriteWidth, spriteHeight;
-        private Rectangle spriteSourceRectangle;
+        private int frames, frameIndex, frameDuration, currentAnimationTime, animationDuration;
 
         #endregion
 
@@ -28,15 +25,43 @@
         /// </summary>
         public Animation(int spriteWidth, int spriteHeight, int frameDuration, int frames, Texture2D spritesheet)
         {
+            this.Spritesheet = spritesheet;
+            this.SpriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteWidth, spriteHeight);
+            this.SpriteWidth = spriteWidth;
+            this.SpriteHeight = spriteHeight;
             this.frameDuration = frameDuration;
             this.frames = frames;
-            this.spritesheet = spritesheet;
             this.currentAnimationTime = 0;
             this.frameIndex = 0;
-            this.spriteWidth = spriteWidth;
-            this.spriteHeight = spriteHeight;
             this.animationDuration = frames * frameDuration;
-            this.spriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteWidth, spriteHeight);
+        }
+
+        #endregion
+
+        #region Properties
+
+        public Texture2D Spritesheet
+        {
+            get;
+            private set;
+        }
+
+        public Rectangle SpriteSourceRectangle
+        {
+            get;
+            private set;
+        }
+
+        public int SpriteWidth
+        {
+            get;
+            private set;
+        }
+
+        public int SpriteHeight
+        {
+            get;
+            private set;
         }
 
         #endregion
@@ -63,7 +88,7 @@
 
             frameIndex = currentAnimationTime / frameDuration;
 
-            spriteSourceRectangle = new Rectangle(frameIndex * spriteWidth, 0, spriteWidth, spriteHeight);
+            SpriteSourceRectangle = new Rectangle(frameIndex * SpriteWidth, 0, SpriteWidth, SpriteHeight);
         }
 
         /// <summary>
@@ -72,21 +97,6 @@
         public static Animation SingleFrameAnimation(int width, int height, Texture2D texture)
         {
             return new Animation(width, height, 0, 1, texture);
-        }
-
-        /// <summary>
-        /// Gets the current sprite.
-        /// </summary>
-        /// <returns></returns>
-        public Texture2D GetCurrentAnimationFrame()
-        {
-            Color[] imageData = new Color[spriteWidth * spriteHeight];
-            spritesheet.GetData(0, spriteSourceRectangle, imageData, 0, imageData.Length);
-
-            Texture2D result = new Texture2D(Resources.GetInstance().GraphicsDevice, spriteWidth, spriteHeight);
-            result.SetData(imageData);
-
-            return result;
         }
 
         #endregion

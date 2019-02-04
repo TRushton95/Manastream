@@ -101,13 +101,8 @@
             {
                 return;
             }
-
-            Texture2D texture = animation.GetCurrentAnimationFrame();
-
-            if (texture != null)
-            {
-                eventManager.Notify(new TextureDrawReadyEvent(texture, CanvasPosition.ToVector2(), DrawLayer.Game));
-            }
+            
+            eventManager.Notify(new TextureDrawReadyEvent(animation.Spritesheet, CanvasPosition.ToVector2(), animation.SpriteSourceRectangle, DrawLayer.Game));
         }
 
         #endregion
