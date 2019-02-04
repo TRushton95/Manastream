@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.Abilities.Effects
 {
+    using Manastream.Src.EventSystem.Events.Game;
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors;
@@ -45,6 +46,7 @@
             if (ValidateTarget(targetTile, caster))
             {
                 AtomicEffects.Damage(targetTile.Occupant, Value);
+                eventManager.Notify(new UnitDamagedEvent(caster, targetTile.Occupant, Value));
             }
         }
 

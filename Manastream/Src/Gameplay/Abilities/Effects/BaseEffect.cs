@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
     using Manastream.Src.Gameplay.Enums;
@@ -12,7 +13,7 @@
     /// <summary>
     /// The base effect class that defines the base behaviour for effects.
     /// </summary>
-    public abstract class BaseEffect
+    public abstract class BaseEffect : Listener
     {
         #region Constructors
 

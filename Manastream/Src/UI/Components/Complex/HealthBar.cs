@@ -1,5 +1,8 @@
 ﻿namespace Manastream.Src.UI.Components.Complex
 {
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events;
+    using Manastream.Src.EventSystem.Events.Game;
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors;
@@ -35,6 +38,8 @@
         {
             this.unit = unit;
             BuildComponents();
+
+            AddEventHandler(EventTypes.Game.UnitDamaged, OnUnitDamaged);
         }
 
         #endregion
@@ -112,6 +117,19 @@
         {
             SetCoordinates(parent);
             frame.Update(GetBounds());
+        }
+        
+        private void OnUnitDamaged(Event e)
+        {
+            UnitDamagedEvent args = (UnitDamagedEvent)e;
+
+            if (args.UnitDamaged != unit)
+            {
+                return;
+            }
+
+            BuildComponents();
+            InitialiseComponents();
         }
 
         #endregion

@@ -49,6 +49,8 @@
             public static EventType EndTurn = new EventType("GM_END_TURN");
 
             public static EventType UnitSpawn = new EventType("GM_UNIT_SPAWN");
+
+            public static EventType UnitDamaged = new EventType("GM_UNIT_DAMAGED");
         }
 
         /// <summary>
