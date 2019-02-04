@@ -58,6 +58,11 @@
         {
             SelectUnitEvent args = (SelectUnitEvent)e;
 
+            if (args.SelectedUnit == null)
+            {
+                return;
+            }
+
             HealthBar healthBar = new HealthBar(75, 10, new AbsolutePositionProfile(args.SelectedUnit.CanvasPosition, 0, 0), args.SelectedUnit);
             ui.Components.Add(healthBar);
         }

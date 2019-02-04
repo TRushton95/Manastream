@@ -1,13 +1,15 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates
 {
-    using Manastream.Src.EventSystem;
-    using Manastream.Src.EventSystem.Events.Debug;
     #region Usings
 
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events.Debug;
+    using Manastream.Src.EventSystem.Events.Graphics;
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -90,7 +92,7 @@
         {
             if (HighlightedTile != null)
             {
-                spriteBatch.Draw(Textures.TileHighlight, HighlightedTile.CanvasPosition.ToVector2(), Color.White);
+                eventManager.Notify(new TextureDrawReadyEvent(Textures.TileHighlight, HighlightedTile.CanvasPosition.ToVector2(), DrawLayer.Game));
             }
         }
 

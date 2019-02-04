@@ -1,11 +1,13 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
-    using Manastream.Src.DataStructures;
     #region Usings
 
+    using Manastream.Src.DataStructures;
+    using Manastream.Src.EventSystem.Events.Graphics;
     using Manastream.Src.Gameplay.Abilities;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.Gameplay.Services;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -91,12 +93,14 @@
 
             Texture2D filter = validCast ? Textures.GreenTileFilter : Textures.RedTileFilter;
 
-            if (templateAffectedTiles.Count > 0)
+            if (templateAffectedTiles.Count <= 0)
             {
-                foreach (Tile tile in templateAffectedTiles)
-                {
-                    spriteBatch.Draw(filter, tile.CanvasPosition.ToVector2(), Color.White);
-                }
+                return;
+            }
+
+            foreach (Tile tile in templateAffectedTiles)
+            {
+                eventManager.Notify(new TextureDrawReadyEvent(filter, tile.CanvasPosition.ToVector2(), DrawLayer.Game));
             }
         }
 

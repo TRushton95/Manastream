@@ -1,10 +1,12 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
+    using Manastream.Src.EventSystem.Events.Graphics;
     #region Usings
 
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -86,13 +88,13 @@
             if (HighlightedTile != null && HighlightedTile.Occupant != null)
             {
                 Texture2D highlight = HighlightedTile.Occupant.Owner.Team == player.Team ? Textures.AllyTileHighlight : Textures.EnemyTileHighlight;
-
-                spriteBatch.Draw(highlight, HighlightedTile.CanvasPosition.ToVector2(), Color.White);
+                
+                eventManager.Notify(new TextureDrawReadyEvent(highlight, HighlightedTile.CanvasPosition.ToVector2(), DrawLayer.Game));
             }
 
             if (SelectedUnitTile != null)
             {
-                spriteBatch.Draw(Textures.UnitSelect, SelectedUnitTile.CanvasPosition.ToVector2(), Color.White);
+                eventManager.Notify(new TextureDrawReadyEvent(Textures.UnitSelect, SelectedUnitTile.CanvasPosition.ToVector2(), DrawLayer.Game));
             }
         }
 

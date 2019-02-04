@@ -3,9 +3,11 @@
     #region Usings
 
     using Manastream.Src.EventSystem.Events.Debug;
+    using Manastream.Src.EventSystem.Events.Graphics;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -116,6 +118,8 @@
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     float rotation = GetArrowRotation(path[i + 1], path[i]);
+
+                    //TO-DO Need to specify rotation to draw manager
                     spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition.ToVector2() + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
                 }
 
@@ -124,8 +128,8 @@
                 {
                     totalCost += tile.MovementCost;
                     Texture2D filter = totalCost > SelectedUnit.CurrentEnergy ? Textures.RedTileFilter : Textures.GreenTileFilter;
-
-                    spriteBatch.Draw(filter, tile.CanvasPosition.ToVector2(), Color.White);
+                    
+                    eventManager.Notify(new TextureDrawReadyEvent(filter, tile.CanvasPosition.ToVector2(), DrawLayer.Game));
                 }
             }
         }

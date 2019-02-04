@@ -2,6 +2,7 @@
 {
     #region Usings
 
+    using Manastream.Src.EventSystem;
     using Manastream.Src.GameResources;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
@@ -12,7 +13,7 @@
     /// <summary>
     /// The base component class that represents a UI component.
     /// </summary>
-    public abstract class BasicUIComponent
+    public abstract class BasicUIComponent : Listener
     {
         #region Fields
 
