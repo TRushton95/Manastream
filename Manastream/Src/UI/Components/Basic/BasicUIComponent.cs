@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.EventSystem;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.GameResources;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
@@ -26,9 +27,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="BasicUIComponent"/> class.
         /// </summary>
-        public BasicUIComponent(IPositionProfile positionProfile)
+        public BasicUIComponent(IPositionProfile positionProfile, DrawLayer drawLayer)
         {
             this.PositionProfile = positionProfile;
+            this.DrawLayer = drawLayer;
         }
 
         #endregion
@@ -48,6 +50,11 @@
         }
 
         public IPositionProfile PositionProfile
+        {
+            get;
+        }
+
+        public DrawLayer DrawLayer
         {
             get;
         }

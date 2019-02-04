@@ -33,8 +33,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="FontGraphics"/> class.
         /// </summary>
-        public FontGraphics(string text, int maxWidth, IPositionProfile positionProfile, TextFormat fontFlow, Color colour, SpriteFont font)
-            : base(positionProfile)
+        public FontGraphics(string text, int maxWidth, IPositionProfile positionProfile, DrawLayer drawLayer, TextFormat fontFlow, Color colour, SpriteFont font)
+            : base(positionProfile, drawLayer)
         {
             this.text = text;
             this.displayText = text;
@@ -54,7 +54,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            eventManager.Notify(new StringDrawReadyEvent(displayText, font, GetCoordinates(), scale, colour, DrawLayer.UI));
+            eventManager.Notify(new StringDrawReadyEvent(displayText, font, GetCoordinates(), scale, colour, DrawLayer));
         }
 
         /// <summary>

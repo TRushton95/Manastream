@@ -27,8 +27,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Frame"/> class.
         /// </summary>
-        public Frame(int width, int height, IPositionProfile positionProfile, Color colour)
-            : base(positionProfile)
+        public Frame(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer, Color colour)
+            : base(positionProfile, drawLayer)
         {
             this.Width = width;
             this.Height = height;
@@ -59,7 +59,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            eventManager.Notify(new TextureDrawReadyEvent(texture, GetCoordinates(), DrawLayer.UI));
+            eventManager.Notify(new TextureDrawReadyEvent(texture, GetCoordinates(), DrawLayer));
 
             foreach (BasicUIComponent component in Components)
             {

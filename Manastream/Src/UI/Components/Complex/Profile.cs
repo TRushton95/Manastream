@@ -6,6 +6,7 @@
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.Factories;
@@ -41,8 +42,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Profile"/> class.
         /// </summary>
-        public Profile(IPositionProfile positionProfile)
-            : base(ProfileWidth, ProfileHeight, positionProfile)
+        public Profile(IPositionProfile positionProfile, DrawLayer drawLayer)
+            : base(ProfileWidth, ProfileHeight, positionProfile, drawLayer)
         {
             Hide();
         }
@@ -94,17 +95,17 @@
         /// </summary>
         private void BuildComponents()
         {
-            frame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), Color.Black);
+            frame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), DrawLayer, Color.Black);
 
-            FontGraphics nameFontGraphics = new FontGraphics(unit.Name, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+            FontGraphics nameFontGraphics = new FontGraphics(unit.Name, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 10), DrawLayer, TextFormat.Shrink, Color.White, Resources.Textures.Debug);
             frame.Components.Add(nameFontGraphics);
 
             //Health bar
             Color healthColour = unit.CurrentHealth == 0 ? Color.Transparent : Color.Green;
 
-            FontGraphics healthFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentHealth, unit.MaxHealth), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-            Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), Color.Black);
-            Frame health = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), healthColour);
+            FontGraphics healthFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentHealth, unit.MaxHealth), Width, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+            Frame healthFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 50), DrawLayer, Color.Black);
+            Frame health = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), DrawLayer, healthColour);
 
             healthFrame.Components.Add(health);
             healthFrame.Components.Add(healthFontGraphics);
@@ -113,9 +114,9 @@
             //Energy bar
             Color energyColour = unit.CurrentEnergy == 0 ? Color.Transparent : Color.RoyalBlue;
 
-            FontGraphics energyFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentEnergy, unit.MaxEnergy), Width, PositionProfileFactory.BuildCenteredRelative(), TextFormat.Shrink, Color.White, Resources.Textures.Debug);
-            Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), Color.Black);
-            Frame energy = new Frame(ZeroAdjustedWidth(unit.CurrentEnergy, unit.MaxEnergy), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), energyColour);
+            FontGraphics energyFontGraphics = new FontGraphics(string.Format(ResourceText, unit.CurrentEnergy, unit.MaxEnergy), Width, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, TextFormat.Shrink, Color.White, Resources.Textures.Debug);
+            Frame energyFrame = new Frame(Width, 50, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, 100), DrawLayer, Color.Black);
+            Frame energy = new Frame(ZeroAdjustedWidth(unit.CurrentEnergy, unit.MaxEnergy), 50, new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, 0, 0), DrawLayer, energyColour);
 
             energyFrame.Components.Add(energy);
             energyFrame.Components.Add(energyFontGraphics);

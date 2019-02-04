@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Factories;
     using Manastream.Src.UI.PositionProfiles;
@@ -29,8 +30,8 @@
         /// </summary>
         #region Constructors
 
-        public HealthBar(int width, int height, IPositionProfile positionProfile, Unit unit)
-            : base(width, height, positionProfile)
+        public HealthBar(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer, Unit unit)
+            : base(width, height, positionProfile, drawLayer)
         {
             this.unit = unit;
             BuildComponents();
@@ -80,7 +81,7 @@
         /// </summary>
         private void BuildComponents()
         {
-            frame = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.BuildCenteredRelative(), Color.SpringGreen);
+            frame = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, Color.SpringGreen);
         }
 
         /// <summary>

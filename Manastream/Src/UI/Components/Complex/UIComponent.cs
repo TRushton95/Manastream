@@ -3,7 +3,9 @@
     #region Usings
 
     using Manastream.Src.EventSystem;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.GameResources;
+    using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -14,47 +16,24 @@
     /// <summary>
     /// The complex ui component class that represents a usable component, built out of base UI components.
     /// </summary>
-    public abstract class UIComponent : Listener
+    public abstract class UIComponent : BasicUIComponent
     {
-        #region Fields
-
-        protected int posX, posY;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
         /// Initialises a new instance of the <see cref="UIComponent"/> class.
         /// </summary>
-        public UIComponent(int width, int height, IPositionProfile positionProfile)
+        public UIComponent(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer)
+            : base(positionProfile, drawLayer)
         {
             this.Width = width;
             this.Height = height;
-            this.PositionProfile = positionProfile;
             this.Visible = true;
         }
 
         #endregion
 
         #region Properties
-
-        public int Width
-        {
-            get;
-            protected set;
-        }
-
-        public int Height
-        {
-            get;
-            protected set;
-        }
-
-        public IPositionProfile PositionProfile
-        {
-            get;
-        }
 
         public bool Visible
         {
@@ -67,8 +46,6 @@
             get;
             private set;
         }
-
-        protected Resources Resources => Resources.GetInstance();
 
         #endregion
 
@@ -142,7 +119,7 @@
         /// <summary>
         /// Draws the UI component.
         /// </summary>
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             if (Visible)
             {
@@ -151,41 +128,9 @@
         }
 
         /// <summary>
-        /// Initialises the UI component.
-        /// </summary>
-        public abstract void Initialise(Rectangle parent);
-
-        /// <summary>
-        /// Gets the boundaries of the component.
-        /// </summary>
-        public Rectangle GetBounds()
-        {
-            return new Rectangle(posX, posY, Width, Height);
-        }
-
-        /// <summary>
-        /// Gets the coordinates of the component.
-        /// </summary>
-        public Vector2 GetCoordinates()
-        {
-            return new Vector2(posX, posY);
-        }
-
-        /// <summary>
         /// Defines the implementation details of the Draw method.
         /// </summary>
         protected abstract void DrawDetail(SpriteBatch spriteBatch);
-
-        /// <summary>
-        /// Initialises the coordinates of the UI component based on its parent's location
-        /// </summary>
-        protected void InitialiseCoordinates(Rectangle parent)
-        {
-            Vector2 coords = PositionProfile.GetPosition(GetBounds(), parent);
-
-            posX = (int)coords.X;
-            posY = (int)coords.Y;
-        }
 
         #endregion
     }

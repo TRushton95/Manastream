@@ -26,8 +26,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="ImageGraphics"/> class.
         /// </summary>
-        public ImageGraphics(Texture2D image, IPositionProfile positionProfile)
-            : base(positionProfile)
+        public ImageGraphics(Texture2D image, IPositionProfile positionProfile, DrawLayer drawLayer)
+            : base(positionProfile, drawLayer)
         {
             this.image = image;
         }
@@ -41,7 +41,7 @@
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            eventManager.Notify(new TextureDrawReadyEvent(image, GetCoordinates(), DrawLayer.UI));
+            eventManager.Notify(new TextureDrawReadyEvent(image, GetCoordinates(), DrawLayer));
         }
 
         /// <summary>

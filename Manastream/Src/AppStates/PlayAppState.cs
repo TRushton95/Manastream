@@ -113,13 +113,15 @@
         /// </summary>
         public override void DrawState(SpriteBatch uiSpriteBatch)
         {
+            //UI must be drawn within game sprite batch as UI may use game spritebatch
             gameSpriteBatch.Begin(transformMatrix: cameraMatrix);
+
             board.Draw(gameSpriteBatch);
             playerState.Draw(gameSpriteBatch);
-            gameSpriteBatch.End();
-
             ui.Draw(uiSpriteBatch);
             //debugUI.Draw(uiSpriteBatch);
+
+            gameSpriteBatch.End();
         }
 
         /// <summary>

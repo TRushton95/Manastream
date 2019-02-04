@@ -3,6 +3,7 @@
     #region Usings
 
     using Manastream.Src.EventSystem.Events;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
@@ -39,11 +40,12 @@
             int height,
             string text,
             IPositionProfile positionProfile,
+            DrawLayer drawLayer,
             Color defaultBackgroundColour,
             Color defaultTextColour,
             Color hoverBackgroundColour,
             Color hoverTextColour)
-            : base(width, height, positionProfile)
+            : base(width, height, positionProfile, drawLayer)
         {
             this.text = text;
             BuildComponents(defaultBackgroundColour, defaultTextColour, hoverBackgroundColour, hoverTextColour);
@@ -109,12 +111,12 @@
         /// </summary>
         private void BuildComponents(Color defaultBackgroundColour, Color defaultTextColour, Color hoverBackgroundColour, Color hoverTextColour)
         {
-            FontGraphics defaultFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, defaultTextColour, Resources.Textures.Debug);
-            defaultFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), defaultBackgroundColour);
+            FontGraphics defaultFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), DrawLayer, TextFormat.Shrink, defaultTextColour, Resources.Textures.Debug);
+            defaultFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), DrawLayer, defaultBackgroundColour);
             defaultFrame.Components.Add(defaultFontGraphics);
 
-            FontGraphics hoverFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), TextFormat.Shrink, hoverTextColour, Resources.Textures.Debug);
-            hoverFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), hoverBackgroundColour);
+            FontGraphics hoverFontGraphics = new FontGraphics(text, Width, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), DrawLayer, TextFormat.Shrink, hoverTextColour, Resources.Textures.Debug);
+            hoverFrame = new Frame(Width, Height, new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Center, 0, 0), DrawLayer, hoverBackgroundColour);
             hoverFrame.Components.Add(hoverFontGraphics);
 
             frame = defaultFrame;

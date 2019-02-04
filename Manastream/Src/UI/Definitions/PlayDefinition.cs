@@ -6,6 +6,7 @@
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.EventSystem.Events.Game;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components;
     using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Enums;
@@ -32,12 +33,12 @@
         {
             List<UIComponent> result = new List<UIComponent>();
 
-            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Right, VerticalAlign.Bottom, -10, -10),
+            Button button = new Button(200, 50, "End turn", new RelativePositionProfile(HorizontalAlign.Right, VerticalAlign.Bottom, -10, -10), DrawLayer.UI,
                 Color.Red, Color.Black, Color.Pink, Color.Black);
             button.OnClickEvent = CreateEndTurnEvent;
             result.Add(button);
 
-            Profile profile = new Profile(new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Top, 0, 0));
+            Profile profile = new Profile(new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Top, 0, 0), DrawLayer.UI);
             profile.AddEventHandler(EventTypes.Debug.SelectUnit, profile.OnSelectUnit);
             result.Add(profile);
 
@@ -63,7 +64,7 @@
                 return;
             }
 
-            HealthBar healthBar = new HealthBar(75, 10, new AbsolutePositionProfile(args.SelectedUnit.CanvasPosition, 0, 0), args.SelectedUnit);
+            HealthBar healthBar = new HealthBar(75, 10, new AbsolutePositionProfile(args.SelectedUnit.CanvasPosition, 0, 0), DrawLayer.Game, args.SelectedUnit);
             ui.Components.Add(healthBar);
         }
     }
