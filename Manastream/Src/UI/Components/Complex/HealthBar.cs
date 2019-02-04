@@ -1,10 +1,10 @@
 ﻿namespace Manastream.Src.UI.Components.Complex
 {
+    #region Usings
+
     using Manastream.Src.EventSystem;
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Game;
-    #region Usings
-
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
@@ -28,18 +28,16 @@
 
         #endregion
 
+        #region Constructors
+
         /// <summary>
         /// Initialises a new instance of the <see cref="HealthBar"/> class.
         /// </summary>
-        #region Constructors
-
         public HealthBar(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer, Unit unit)
             : base(width, height, positionProfile, drawLayer)
         {
             this.unit = unit;
             BuildComponents();
-
-            AddEventHandler(EventTypes.Game.UnitDamaged, OnUnitDamaged);
         }
 
         #endregion
@@ -60,6 +58,7 @@
 
             if (prevHealth != unit.CurrentHealth)
             {
+                BuildComponents();
                 InitialiseComponents();
             }
 
@@ -117,19 +116,6 @@
         {
             SetCoordinates(parent);
             frame.Update(GetBounds());
-        }
-        
-        private void OnUnitDamaged(Event e)
-        {
-            UnitDamagedEvent args = (UnitDamagedEvent)e;
-
-            if (args.UnitDamaged != unit)
-            {
-                return;
-            }
-
-            BuildComponents();
-            InitialiseComponents();
         }
 
         #endregion
