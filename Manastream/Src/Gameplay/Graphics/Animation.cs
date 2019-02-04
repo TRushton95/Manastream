@@ -1,5 +1,6 @@
 ﻿namespace Manastream.Src.Gameplay.Graphics
 {
+    using Manastream.Src.GameResources;
     #region Usings
 
     using Microsoft.Xna.Framework;
@@ -74,11 +75,18 @@
         }
 
         /// <summary>
-        /// Draws the current sprite.
+        /// Gets the current sprite.
         /// </summary>
-        public void Draw(SpriteBatch spriteBatch, Vector2 canvasPosition)
+        /// <returns></returns>
+        public Texture2D GetCurrentAnimationFrame()
         {
-            spriteBatch.Draw(spritesheet, canvasPosition, spriteSourceRectangle, Color.White);
+            Color[] imageData = new Color[spriteWidth * spriteHeight];
+            spritesheet.GetData(0, spriteSourceRectangle, imageData, 0, imageData.Length);
+
+            Texture2D result = new Texture2D(Resources.GetInstance().GraphicsDevice, spriteWidth, spriteHeight);
+            result.SetData(imageData);
+
+            return result;
         }
 
         #endregion

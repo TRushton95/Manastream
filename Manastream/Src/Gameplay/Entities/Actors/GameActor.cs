@@ -3,6 +3,9 @@
     #region Usings
 
     using Manastream.Src.DataStructures;
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events.Graphics;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
@@ -14,7 +17,7 @@
     /// <summary>
     /// The game actor base class representing any entity that exists on the <see cref="Board"/>.
     /// </summary>
-    public abstract class GameActor
+    public abstract class GameActor : Listener
     {
         #region Constructors
 
@@ -94,9 +97,16 @@
             Animation animation;
             Animations.TryGetValue(AnimationIndex, out animation);
 
-            if (animation != null)
+            if (animation == null)
             {
-                animation.Draw(spriteBatch, CanvasPosition.ToVector2());
+                return;
+            }
+
+            Texture2D texture = animation.GetCurrentAnimationFrame();
+
+            if (texture != null)
+            {
+                eventManager.Notify(new TextureDrawReadyEvent(texture, CanvasPosition.ToVector2(), DrawLayer.Game));
             }
         }
 
