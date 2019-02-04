@@ -37,6 +37,14 @@
         #region Methods
 
         /// <summary>
+        /// Updates the text.
+        /// </summary>
+        public override void Update(Rectangle parent)
+        {
+            SetCoordinates(parent);
+        }
+
+        /// <summary>
         /// Draws the image.
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
@@ -50,7 +58,7 @@
         public override void Initialise(Rectangle parent)
         {
             InitialiseDimensions();
-            InitialiseCoordinates(parent);
+            SetCoordinates(parent);
         }
 
         /// <summary>

@@ -64,13 +64,21 @@
         #endregion
 
         #region Methods
+        
+        /// <summary>
+        /// Updates the UI component.
+        /// </summary>
+        public override void Update(Rectangle parent)
+        {
+            UpdateCoordinates(parent);
+        }
 
         /// <summary>
         /// Initialises the UI component.
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
-            InitialiseCoordinates(parent);
+            SetCoordinates(parent);
             InitialiseComponents();
         }
 
@@ -104,6 +112,15 @@
         protected override void OnClick()
         {
             eventManager.Notify(OnClickEvent());
+        }
+
+        /// <summary>
+        /// Updates the coordinates of the UI component and it's composite components.
+        /// </summary>
+        protected override void UpdateCoordinates(Rectangle parent)
+        {
+            SetCoordinates(parent);
+            frame.Update(GetBounds());
         }
 
         /// <summary>

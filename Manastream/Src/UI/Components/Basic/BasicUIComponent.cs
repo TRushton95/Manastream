@@ -66,6 +66,11 @@
         #region Methods
 
         /// <summary>
+        /// Updates the UI component.
+        /// </summary>
+        public abstract void Update(Rectangle parent);
+
+        /// <summary>
         /// Draws the UI component.
         /// </summary>
         public abstract void Draw(SpriteBatch spriteBatch);
@@ -92,9 +97,9 @@
         }
 
         /// <summary>
-        /// Initialises the coordinates of the UI component based on its parent's location
+        /// Gets the coordinates of the UI component based on its parent's location
         /// </summary>
-        protected void InitialiseCoordinates(Rectangle parent)
+        protected void SetCoordinates(Rectangle parent)
         {
             Vector2 coords = PositionProfile.GetPosition(GetBounds(), parent);
 

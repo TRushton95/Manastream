@@ -110,12 +110,6 @@
         /// </summary>
         protected virtual void OnClick() { }
 
-
-        /// <summary>
-        /// Updates the UI component.
-        /// </summary>
-        public virtual void Update() { }
-
         /// <summary>
         /// Draws the UI component.
         /// </summary>
@@ -131,6 +125,11 @@
         /// Defines the implementation details of the Draw method.
         /// </summary>
         protected abstract void DrawDetail(SpriteBatch spriteBatch);
+
+        /// <summary>
+        /// Updates the coordinates of the UI component and it's composite components.
+        /// </summary>
+        protected abstract void UpdateCoordinates(Rectangle parent);
 
         #endregion
     }

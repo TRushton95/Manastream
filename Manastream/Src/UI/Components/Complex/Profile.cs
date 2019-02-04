@@ -55,8 +55,10 @@
         /// <summary>
         /// Updates the UI component.
         /// </summary>
-        public override void Update()
+        public override void Update(Rectangle parent)
         {
+            UpdateCoordinates(parent);
+
             if (unit == null)
             {
                 return;
@@ -78,7 +80,7 @@
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
-            InitialiseCoordinates(parent);
+            SetCoordinates(parent);
             InitialiseComponents();
         }
 
@@ -88,6 +90,15 @@
         protected override void DrawDetail(SpriteBatch spriteBatch)
         {
             frame.Draw(spriteBatch);
+        }
+
+        /// <summary>
+        /// Updates the coordinates of the UI component and it's composite components.
+        /// </summary>
+        protected override void UpdateCoordinates(Rectangle parent)
+        {
+            SetCoordinates(parent);
+            frame?.Update(GetBounds());
         }
 
         /// <summary>

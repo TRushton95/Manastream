@@ -50,6 +50,14 @@
         #region Methods
 
         /// <summary>
+        /// Updates the text.
+        /// </summary>
+        public override void Update(Rectangle parent)
+        {
+            SetCoordinates(parent);
+        }
+
+        /// <summary>
         /// Draws the text.
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
@@ -64,7 +72,7 @@
         {
             FormatText();
             InitialiseDimensions();
-            InitialiseCoordinates(parent);
+            SetCoordinates(parent);
         }
 
         /// <summary>

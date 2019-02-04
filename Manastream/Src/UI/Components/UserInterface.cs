@@ -79,7 +79,7 @@
         {
             foreach (UIComponent component in Components)
             {
-                component.Update();
+                component.Update(Resources.GetInstance().GraphicsDevice.Viewport.Bounds);
             }
 
             UpdateHoveredComponent();

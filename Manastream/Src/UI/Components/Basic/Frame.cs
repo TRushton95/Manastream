@@ -55,6 +55,19 @@
         #region Methods
 
         /// <summary>
+        /// Updates the UI component.
+        /// </summary>
+        public override void Update(Rectangle parent)
+        {
+            SetCoordinates(parent);
+
+            foreach (BasicUIComponent component in Components)
+            {
+                component.Update(GetBounds());
+            }
+        }
+
+        /// <summary>
         /// Draws the UI component.
         /// </summary>
         public override void Draw(SpriteBatch spriteBatch)
@@ -72,7 +85,7 @@
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
-            InitialiseCoordinates(parent);
+            SetCoordinates(parent);
             texture = BuildTexture(Colour);
 
             foreach (BasicUIComponent component in Components)

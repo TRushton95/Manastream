@@ -44,8 +44,10 @@
         /// <summary>
         /// Updates the component.
         /// </summary>
-        public override void Update()
+        public override void Update(Rectangle parent)
         {
+            UpdateCoordinates(parent);
+
             if (unit == null)
             {
                 return;
@@ -64,8 +66,8 @@
         /// </summary>
         public override void Initialise(Rectangle parent)
         {
+            SetCoordinates(parent);
             InitialiseComponents();
-            InitialiseCoordinates(parent);
         }
 
         /// <summary>
@@ -99,6 +101,15 @@
         {
             int resourceWidth = (int)(Width * (current / max));
             return resourceWidth > 0 ? resourceWidth : Width;
+        }
+
+        /// <summary>
+        /// Updates the coordinates of the UI component and it's composite components.
+        /// </summary>
+        protected override void UpdateCoordinates(Rectangle parent)
+        {
+            SetCoordinates(parent);
+            frame.Update(GetBounds());
         }
 
         #endregion
