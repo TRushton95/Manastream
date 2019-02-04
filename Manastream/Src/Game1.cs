@@ -3,6 +3,8 @@
     #region Usings
 
     using Manastream.Src.AppStates;
+    using Manastream.Src.Gameplay.Enums;
+    using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
@@ -43,6 +45,8 @@
             // TODO: Add your initialization logic here
             resources = Resources.GetInstance();
             resources.GraphicsDevice = GraphicsDevice;
+            
+            DrawingManager.Instance.RegisterSpriteBatch(DrawLayer.UI, spriteBatch);
 
             base.Initialize();
         }

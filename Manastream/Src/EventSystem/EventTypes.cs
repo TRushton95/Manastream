@@ -48,5 +48,15 @@
         {
             public static EventType EndTurn = new EventType("GM_END_TURN");
         }
+
+        /// <summary>
+        /// The graphics events.
+        /// </summary>
+        public class Graphics
+        {
+            public static EventType TextureDrawReady = new EventType("GFX_TEXTURE_DRAW_READY");
+
+            public static EventType StringDrawReady = new EventType("GFX_STRING_DRAW_READY");
+        }
     }
 }

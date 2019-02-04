@@ -10,6 +10,7 @@
     using Manastream.Src.Gameplay.ControlStates.PlayerStates;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
+    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
     using Manastream.Src.UI.Components;
@@ -68,6 +69,8 @@
 
             ui = PlayDefinition.BuildUI();
             ui.Initialise();
+
+            DrawingManager.Instance.RegisterSpriteBatch(DrawLayer.Game, gameSpriteBatch);
 
             InitialiseEventHandlers();
         }
