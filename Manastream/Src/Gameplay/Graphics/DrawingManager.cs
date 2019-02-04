@@ -83,15 +83,8 @@
 
             SpriteBatch sb;
             spriteBatchLookup.TryGetValue(args.DrawLayer, out sb);
-
-            if (args.SourceRectangle == Rectangle.Empty)
-            {
-                sb.Draw(args.Texture, args.Position, Color.White);
-            }
-            else
-            {
-                sb.Draw(args.Texture, args.Position, args.SourceRectangle, Color.White);
-            }
+            
+            sb.Draw(args.Texture, args.Position + args.RotationOrigin, args.SourceRectangle, Color.White, args.Rotation, args.RotationOrigin, 1, SpriteEffects.None, 1);
         }
 
         /// <summary>

@@ -118,9 +118,8 @@
                 for (int i = 0; i < path.Count - 1; i++)
                 {
                     float rotation = GetArrowRotation(path[i + 1], path[i]);
-
-                    //TO-DO Need to specify rotation to draw manager
-                    spriteBatch.Draw(Textures.MoveArrow, path[i].CanvasPosition.ToVector2() + rotationOrigin, null, Color.White, rotation, rotationOrigin, 1, SpriteEffects.None, 1);
+                    
+                    eventManager.Notify(new TextureDrawReadyEvent(Textures.MoveArrow, path[i].CanvasPosition.ToVector2(), rotation, rotationOrigin, DrawLayer.Game));
                 }
 
                 int totalCost = 0;

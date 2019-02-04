@@ -15,7 +15,7 @@
         {
             this.Texture = texture;
             this.Position = position;
-            this.SourceRectangle = Rectangle.Empty;
+            this.SourceRectangle = null;
             this.Rotation = 0;
             this.RotationOrigin = Vector2.Zero;
             this.DrawLayer = drawLayer;
@@ -37,7 +37,7 @@
         {
             this.Texture = texture;
             this.Position = position;
-            this.SourceRectangle = Rectangle.Empty;
+            this.SourceRectangle = null;
             this.Rotation = rotation;
             this.RotationOrigin = rotationOrigin;
             this.DrawLayer = drawLayer;
@@ -53,7 +53,7 @@
             get;
         }
 
-        public Rectangle SourceRectangle
+        public Rectangle? SourceRectangle
         {
             get;
         }
