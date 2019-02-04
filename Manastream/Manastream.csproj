@@ -52,6 +52,7 @@
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewTurnEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Game\EndTurnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Game\UnitSpawnEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Graphics\StringDrawReadyEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Graphics\TextureDrawReadyEvent.cs" />
     <Compile Include="Src\EventSystem\EventType.cs" />

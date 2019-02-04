@@ -7,6 +7,7 @@
     using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.EventSystem.Events.Game;
     using Manastream.Src.Gameplay.Enums;
+    using Manastream.Src.GameResources;
     using Manastream.Src.UI.Components;
     using Manastream.Src.UI.Components.Complex;
     using Manastream.Src.UI.Enums;
@@ -47,7 +48,7 @@
 
         private static void AttachListeners()
         {
-            ui.AddEventHandler(EventTypes.Debug.SelectUnit, OnSelectUnit);
+            ui.AddEventHandler(EventTypes.Game.UnitSpawn, OnUnitSpawn);
         }
 
         private static Event CreateEndTurnEvent()
@@ -55,16 +56,17 @@
             return new EndTurnEvent();
         }
 
-        private static void OnSelectUnit(Event e)
+        private static void OnUnitSpawn(Event e)
         {
-            SelectUnitEvent args = (SelectUnitEvent)e;
+            UnitSpawnEvent args = (UnitSpawnEvent)e;
 
-            if (args.SelectedUnit == null)
+            if (args.Unit == null)
             {
                 return;
             }
 
-            HealthBar healthBar = new HealthBar(75, 10, new AbsolutePositionProfile(args.SelectedUnit.CanvasPosition, 0, 0), DrawLayer.Game, args.SelectedUnit);
+            HealthBar healthBar = new HealthBar(75, 10, new AbsolutePositionProfile(args.Unit.CanvasPosition, 0, 15), DrawLayer.Game, args.Unit);
+            healthBar.Initialise(Resources.GetInstance().GraphicsDevice.Viewport.Bounds);
             ui.Components.Add(healthBar);
         }
     }

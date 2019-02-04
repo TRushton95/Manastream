@@ -47,6 +47,8 @@
         public class Game
         {
             public static EventType EndTurn = new EventType("GM_END_TURN");
+
+            public static EventType UnitSpawn = new EventType("GM_UNIT_SPAWN");
         }
 
         /// <summary>

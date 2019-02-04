@@ -3,6 +3,8 @@
     #region Usings
 
     using Manastream.Src.DataStructures;
+    using Manastream.Src.EventSystem;
+    using Manastream.Src.EventSystem.Events.Game;
     using Manastream.Src.Gameplay.Abilities.Ticks;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
@@ -24,7 +26,7 @@
     /// <summary>
     /// The board class that contains a set of <see cref="Tile"/> classes.
     /// </summary>
-    public class Board
+    public class Board : Listener
     {
         #region Constants
 
@@ -229,6 +231,7 @@
             if (result == true)
             {
                 units.Add(unit);
+                eventManager.Notify(new UnitSpawnEvent(unit));
             }
 
             return result;

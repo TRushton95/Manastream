@@ -59,6 +59,9 @@
                 players.Add(i, new Player(i));
             }
 
+            ui = PlayDefinition.BuildUI();
+            ui.Initialise();
+
             board = new Board();
             board.Generate();
             SpawnTestUnits();
@@ -66,9 +69,6 @@
 
             InitialiseTurns();
             playerState = new UnselectedPlayerState(players[currentTeam]);
-
-            ui = PlayDefinition.BuildUI();
-            ui.Initialise();
 
             DrawingManager.Instance.RegisterSpriteBatch(DrawLayer.Game, gameSpriteBatch);
 
