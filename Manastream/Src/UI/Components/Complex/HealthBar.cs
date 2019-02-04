@@ -83,7 +83,9 @@
         /// </summary>
         private void BuildComponents()
         {
-            frame = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, Color.SpringGreen);
+            Frame currentHealthframe = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.CenteredLeftRelative(), DrawLayer, Color.SpringGreen);
+            frame = new Frame(Width, Height, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, Color.Red);
+            frame.Components.Add(currentHealthframe);
         }
 
         /// <summary>

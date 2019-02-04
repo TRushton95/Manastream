@@ -30,6 +30,15 @@
             return new RelativePositionProfile(HorizontalAlign.Center, VerticalAlign.Top, 0, topOffset);
         }
 
+        /// <summary>
+        /// A relative position profile that is centered vertically to the left of the parent element.
+        /// </summary>
+        /// <returns></returns>
+        public static RelativePositionProfile CenteredLeftRelative(int leftOffset = 0)
+        {
+            return new RelativePositionProfile(HorizontalAlign.Left, VerticalAlign.Center, leftOffset, 0);
+        }
+
         #endregion
     }
 }
