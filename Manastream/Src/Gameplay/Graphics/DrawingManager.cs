@@ -101,10 +101,10 @@
         {
             StringDrawReadyEvent args = (StringDrawReadyEvent)e;
 
-            SpriteBatch sb;
-            spriteBatchLookup.TryGetValue(args.DrawLayer, out sb);
+            SpriteBatch spriteBatch;
+            spriteBatchLookup.TryGetValue(args.DrawLayer, out spriteBatch);
 
-            sb.DrawString(args.Font, args.Text, args.Position, args.Colour, 0, Vector2.Zero, args.Scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(args.Font, args.Text, args.Position, args.Colour, 0, Vector2.Zero, args.Scale, SpriteEffects.None, 0);
         }
 
         /// <summary>
