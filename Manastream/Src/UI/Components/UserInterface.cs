@@ -134,7 +134,7 @@
         /// TO-DO The AllComponents list should be stored in a property and updated when a component update notification is received - avoids
         /// rebuilding the list every time it is required.
         /// </summary>
-        private List<UIComponent> GetAllComponents()
+        public List<UIComponent> GetAllComponents()
         {
             List<UIComponent> results = new List<UIComponent>();
 
@@ -144,6 +144,17 @@
             }
 
             return results;
+        }
+
+        /// <summary>
+        /// Gets the component by id.
+        /// </summary>
+        public UIComponent GetComponent(int id)
+        {
+            List<UIComponent> components = GetAllComponents();
+            UIComponent result = components.SingleOrDefault(component => component.Id == id);
+
+            return result;
         }
 
         #endregion

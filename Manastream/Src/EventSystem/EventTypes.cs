@@ -50,7 +50,11 @@
 
             public static EventType UnitSpawn = new EventType("GM_UNIT_SPAWN");
 
+            public static EventType UnitDespawn = new EventType("GM_UNIT_DESPAWN");
+
             public static EventType UnitDamaged = new EventType("GM_UNIT_DAMAGED");
+
+            public static EventType UnitDied = new EventType("GM_UNIT_DIED");
         }
 
         /// <summary>

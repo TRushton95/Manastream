@@ -23,7 +23,6 @@
         #region Fields
 
         private int prevHealth;
-        private Unit unit;
         private Frame frame;
 
         #endregion
@@ -33,11 +32,21 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="HealthBar"/> class.
         /// </summary>
-        public HealthBar(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer, Unit unit)
-            : base(width, height, positionProfile, drawLayer)
+        public HealthBar(int id, int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer, Unit unit)
+            : base(id, width, height, positionProfile, drawLayer)
         {
-            this.unit = unit;
+            this.Unit = unit;
+
             BuildComponents();
+        }
+
+        #endregion
+
+        #region Properties
+
+        public Unit Unit
+        {
+            get;
         }
 
         #endregion
@@ -51,18 +60,18 @@
         {
             UpdateCoordinates(parent);
 
-            if (unit == null)
+            if (Unit == null)
             {
                 return;
             }
 
-            if (prevHealth != unit.CurrentHealth)
+            if (prevHealth != Unit.CurrentHealth)
             {
                 BuildComponents();
                 InitialiseComponents();
             }
 
-            prevHealth = unit.CurrentHealth;
+            prevHealth = Unit.CurrentHealth;
         }
 
         /// <summary>
@@ -87,7 +96,7 @@
         /// </summary>
         private void BuildComponents()
         {
-            Frame currentHealthframe = new Frame(ZeroAdjustedWidth(unit.CurrentHealth, unit.MaxHealth), Height, PositionProfileFactory.CenteredLeftRelative(), DrawLayer, Color.SpringGreen);
+            Frame currentHealthframe = new Frame(ZeroAdjustedWidth(Unit.CurrentHealth, Unit.MaxHealth), Height, PositionProfileFactory.CenteredLeftRelative(), DrawLayer, Color.SpringGreen);
             frame = new Frame(Width, Height, PositionProfileFactory.BuildCenteredRelative(), DrawLayer, Color.Red);
             frame.Components.Add(currentHealthframe);
         }

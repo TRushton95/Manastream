@@ -250,6 +250,7 @@
             Tile unitTile = GetTile(unit.BoardPosition.X, unit.BoardPosition.Y);
             unitTile.Occupant = null;
             units.Remove(unit);
+            eventManager.Notify(new UnitDespawnEvent(unit));
 
             return true;
         }

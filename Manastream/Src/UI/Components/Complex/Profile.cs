@@ -42,8 +42,8 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="Profile"/> class.
         /// </summary>
-        public Profile(IPositionProfile positionProfile, DrawLayer drawLayer)
-            : base(ProfileWidth, ProfileHeight, positionProfile, drawLayer)
+        public Profile(int id, IPositionProfile positionProfile, DrawLayer drawLayer)
+            : base(id, ProfileWidth, ProfileHeight, positionProfile, drawLayer)
         {
             Hide();
         }

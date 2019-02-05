@@ -23,9 +23,10 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="UIComponent"/> class.
         /// </summary>
-        public UIComponent(int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer)
+        public UIComponent(int id, int width, int height, IPositionProfile positionProfile, DrawLayer drawLayer)
             : base(positionProfile, drawLayer)
         {
+            this.Id = id;
             this.Width = width;
             this.Height = height;
             this.Visible = true;
@@ -34,6 +35,11 @@
         #endregion
 
         #region Properties
+
+        public int Id
+        {
+            get;
+        }
 
         public bool Visible
         {

@@ -36,6 +36,7 @@
         /// Initialises a new instance of the <see cref="Button"/> class.
         /// </summary>
         public Button(
+            int id,
             int width,
             int height,
             string text,
@@ -45,7 +46,7 @@
             Color defaultTextColour,
             Color hoverBackgroundColour,
             Color hoverTextColour)
-            : base(width, height, positionProfile, drawLayer)
+            : base(id, width, height, positionProfile, drawLayer)
         {
             this.text = text;
             BuildComponents(defaultBackgroundColour, defaultTextColour, hoverBackgroundColour, hoverTextColour);
