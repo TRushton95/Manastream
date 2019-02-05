@@ -18,24 +18,38 @@
 
     #endregion
 
+    /// <summary>
+    /// The play definition class that builds the user interface for the play appstate.
+    /// </summary>
     public class PlayDefinition
     {
+        #region Fields
+
         private static UserInterface ui;
         private static int nextComponentId;
         private static List<HealthBar> healthBars;
 
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Builds the user interface.
+        /// </summary>
         public static UserInterface BuildUI()
         {
             nextComponentId = 0;
             healthBars = new List<HealthBar>();
-
             ui = new UserInterface();
             ui.Components = BuildComponents();
-            AttachListeners();
+            InitialiseEventHandlers();
             
             return ui;
         }
 
+        /// <summary>
+        /// Builds the UI components.
+        /// </summary>
         private static List<UIComponent> BuildComponents()
         {
             List<UIComponent> result = new List<UIComponent>();
@@ -52,14 +66,22 @@
             return result;
         }
 
-        private static void AttachListeners()
+        /// <summary>
+        /// Initialises the event handlers.
+        /// </summary>
+        private static void InitialiseEventHandlers()
         {
             ui.AddEventHandler(EventTypes.Game.UnitSpawn, OnUnitSpawn);
             ui.AddEventHandler(EventTypes.Game.UnitDespawn, OnUnitDespawn);
         }
 
+        #endregion
+
         #region Component Delegates
 
+        /// <summary>
+        /// Creates a new end turn event.
+        /// </summary>
         private static Event CreateEndTurnEvent()
         {
             return new EndTurnEvent();
@@ -69,6 +91,9 @@
 
         #region Event Handlers
 
+        /// <summary>
+        /// The unit spawn handlers.
+        /// </summary>
         private static void OnUnitSpawn(Event e)
         {
             UnitSpawnEvent args = (UnitSpawnEvent)e;
@@ -84,6 +109,9 @@
             healthBars.Add(healthBar);
         }
 
+        /// <summary>
+        /// The unit despawn handlers.
+        /// </summary>
         private static void OnUnitDespawn(Event e)
         {
             UnitDespawnEvent args = (UnitDespawnEvent)e;
