@@ -31,7 +31,7 @@
         /// <summary>
         /// Initialises a new instance of the <see cref="EventManager"/> class.
         /// </summary>
-        public EventManager()
+        private EventManager()
         {
             eventListenerLookup = new SortedDictionary<int, List<Listener>>();
         }
