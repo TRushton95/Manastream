@@ -123,6 +123,7 @@
     <Compile Include="Src\UI\PositionProfiles\AbsolutePositionProfile.cs" />
     <Compile Include="Src\UI\PositionProfiles\IPositionProfile.cs" />
     <Compile Include="Src\UI\PositionProfiles\RelativePositionProfile.cs" />
+    <Compile Include="Src\UI\UIEventBeacon.cs" />
     <Compile Include="Src\Utility\MouseInfo.cs" />
   </ItemGroup>
   <ItemGroup>
