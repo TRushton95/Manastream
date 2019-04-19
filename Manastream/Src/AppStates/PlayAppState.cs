@@ -14,11 +14,14 @@
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.UI;
     using Manastream.Src.UI.Components;
-    using Manastream.Src.UI.Definitions;
+    using Manastream.Src.UI.JsonConverters;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
 
     #endregion
 
@@ -27,6 +30,12 @@
     /// </summary>
     public class PlayAppState : AppState
     {
+        #region Constants
+
+        private const string JsonExt = ".json";
+
+        #endregion
+
         #region Fields
 
         private SpriteBatch gameSpriteBatch;
@@ -59,7 +68,7 @@
                 players.Add(i, new Player(i));
             }
 
-            ui = PlayDefinition.BuildUI();
+            ui = LoadUI("play");
             ui.Initialise();
 
             board = new Board();
@@ -122,6 +131,30 @@
             //debugUI.Draw(uiSpriteBatch);
 
             gameSpriteBatch.End();
+        }
+
+        /// <summary>
+        /// Loads the user interface from a given file.
+        /// </summary>
+        private UserInterface LoadUI(string fileName)
+        {
+            if (!fileName.EndsWith(JsonExt))
+            {
+                fileName = string.Concat(fileName, JsonExt);
+            }
+
+            UserInterface result = null;
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Src", "UI", "Definitions", fileName);
+            
+            if (File.Exists(path))
+            {
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new UIComponentConverter());
+
+                result = JsonConvert.DeserializeObject<UserInterface>(File.ReadAllText(path), settings);
+            }
+
+            return result;
         }
 
         /// <summary>

@@ -1,0 +1,56 @@
+﻿{
+	"Components": [
+		{
+			"type": "Button",
+			"Id": 0,
+			"Width": 200,
+			"Height": 50,
+			"Text": "End turn",
+			"PositionProfile": {
+				"type": "RelativePositionProfile",
+				"HorizontalAlign": "Right",
+				"VerticalAlign": "Bottom",
+				"OffsetX": -10,
+				"OffsetY": -10
+			},
+			"DrawLayer": "UI",
+			"DefaultBackgroundColour": {
+				"R": 255,
+				"G": 0,
+				"B": 0,
+				"A": 255
+			},
+			"DefaultTextColour": {
+				"R": 0,
+				"G": 0,
+				"B": 0,
+				"A": 255
+			},
+			"HoverBackgroundColour": {
+				"R": 255,
+				"G": 192,
+				"B": 203,
+				"A": 255
+			},
+			"HoverTextColour": {
+				"R": 0,
+				"G": 0,
+				"B": 0,
+				"A": 255
+			}
+		},
+
+		{
+			"type": "Profile",
+			"Id": 1,
+			"PositionProfile": {
+				"type": "RelativePositionProfile",
+				"HorizontalAlign": "Left",
+				"VerticalAlign": "Top",
+				"OffsetX": 0,
+				"OffsetY": 0,
+			},
+			"DrawLayer": "UI"
+		}
+	]
+}
