@@ -3,7 +3,7 @@
     public class EndTurnEvent : Event
     {
         public EndTurnEvent()
-            : base(EventTypes.Game.EndTurn)
+            : base(EventTypes.Board.EndTurn)
         {
         }
     }

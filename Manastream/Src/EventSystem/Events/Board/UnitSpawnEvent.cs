@@ -9,7 +9,7 @@
     public class UnitSpawnEvent : Event
     {
         public UnitSpawnEvent(Unit unit)
-            : base(EventTypes.Game.UnitSpawn)
+            : base(EventTypes.Board.UnitSpawn)
         {
             this.Unit = unit;
         }

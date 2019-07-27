@@ -224,7 +224,7 @@
         /// </summary>
         private void InitialiseEventHandlers()
         {
-            AddEventHandler(EventTypes.Game.EndTurn, OnEndTurn);
+            AddEventHandler(EventTypes.Board.EndTurn, OnEndTurn);
         }
 
         #endregion

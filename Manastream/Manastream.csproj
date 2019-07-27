@@ -51,11 +51,11 @@
     <Compile Include="Src\EventSystem\Events\Event.cs" />
     <Compile Include="Src\EventSystem\EventManager.cs" />
     <Compile Include="Src\EventSystem\Events\Debug\NewTurnEvent.cs" />
-    <Compile Include="Src\EventSystem\Events\Game\EndTurnEvent.cs" />
-    <Compile Include="Src\EventSystem\Events\Game\UnitDamagedEvent.cs" />
-    <Compile Include="Src\EventSystem\Events\Game\UnitDespawnEvent.cs" />
-    <Compile Include="Src\EventSystem\Events\Game\UnitDiedEvent.cs" />
-    <Compile Include="Src\EventSystem\Events\Game\UnitSpawnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Board\EndTurnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Board\UnitDamagedEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Board\UnitDespawnEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Board\UnitDiedEvent.cs" />
+    <Compile Include="Src\EventSystem\Events\Board\UnitSpawnEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Graphics\StringDrawReadyEvent.cs" />
     <Compile Include="Src\EventSystem\Events\Graphics\TextureDrawReadyEvent.cs" />
     <Compile Include="Src\EventSystem\EventType.cs" />

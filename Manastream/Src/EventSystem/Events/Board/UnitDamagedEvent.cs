@@ -9,7 +9,7 @@
     public class UnitDamagedEvent : Event
     {
         public UnitDamagedEvent(Unit caster, Unit unitDamage, int damage)
-            : base(EventTypes.Game.UnitDamaged)
+            : base(EventTypes.Board.UnitDamaged)
         {
             this.Caster = caster;
             this.UnitDamaged = unitDamage;

@@ -6,10 +6,10 @@
 
     #endregion
 
-    public class UnitDiedEvent : Event
+    public class UnitDespawnEvent : Event
     {
-        public UnitDiedEvent(Unit unit)
-            : base(EventTypes.Game.UnitDied)
+        public UnitDespawnEvent(Unit unit)
+            : base(EventTypes.Board.UnitDespawn)
         {
             this.Unit = unit;
         }
