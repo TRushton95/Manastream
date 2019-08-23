@@ -2,19 +2,18 @@
 {
     #region Usings
 
+    using System;
+    using System.Collections.Generic;
     using Manastream.Src.EventSystem.Events.Debug;
     using Manastream.Src.EventSystem.Events.Graphics;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
-    using Manastream.Src.Gameplay.Enums;
-    using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
-    using System;
-    using System.Collections.Generic;
+    using Shared.Enums;
 
     #endregion
 

@@ -2,14 +2,14 @@
 {
     #region Usings
 
+    using System;
+    using System.Collections.Generic;
     using Manastream.Src.EventSystem;
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Graphics;
-    using Manastream.Src.Gameplay.Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
-    using System.Collections.Generic;
+    using Shared.Enums;
 
     #endregion
 

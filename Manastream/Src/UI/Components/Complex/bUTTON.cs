@@ -3,12 +3,12 @@
     #region Usings
 
     using Manastream.Src.EventSystem.Events;
-    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
     using Manastream.Src.UI.Enums;
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Shared.Enums;
 
     #endregion
 

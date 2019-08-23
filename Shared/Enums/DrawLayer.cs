@@ -1,4 +1,4 @@
-﻿namespace Manastream.Src.Gameplay.Enums
+﻿namespace Shared.Enums
 {
     public enum DrawLayer
     {

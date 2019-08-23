@@ -1,20 +1,14 @@
 ﻿namespace EventSystem.Events.Game
 {
-    #region Usings
-
-    using Manastream.Src.Gameplay.Entities.Actors;
-
-    #endregion
-
     public class UnitDespawnEvent : Event
     {
-        public UnitDespawnEvent(Unit unit)
+        public UnitDespawnEvent(int unitId)
             : base(EventTypes.Board.UnitDespawn)
         {
-            this.Unit = unit;
+            this.UnitId = unitId;
         }
 
-        public Unit Unit
+        public int UnitId
         {
             get;
         }

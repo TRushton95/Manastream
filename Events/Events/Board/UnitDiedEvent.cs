@@ -1,20 +1,14 @@
 ﻿namespace EventSystem.Events.Game
 {
-    #region Usings
-
-    using Manastream.Src.Gameplay.Entities.Actors;
-
-    #endregion
-
     public class UnitDiedEvent : Event
     {
-        public UnitDiedEvent(Unit unit)
+        public UnitDiedEvent(int unitId)
             : base(EventTypes.Board.UnitDied)
         {
-            this.Unit = unit;
+            this.UnitId = unitId;
         }
 
-        public Unit Unit
+        public int UnitId
         {
             get;
         }

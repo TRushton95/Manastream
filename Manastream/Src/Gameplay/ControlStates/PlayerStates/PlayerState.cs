@@ -1,15 +1,15 @@
 ﻿namespace Manastream.Src.Gameplay.ControlStates.PlayerStates
 {
-    using Manastream.Src.EventSystem.Events.Graphics;
     #region Usings
 
+    using Manastream.Src.EventSystem.Events.Graphics;
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
-    using Manastream.Src.Gameplay.Enums;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Shared.Enums;
 
     #endregion
 

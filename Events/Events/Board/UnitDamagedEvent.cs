@@ -1,27 +1,21 @@
 ﻿namespace EventSystem.Events.Game
 {
-    #region Usings
-
-    using Manastream.Src.Gameplay.Entities.Actors;
-
-    #endregion
-
     public class UnitDamagedEvent : Event
     {
-        public UnitDamagedEvent(Unit caster, Unit unitDamage, int damage)
+        public UnitDamagedEvent(int casterId, int unitDamageId, int damage)
             : base(EventTypes.Board.UnitDamaged)
         {
-            this.Caster = caster;
-            this.UnitDamaged = unitDamage;
+            this.CasterId = casterId;
+            this.UnitDamagedId = unitDamageId;
             this.Damage = damage;
         }
 
-        public Unit Caster
+        public int CasterId
         {
             get;
         }
 
-        public Unit UnitDamaged
+        public int UnitDamagedId
         {
             get;
         }

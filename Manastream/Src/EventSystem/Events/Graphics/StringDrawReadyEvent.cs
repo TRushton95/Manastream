@@ -1,10 +1,10 @@
 ﻿namespace Manastream.Src.EventSystem.Events.Graphics
 {
     #region Usings
-
-    using Manastream.Src.Gameplay.Enums;
+    
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Shared.Enums;
 
     #endregion
 

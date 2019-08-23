@@ -2,6 +2,9 @@
 {
     #region Usings
 
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
     using Manastream.Src.EventSystem;
     using Manastream.Src.EventSystem.Events;
     using Manastream.Src.EventSystem.Events.Debug;
@@ -19,9 +22,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
+    using Shared.Enums;
 
     #endregion
 

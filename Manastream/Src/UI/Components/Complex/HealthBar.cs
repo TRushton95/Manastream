@@ -1,10 +1,7 @@
 ﻿namespace Manastream.Src.UI.Components.Complex
 {
     #region Usings
-
-    using Manastream.Src.EventSystem;
-    using Manastream.Src.EventSystem.Events;
-    using Manastream.Src.EventSystem.Events.Game;
+    
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.UI.Components.Basic;
@@ -12,6 +9,7 @@
     using Manastream.Src.UI.PositionProfiles;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Shared.Enums;
 
     #endregion
 

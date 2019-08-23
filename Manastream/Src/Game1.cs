@@ -3,13 +3,13 @@
     #region Usings
 
     using Manastream.Src.AppStates;
-    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.Gameplay.Graphics;
     using Manastream.Src.GameResources;
     using Manastream.Src.Utility;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using Shared.Enums;
 
     #endregion
 

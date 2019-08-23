@@ -9,10 +9,10 @@
     using Manastream.Src.Gameplay.Entities;
     using Manastream.Src.Gameplay.Entities.Actors;
     using Manastream.Src.Gameplay.Entities.Actors.Tiles;
-    using Manastream.Src.Gameplay.Enums;
     using Manastream.Src.GameResources;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Shared.Enums;
 
     #endregion
 
